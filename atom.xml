@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-09T09:05:27.062Z</updated>
+  <updated>2019-08-09T16:04:41.156Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>那些既熟悉又陌生的C/C++知识点（长期更新）</title>
+    <link href="http://yoursite.com/2019/08/09/%E9%82%A3%E4%BA%9B%E6%97%A2%E7%86%9F%E6%82%89%E5%8F%88%E9%99%8C%E7%94%9F%E7%9A%84C-C-%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%88%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0%EF%BC%89/"/>
+    <id>http://yoursite.com/2019/08/09/那些既熟悉又陌生的C-C-知识点（长期更新）/</id>
+    <published>2019-08-09T15:21:44.000Z</published>
+    <updated>2019-08-09T16:04:41.156Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="头文件的等价写法"><a href="#头文件的等价写法" class="headerlink" title="头文件的等价写法"></a>头文件的等价写法</h2><p>在C++标准中，<strong>stdio.h</strong>更推荐使用等价写法：<strong>cstdio</strong>，也就是在前面加一个<code>c</code>，然后去掉<code>.h</code>即可。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 以下两种写法等价 */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br></pre></td></tr></table></figure><h2 id="整型变量类型表示数的范围"><a href="#整型变量类型表示数的范围" class="headerlink" title="整型变量类型表示数的范围"></a>整型变量类型表示数的范围</h2><ul><li>整型<code>int</code>：<strong>32位</strong>整数/<strong>绝对值在10^9范围以内</strong>的整数都可以定义为int型</li><li>长整型<code>long long</code>：<strong>64位</strong>整数/<strong>10^18以内（如10^10）</strong>的整数就要定义为long long型</li></ul><h2 id="long-long型的使用"><a href="#long-long型的使用" class="headerlink" title="long long型的使用"></a>long long型的使用</h2><p>long long型赋<strong>大于2^31-1</strong>的初值，需要在初值后面加上LL</p><p>经常<strong>利用typedef用LL来代替long long</strong>，以避免在程序中大量出现long long而降低编码的效率。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL; <span class="comment">//给long long起个别名LL</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LL a = <span class="number">123456789012345L</span>L, b = <span class="number">234567890123456L</span>L;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, a + b);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="浮点数的存储类型"><a href="#浮点数的存储类型" class="headerlink" title="浮点数的存储类型"></a>浮点数的存储类型</h2><p>对于浮点型，<strong>不要使用float，碰到浮点型的数据都应该用double来存储</strong>。</p><ul><li>单精度<code>float</code>：有效精度只有<strong>6~7位</strong></li><li>双精度<code>double</code>：有效精度有<strong>15~16位</strong></li></ul><h2 id="double型的输入输出格式"><a href="#double型的输入输出格式" class="headerlink" title="double型的输入输出格式"></a>double型的输入输出格式</h2><ul><li>输出格式：<code>%f</code>（与float型相同）</li><li>输入格式：scanf中是<code>%lf</code></li></ul><p>注：有些系统如果把输出格式写成%lf也不会出错，但尽量还是按标准来</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;头文件的等价写法&quot;&gt;&lt;a href=&quot;#头文件的等价写法&quot; class=&quot;headerlink&quot; title=&quot;头文件的等价写法&quot;&gt;&lt;/a&gt;头文件的等价写法&lt;/h2&gt;&lt;p&gt;在C++标准中，&lt;strong&gt;stdio.h&lt;/strong&gt;更推荐使用等价写法：&lt;str
+      
+    
+    </summary>
+    
+    
+      <category term="C/C++" scheme="http://yoursite.com/tags/C-C/"/>
+    
+  </entry>
   
   <entry>
     <title>deeplearning.ai学习笔记（一）深度学习引言</title>

@@ -21,13 +21,13 @@
     
     
     <meta name="keywords" content="学习笔记,deeplearning.ai">
-    <meta name="description" content="AI is the new Electricity. ——吴恩达（Andrew Ng）  大约在一百年前，社会的电气化改变了每个主要行业。而如今我们见到了 AI令人惊讶的能量会产生同样巨大的转变。显然 AI的各个分支中，发展最为迅速的就是深度学习（deep learning）。而深度学习，一般指的是训练神经网络（有时是非常非常大/深的神经网络）。 何为神经网络（What is a neural">
+    <meta name="description" content="AI is the new Electricity. ——吴恩达（Andrew Ng）  大约在一百年前，社会的电气化改变了每个主要行业。而如今我们见到了 AI令人惊讶的能量会产生同样巨大的转变。显然 AI的各个分支中，发展最为迅速的就是深度学习（deep learning）。而深度学习，一般指的是训练神经网络（有时是非常非常大/深的神经网络）。">
 <meta name="keywords" content="学习笔记,deeplearning.ai">
 <meta property="og:type" content="article">
 <meta property="og:title" content="deeplearning.ai学习笔记（一）深度学习引言">
 <meta property="og:url" content="http://yoursite.com/2019/08/09/deeplearning-ai学习笔记（一）深度学习引言/index.html">
 <meta property="og:site_name" content="一只程序喵">
-<meta property="og:description" content="AI is the new Electricity. ——吴恩达（Andrew Ng）  大约在一百年前，社会的电气化改变了每个主要行业。而如今我们见到了 AI令人惊讶的能量会产生同样巨大的转变。显然 AI的各个分支中，发展最为迅速的就是深度学习（deep learning）。而深度学习，一般指的是训练神经网络（有时是非常非常大/深的神经网络）。 何为神经网络（What is a neural">
+<meta property="og:description" content="AI is the new Electricity. ——吴恩达（Andrew Ng）  大约在一百年前，社会的电气化改变了每个主要行业。而如今我们见到了 AI令人惊讶的能量会产生同样巨大的转变。显然 AI的各个分支中，发展最为迅速的就是深度学习（deep learning）。而深度学习，一般指的是训练神经网络（有时是非常非常大/深的神经网络）。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/09/ebRgtx.md.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/09/ebfBw9.png">
@@ -39,10 +39,10 @@
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/09/ebfTYt.md.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/09/ebfoFI.md.png">
 <meta property="og:image" content="https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/JP--G3ooEeeJIwrF5BVsIg_b60d752c05bec0881d8ca08cfc2646d2_Screen-Shot-2017-08-05-at-2.30.09-PM.png?expiry=1565481600000&hmac=I-FnXoQoONjGN17_lNuk7vXj7BK4h_mP1txu2K-Y830">
-<meta property="og:updated_time" content="2019-08-09T08:51:23.831Z">
+<meta property="og:updated_time" content="2019-08-09T09:05:27.062Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="deeplearning.ai学习笔记（一）深度学习引言">
-<meta name="twitter:description" content="AI is the new Electricity. ——吴恩达（Andrew Ng）  大约在一百年前，社会的电气化改变了每个主要行业。而如今我们见到了 AI令人惊讶的能量会产生同样巨大的转变。显然 AI的各个分支中，发展最为迅速的就是深度学习（deep learning）。而深度学习，一般指的是训练神经网络（有时是非常非常大/深的神经网络）。 何为神经网络（What is a neural">
+<meta name="twitter:description" content="AI is the new Electricity. ——吴恩达（Andrew Ng）  大约在一百年前，社会的电气化改变了每个主要行业。而如今我们见到了 AI令人惊讶的能量会产生同样巨大的转变。显然 AI的各个分支中，发展最为迅速的就是深度学习（deep learning）。而深度学习，一般指的是训练神经网络（有时是非常非常大/深的神经网络）。">
 <meta name="twitter:image" content="https://s2.ax1x.com/2019/08/09/ebRgtx.md.png">
     
         <link rel="alternate" type="application/atom+xml" title="一只程序喵" href="/atom.xml">
@@ -137,7 +137,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -204,6 +204,8 @@
 <p>AI is the new Electricity. ——吴恩达（<a href="https://www.coursera.org/instructor/andrewng" target="_blank" rel="noopener">Andrew Ng</a>）</p>
 </blockquote>
 <p>大约在一百年前，社会的电气化改变了每个主要行业。而如今我们见到了 AI令人惊讶的能量会产生同样巨大的转变。显然 AI的各个分支中，发展最为迅速的就是<strong>深度学习</strong>（deep learning）。而<strong>深度学习</strong>，一般指的是训练<strong>神经网络</strong>（有时是非常非常大/深的神经网络）。</p>
+<a id="more"></a>
+
 <h2 id="何为神经网络（What-is-a-neural-network-）"><a href="#何为神经网络（What-is-a-neural-network-）" class="headerlink" title="何为神经网络（What is a neural network?）"></a>何为神经网络（What is a <strong>neural network</strong>?）</h2><h3 id="引例：房价预测（Housing-Price-Prediction）"><a href="#引例：房价预测（Housing-Price-Prediction）" class="headerlink" title="引例：房价预测（Housing Price Prediction）"></a>引例：房价预测（Housing Price Prediction）</h3><p>如下图，对于单个因素（如房屋面积）的房屋预测，可以用ReLU函数进行拟合，相当于一个只有一个神经元的神经网络。</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
@@ -320,7 +322,7 @@
     <div class="content">
         
 <span class="post-time">
-    最終更新：<time datetime="2019-08-09T08:51:23.831Z" itemprop="dateUpdated">2019-08-09 16:51:23</time>
+    Last updated: <time datetime="2019-08-09T09:05:27.062Z" itemprop="dateUpdated">2019-08-09 17:05:27</time>
 </span><br>
 
 
@@ -366,7 +368,10 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/09/deeplearning-ai学习笔记（一）深度学习引言/&title=《deeplearning.ai学习笔记（一）深度学习引言》 — 一只程序喵&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/09/deeplearning-ai学习笔记（一）深度学习引言/&title=《deeplearning.ai学习笔记（一）深度学习引言》 — 一只程序喵&source=
+AI is the new Electricity. ——吴恩达（Andrew Ng）
+
+大约在一百年前，社会的电气化改变了每个主要行业。而如今我们见到..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -486,7 +491,7 @@
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">
@@ -518,7 +523,10 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/09/deeplearning-ai学习笔记（一）深度学习引言/&title=《deeplearning.ai学习笔记（一）深度学习引言》 — 一只程序喵&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/09/deeplearning-ai学习笔记（一）深度学习引言/&title=《deeplearning.ai学习笔记（一）深度学习引言》 — 一只程序喵&source=
+AI is the new Electricity. ——吴恩达（Andrew Ng）
+
+大约在一百年前，社会的电气化改变了每个主要行业。而如今我们见到..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>

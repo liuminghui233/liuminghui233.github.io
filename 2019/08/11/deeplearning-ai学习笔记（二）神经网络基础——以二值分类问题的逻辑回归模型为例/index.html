@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/11/exSHu6.md.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/11/exSbDK.md.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/11/exSqHO.md.png">
-<meta property="og:updated_time" content="2019-08-11T15:02:08.738Z">
+<meta property="og:updated_time" content="2019-08-12T13:41:46.528Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="deeplearning-ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例">
 <meta name="twitter:description" content="二值分类（Binary Classification ）问题描述例如：猫咪检测器（Cat vs Non-Cat ） 目标是训练一个分类器，对于输入的照片，如果它是一张猫咪的照片就输出1，否则输出0。 输入将一张RGB三通道彩色图像展开为一个长的列向量做为输入。 若图片尺寸为64*64，则向量的维度n(x)=64*64*3=12288。">
@@ -175,7 +175,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二值分类（Binary-Classification-）问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">二值分类（Binary Classification ）问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#描述"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">描述</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#输入"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">输入</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代价函数（Cost-function-）"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">代价函数（Cost function ）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#损失函数-vs-代价函数"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">损失函数 vs 代价函数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#逻辑回归的损失函数"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">逻辑回归的损失函数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#逻辑回归的代价函数"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">逻辑回归的代价函数</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#训练过程——梯度下降（Gradient-Descent）算法"><span class="post-toc-number">2.</span> <span class="post-toc-text">训练过程——梯度下降（Gradient Descent）算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#算法思想"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">算法思想</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数学基础：计算图（Computation-Graph）"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">数学基础：计算图（Computation Graph）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#计算图计算（前向传播过程）"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">计算图计算（前向传播过程）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#计算图求导（反向传播过程）"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">计算图求导（反向传播过程）</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#逻辑回归模型的前向传播和反向传播过程（单个样本）"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">逻辑回归模型的前向传播和反向传播过程（单个样本）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#逻辑回归模型的计算图"><span class="post-toc-number">2.3.1.</span> <span class="post-toc-text">逻辑回归模型的计算图</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#逻辑回归模型的前向传播"><span class="post-toc-number">2.3.2.</span> <span class="post-toc-text">逻辑回归模型的前向传播</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#逻辑回归模型的反向传播"><span class="post-toc-number">2.3.3.</span> <span class="post-toc-text">逻辑回归模型的反向传播</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#非向量化的逻辑回归训练过程"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">非向量化的逻辑回归训练过程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#向量化（Vectorizing）的逻辑回归训练过程"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">向量化（Vectorizing）的逻辑回归训练过程</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二值分类（Binary-Classification-）问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">二值分类（Binary Classification ）问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#描述"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">描述</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#输入"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">输入</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#输出"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">输出</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#训练数据"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">训练数据</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#逻辑回归（Logistic-Regression-）模型"><span class="post-toc-number">2.</span> <span class="post-toc-text">逻辑回归（Logistic Regression ）模型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#定义"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">定义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代价函数（Cost-function-）"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">代价函数（Cost function ）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#损失函数-vs-代价函数"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">损失函数 vs 代价函数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#逻辑回归的损失函数"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">逻辑回归的损失函数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#逻辑回归的代价函数"><span class="post-toc-number">2.2.3.</span> <span class="post-toc-text">逻辑回归的代价函数</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#训练过程——梯度下降（Gradient-Descent）算法"><span class="post-toc-number">3.</span> <span class="post-toc-text">训练过程——梯度下降（Gradient Descent）算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#算法思想"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">算法思想</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数学基础：计算图（Computation-Graph）"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">数学基础：计算图（Computation Graph）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#计算图计算（前向传播过程）"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">计算图计算（前向传播过程）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#计算图求导（反向传播过程）"><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text">计算图求导（反向传播过程）</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#逻辑回归模型的前向传播和反向传播过程（单个样本）"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">逻辑回归模型的前向传播和反向传播过程（单个样本）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#逻辑回归模型的计算图"><span class="post-toc-number">3.3.1.</span> <span class="post-toc-text">逻辑回归模型的计算图</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#逻辑回归模型的前向传播"><span class="post-toc-number">3.3.2.</span> <span class="post-toc-text">逻辑回归模型的前向传播</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#逻辑回归模型的反向传播"><span class="post-toc-number">3.3.3.</span> <span class="post-toc-text">逻辑回归模型的反向传播</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#非向量化的逻辑回归训练过程"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">非向量化的逻辑回归训练过程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#向量化（Vectorizing）的逻辑回归训练过程"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">向量化（Vectorizing）的逻辑回归训练过程</span></a></li></ol></li></ol>
         </nav>
     </aside>
 
@@ -209,52 +209,30 @@
                     <img src="https://s2.ax1x.com/2019/08/11/exSOED.md.png" alt="输入特征向量x" title>
                 </div>
                 <div class="image-caption">输入特征向量x</div>
-            </figure>](https://imgc
-
-### 输出
-
-对于二值分类问题，输出结果只有两个——**0或1**。
-
-输出标签的向量形式：（m维列向量）
-$$
+            </figure>
+<h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><p>对于二值分类问题，输出结果只有两个——<strong>0或1</strong>。</p>
+<p>输出标签的向量形式：（m维列向量）</p>
+<script type="math/tex; mode=display">
 \begin{bmatrix}
 y^{(1)}\\
 y^{(2)}  \\
 \vdots \\
 y^{(i)}  
-\end{bmatrix}
-$$
-
-
-### 训练数据
-
-- 单个样本由一对（x,y）表示，其中x是一个n(x)维的特征向量 ，y是取值为0或1的标签。
-- 训练集包含m个训练样本（用小写m代表训练集的样本总数），(x(i),y(i)) 表示第i个样本的输入和输出。
-- 写成矩阵形式如下：（X.shape=n_x\*m）
-
-$$
+\end{bmatrix}</script><h3 id="训练数据"><a href="#训练数据" class="headerlink" title="训练数据"></a>训练数据</h3><ul>
+<li>单个样本由一对（x,y）表示，其中x是一个n(x)维的特征向量 ，y是取值为0或1的标签。</li>
+<li>训练集包含m个训练样本（用小写m代表训练集的样本总数），(x(i),y(i)) 表示第i个样本的输入和输出。</li>
+<li>写成矩阵形式如下：（X.shape=n_x*m）</li>
+</ul>
+<script type="math/tex; mode=display">
 \begin{bmatrix}
 \vdots & \vdots & \vdots & \vdots \\
 x^{(1)} & x^{(2)} & \cdots & x^{(i)} \\
 \vdots & \vdots & \vdots & \vdots 
-\end{bmatrix}
-$$
-
-
-
-## **逻辑回归**（Logistic Regression ）模型
-
-逻辑回归是一种用于解决输出是0/1的监督学习问题的学习算法，它使得预测值与训练数据之间的偏差最小。
-
-### 定义
-
-以Cat vs No - cat为例：
-
-把一张图片展开为特征向量x做为输入，算法将估计这张图片中包含猫咪的概率。
-$$
-Given~x~,~\hat{y}=P(y=1|x),where~0\leq\hat{y}\leq1
-$$
-<figure class="image-bubble">
+\end{bmatrix}</script><h2 id="逻辑回归（Logistic-Regression-）模型"><a href="#逻辑回归（Logistic-Regression-）模型" class="headerlink" title="逻辑回归（Logistic Regression ）模型"></a><strong>逻辑回归</strong>（Logistic Regression ）模型</h2><p>逻辑回归是一种用于解决输出是0/1的监督学习问题的学习算法，它使得预测值与训练数据之间的偏差最小。</p>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>以Cat vs No - cat为例：</p>
+<p>把一张图片展开为特征向量x做为输入，算法将估计这张图片中包含猫咪的概率。</p>
+<script type="math/tex; mode=display">
+Given~x~,~\hat{y}=P(y=1|x),where~0\leq\hat{y}\leq1</script><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="https://s2.ax1x.com/2019/08/11/exSWEF.md.png" alt="逻辑回归模型" title>
@@ -400,7 +378,7 @@ b := b - \alpha db</script><p>注意：此为一次迭代的过程，多次迭�
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-08-11T15:02:08.738Z" itemprop="dateUpdated">2019-08-11 23:02:08</time>
+    Last updated: <time datetime="2019-08-12T13:41:46.528Z" itemprop="dateUpdated">2019-08-12 21:41:46</time>
 </span><br>
 
 

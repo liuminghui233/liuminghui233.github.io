@@ -205,7 +205,6 @@
 </blockquote>
 <p>大约在一百年前，社会的电气化改变了每个主要行业。而如今我们见到了 AI令人惊讶的能量会产生同样巨大的转变。显然 AI的各个分支中，发展最为迅速的就是<strong>深度学习</strong>（deep learning）。而<strong>深度学习</strong>，一般指的是训练<strong>神经网络</strong>（有时是非常非常大/深的神经网络）。</p>
 <a id="more"></a>
-
 <h2 id="何为神经网络（What-is-a-neural-network-）"><a href="#何为神经网络（What-is-a-neural-network-）" class="headerlink" title="何为神经网络（What is a neural network?）"></a>何为神经网络（What is a <strong>neural network</strong>?）</h2><h3 id="引例：房价预测（Housing-Price-Prediction）"><a href="#引例：房价预测（Housing-Price-Prediction）" class="headerlink" title="引例：房价预测（Housing Price Prediction）"></a>引例：房价预测（Housing Price Prediction）</h3><p>如下图，对于单个因素（如房屋面积）的房屋预测，可以用ReLU函数进行拟合，相当于一个只有一个神经元的神经网络。</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
@@ -214,7 +213,6 @@
                 </div>
                 <div class="image-caption">ReLU函数拟合</div>
             </figure>
-
 <p>用房子的大小 x 作为神经网络的输入，它进入到这个节点(这个小圈)中 ，然后这个小圈就输出了房价 y 。所以这个小圈，也就是一个神经网络中的一个神经元，就会执行上图中画出的这个方程。</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
@@ -223,7 +221,6 @@
                 </div>
                 <div class="image-caption">单个神经元的神经网络</div>
             </figure>
-
 <p><strong>一个很大的神经网络是由许多这样的单一神经元叠加在一起组成。</strong>比如下面这个例子，我们不仅仅根据房屋大小来预测房屋价格，我们引入其他特征量。能够容纳的家庭人口也会影响房屋价格 ，这个因素其实是取决于房屋大小以及卧室的数量这两个因素决定了这个房子是否能够容纳你的家庭 。</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
@@ -232,7 +229,6 @@
                 </div>
                 <div class="image-caption">多因素房价预测</div>
             </figure>
-
 <p>所以在这个例子中：</p>
 <ul>
 <li>x 表示所有这四个输入 (房屋大小、卧室数量、邮政编码、富裕程度)</li>
@@ -247,7 +243,6 @@
                 </div>
                 <div class="image-caption">简单神经网络</div>
             </figure>
-
 <h2 id="深度学习：监督学习的一种（Supervised-Learning-with-Neural-Networks）"><a href="#深度学习：监督学习的一种（Supervised-Learning-with-Neural-Networks）" class="headerlink" title="深度学习：监督学习的一种（Supervised Learning with Neural Networks）"></a>深度学习：监督学习的一种（Supervised Learning with Neural Networks）</h2><h3 id="监督学习与非监督学习"><a href="#监督学习与非监督学习" class="headerlink" title="监督学习与非监督学习"></a>监督学习与非监督学习</h3><p><code>监督学习</code>：给定标记好的训练样本集，如回归问题、分类问题</p>
 <p><code>非监督学习</code>：给定样本集，发现特征数据中的分布结构，如聚类问题</p>
 <figure class="image-bubble">
@@ -257,7 +252,6 @@
                 </div>
                 <div class="image-caption">监督学习</div>
             </figure>
-
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
@@ -265,7 +259,6 @@
                 </div>
                 <div class="image-caption">非监督学习</div>
             </figure>
-
 <h3 id="深度学习在监督学习中的应用-amp-常用神经网络"><a href="#深度学习在监督学习中的应用-amp-常用神经网络" class="headerlink" title="深度学习在监督学习中的应用 &amp; 常用神经网络"></a>深度学习在监督学习中的应用 &amp; 常用神经网络</h3><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
@@ -273,7 +266,6 @@
                 </div>
                 <div class="image-caption">深度学习的应用</div>
             </figure>
-
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
@@ -281,7 +273,6 @@
                 </div>
                 <div class="image-caption">几种常见神经网络</div>
             </figure>
-
 <h3 id="结构化数据与非结构化数据"><a href="#结构化数据与非结构化数据" class="headerlink" title="结构化数据与非结构化数据"></a>结构化数据与非结构化数据</h3><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
@@ -289,7 +280,6 @@
                 </div>
                 <div class="image-caption">结构化数据与非结构化数据示例</div>
             </figure>
-
 <h2 id="深度学习兴起的原因（Why-is-Deep-Learning-taking-off-）"><a href="#深度学习兴起的原因（Why-is-Deep-Learning-taking-off-）" class="headerlink" title="深度学习兴起的原因（Why is Deep Learning taking off?）"></a>深度学习兴起的原因（Why is Deep Learning taking off?）</h2><blockquote>
 <p>Scale drives deep learning progress.——吴恩达（<a href="https://www.coursera.org/instructor/andrewng" target="_blank" rel="noopener">Andrew Ng</a>）</p>
 </blockquote>
@@ -304,7 +294,6 @@
                 </div>
                 <div class="image-caption">数据量与算法性能关系</div>
             </figure>
-
 <ul>
 <li>当数据量比较少时，深度学习方法性能不一定优于经典机器学习方法。</li>
 <li>通过增加数据量和神经网络规模可提升深度学习方法的性能。</li>

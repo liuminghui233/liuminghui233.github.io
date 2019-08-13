@@ -14,7 +14,7 @@
     
     
     
-    <title>deeplearning-ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例 | 一只程序喵 | 刘明辉的个人博客</title>
+    <title>deeplearning.ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例 | 一只程序喵 | 刘明辉的个人博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
@@ -24,7 +24,7 @@
     <meta name="description" content="二值分类（Binary Classification ）问题描述例如：猫咪检测器（Cat vs Non-Cat ） 目标是训练一个分类器，对于输入的照片，如果它是一张猫咪的照片就输出1，否则输出0。 输入将一张RGB三通道彩色图像展开为一个长的列向量做为输入。 若图片尺寸为64*64，则向量的维度n(x)=64*64*3=12288。">
 <meta name="keywords" content="学习笔记,deeplearning.ai">
 <meta property="og:type" content="article">
-<meta property="og:title" content="deeplearning-ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例">
+<meta property="og:title" content="deeplearning.ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例">
 <meta property="og:url" content="http://yoursite.com/2019/08/11/deeplearning-ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例/index.html">
 <meta property="og:site_name" content="一只程序喵">
 <meta property="og:description" content="二值分类（Binary Classification ）问题描述例如：猫咪检测器（Cat vs Non-Cat ） 目标是训练一个分类器，对于输入的照片，如果它是一张猫咪的照片就输出1，否则输出0。 输入将一张RGB三通道彩色图像展开为一个长的列向量做为输入。 若图片尺寸为64*64，则向量的维度n(x)=64*64*3=12288。">
@@ -38,9 +38,9 @@
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/11/exSHu6.md.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/11/exSbDK.md.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/11/exSqHO.md.png">
-<meta property="og:updated_time" content="2019-08-12T13:41:46.528Z">
+<meta property="og:updated_time" content="2019-08-12T13:56:39.367Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="deeplearning-ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例">
+<meta name="twitter:title" content="deeplearning.ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例">
 <meta name="twitter:description" content="二值分类（Binary Classification ）问题描述例如：猫咪检测器（Cat vs Non-Cat ） 目标是训练一个分类器，对于输入的照片，如果它是一张猫咪的照片就输出1，否则输出0。 输入将一张RGB三通道彩色图像展开为一个长的列向量做为输入。 若图片尺寸为64*64，则向量的维度n(x)=64*64*3=12288。">
 <meta name="twitter:image" content="https://s2.ax1x.com/2019/08/11/exSOED.md.png">
     
@@ -130,7 +130,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">deeplearning-ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例</div>
+        <div class="flex-col header-title ellipsis">deeplearning.ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -152,7 +152,7 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">deeplearning-ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例</h1>
+        <h1 class="title">deeplearning.ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例</h1>
         <h5 class="subtitle">
             
                 <time datetime="2019-08-11T02:18:57.000Z" itemprop="datePublished" class="page-time">
@@ -184,7 +184,7 @@
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">deeplearning-ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例</h1>
+        <h1 class="post-card-title">deeplearning.ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例</h1>
         <div class="post-meta">
             <time class="post-time" title="2019-08-11 10:18:57" datetime="2019-08-11T02:18:57.000Z"  itemprop="datePublished">2019-08-11</time>
 
@@ -203,6 +203,7 @@
 <p>目标是训练一个分类器，对于输入的照片，如果它是一张猫咪的照片就输出1，否则输出0。</p>
 <h3 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h3><p>将一张RGB三通道彩色图像展开为一个长的列向量做为输入。</p>
 <p>若图片尺寸为64*64，则向量的维度n(x)=64*64*3=12288。</p>
+<a id="more"></a>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
@@ -378,7 +379,7 @@ b := b - \alpha db</script><p>注意：此为一次迭代的过程，多次迭�
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-08-12T13:41:46.528Z" itemprop="dateUpdated">2019-08-12 21:41:46</time>
+    Last updated: <time datetime="2019-08-12T13:56:39.367Z" itemprop="dateUpdated">2019-08-12 21:56:39</time>
 </span><br>
 
 
@@ -414,7 +415,7 @@ b := b - \alpha db</script><p>注意：此为一次迭代的过程，多次迭�
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/08/11/deeplearning-ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例/&title=《deeplearning-ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例》 — 一只程序喵&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/08/11/deeplearning-ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例/&title=《deeplearning.ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例》 — 一只程序喵&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -424,7 +425,8 @@ b := b - \alpha db</script><p>注意：此为一次迭代的过程，多次迭�
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/11/deeplearning-ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例/&title=《deeplearning-ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例》 — 一只程序喵&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/11/deeplearning-ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例/&title=《deeplearning.ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例》 — 一只程序喵&source=二值分类（Binary Classification ）问题描述例如：猫咪检测器（Cat vs Non-Cat ）
+目标是训练一个分类器，对于输入的照片，..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -434,7 +436,7 @@ b := b - \alpha db</script><p>注意：此为一次迭代的过程，多次迭�
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《deeplearning-ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例》 — 一只程序喵&url=http://yoursite.com/2019/08/11/deeplearning-ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《deeplearning.ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例》 — 一只程序喵&url=http://yoursite.com/2019/08/11/deeplearning-ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例/&via=http://yoursite.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
@@ -459,7 +461,14 @@ b := b - \alpha db</script><p>注意：此为一次迭代的过程，多次迭�
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/08/12/deeplearning-ai学习笔记（三）浅层神经网络/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">deeplearning.ai学习笔记（三）浅层神经网络（Shallow neural networks）</h4>
+      </a>
+    </div>
   
 
   
@@ -566,7 +575,7 @@ b := b - \alpha db</script><p>注意：此为一次迭代的过程，多次迭�
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/08/11/deeplearning-ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例/&title=《deeplearning-ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例》 — 一只程序喵&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/08/11/deeplearning-ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例/&title=《deeplearning.ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例》 — 一只程序喵&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -576,7 +585,8 @@ b := b - \alpha db</script><p>注意：此为一次迭代的过程，多次迭�
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/11/deeplearning-ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例/&title=《deeplearning-ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例》 — 一只程序喵&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/11/deeplearning-ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例/&title=《deeplearning.ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例》 — 一只程序喵&source=二值分类（Binary Classification ）问题描述例如：猫咪检测器（Cat vs Non-Cat ）
+目标是训练一个分类器，对于输入的照片，..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -586,7 +596,7 @@ b := b - \alpha db</script><p>注意：此为一次迭代的过程，多次迭�
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《deeplearning-ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例》 — 一只程序喵&url=http://yoursite.com/2019/08/11/deeplearning-ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《deeplearning.ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例》 — 一只程序喵&url=http://yoursite.com/2019/08/11/deeplearning-ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例/&via=http://yoursite.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>

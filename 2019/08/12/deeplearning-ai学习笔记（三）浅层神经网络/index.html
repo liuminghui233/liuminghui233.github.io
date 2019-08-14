@@ -14,26 +14,32 @@
     
     
     
-    <title>deeplearning.ai学习笔记（三）浅层神经网络（Shallow neural networks） | 一只程序喵 | 刘明辉的个人博客</title>
+    <title>deeplearning.ai学习笔记（三）浅层神经网络（Shallow Neural Networks） | 一只程序喵 | 刘明辉的个人博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
     <meta name="keywords" content="学习笔记,deeplearning.ai">
-    <meta name="description" content="神经网络的表示以一个单隐层神经网络为例：                                                                                              1565685520229              神经网络的输出激活函数stR神经网络的梯度下降法算法过程神经网络的前向传播（Forward propagation）即">
+    <meta name="description" content="神经网络的表示以一个单隐层神经网络为例：                                                                                              1565685520229              结构上，从左到右，可以分成三层：输入层（Input layer），隐藏层（Hidden layer）和输出层（Outp">
 <meta name="keywords" content="学习笔记,deeplearning.ai">
 <meta property="og:type" content="article">
-<meta property="og:title" content="deeplearning.ai学习笔记（三）浅层神经网络（Shallow neural networks）">
+<meta property="og:title" content="deeplearning.ai学习笔记（三）浅层神经网络（Shallow Neural Networks）">
 <meta property="og:url" content="http://yoursite.com/2019/08/12/deeplearning-ai学习笔记（三）浅层神经网络/index.html">
 <meta property="og:site_name" content="一只程序喵">
-<meta property="og:description" content="神经网络的表示以一个单隐层神经网络为例：                                                                                              1565685520229              神经网络的输出激活函数stR神经网络的梯度下降法算法过程神经网络的前向传播（Forward propagation）即">
+<meta property="og:description" content="神经网络的表示以一个单隐层神经网络为例：                                                                                              1565685520229              结构上，从左到右，可以分成三层：输入层（Input layer），隐藏层（Hidden layer）和输出层（Outp">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1565685520229.png">
-<meta property="og:updated_time" content="2019-08-13T15:08:46.042Z">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1565784165727.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1565784307544.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1565785824354.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1565785866005.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1565785882232.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1565785892312.png">
+<meta property="og:updated_time" content="2019-08-14T13:50:19.719Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="deeplearning.ai学习笔记（三）浅层神经网络（Shallow neural networks）">
-<meta name="twitter:description" content="神经网络的表示以一个单隐层神经网络为例：                                                                                              1565685520229              神经网络的输出激活函数stR神经网络的梯度下降法算法过程神经网络的前向传播（Forward propagation）即">
+<meta name="twitter:title" content="deeplearning.ai学习笔记（三）浅层神经网络（Shallow Neural Networks）">
+<meta name="twitter:description" content="神经网络的表示以一个单隐层神经网络为例：                                                                                              1565685520229              结构上，从左到右，可以分成三层：输入层（Input layer），隐藏层（Hidden layer）和输出层（Outp">
 <meta name="twitter:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1565685520229.png">
     
         <link rel="alternate" type="application/atom+xml" title="一只程序喵" href="/atom.xml">
@@ -122,7 +128,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">deeplearning.ai学习笔记（三）浅层神经网络（Shallow neural networks）</div>
+        <div class="flex-col header-title ellipsis">deeplearning.ai学习笔记（三）浅层神经网络（Shallow Neural Networks）</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -144,7 +150,7 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">deeplearning.ai学习笔记（三）浅层神经网络（Shallow neural networks）</h1>
+        <h1 class="title">deeplearning.ai学习笔记（三）浅层神经网络（Shallow Neural Networks）</h1>
         <h5 class="subtitle">
             
                 <time datetime="2019-08-12T13:44:29.000Z" itemprop="datePublished" class="page-time">
@@ -167,7 +173,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#神经网络的表示"><span class="post-toc-number">1.</span> <span class="post-toc-text">神经网络的表示</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#神经网络的输出"><span class="post-toc-number">2.</span> <span class="post-toc-text">神经网络的输出</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#激活函数"><span class="post-toc-number">3.</span> <span class="post-toc-text">激活函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#s"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">s</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#t"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">t</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#R"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">R</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#神经网络的梯度下降法"><span class="post-toc-number">4.</span> <span class="post-toc-text">神经网络的梯度下降法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#算法过程"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">算法过程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#神经网络的前向传播（Forward-propagation）"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">神经网络的前向传播（Forward propagation）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#神经网络的反向传播（Back-propagation）"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">神经网络的反向传播（Back propagation）</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#神经网络的表示"><span class="post-toc-number">1.</span> <span class="post-toc-text">神经网络的表示</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#神经网络的输出（正向传播）"><span class="post-toc-number">2.</span> <span class="post-toc-text">神经网络的输出（正向传播）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#单个神经元的输出"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">单个神经元的输出</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#单个样本的神经网络正向传播过程"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">单个样本的神经网络正向传播过程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#非向量化计算过程"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">非向量化计算过程</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#向量化计算过程"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">向量化计算过程</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#m个训练样本的神经网络正向传播过程"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">m个训练样本的神经网络正向传播过程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#非向量化计算过程-1"><span class="post-toc-number">2.3.1.</span> <span class="post-toc-text">非向量化计算过程</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#向量化计算过程-1"><span class="post-toc-number">2.3.2.</span> <span class="post-toc-text">向量化计算过程</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#激活函数"><span class="post-toc-number">3.</span> <span class="post-toc-text">激活函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#几种常见激活函数"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">几种常见激活函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#sigmoid函数"><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">sigmoid函数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#tanh函数"><span class="post-toc-number">3.1.2.</span> <span class="post-toc-text">tanh函数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ReLU函数（线性整流函数，Rectified-Linear-Unit）"><span class="post-toc-number">3.1.3.</span> <span class="post-toc-text">ReLU函数（线性整流函数，Rectified Linear Unit）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Leaky-ReLU函数"><span class="post-toc-number">3.1.4.</span> <span class="post-toc-text">Leaky ReLU函数</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#激活函数的比较与选择"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">激活函数的比较与选择</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#为什么要用非线性函数做激活函数？"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">为什么要用非线性函数做激活函数？</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#神经网络的梯度下降法"><span class="post-toc-number">4.</span> <span class="post-toc-text">神经网络的梯度下降法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#算法过程"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">算法过程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#参数的随机初始化"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">参数的随机初始化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#神经网络的前向传播（Forward-propagation）"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">神经网络的前向传播（Forward propagation）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#神经网络的反向传播（Back-propagation）"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">神经网络的反向传播（Back propagation）</span></a></li></ol></li></ol>
         </nav>
     </aside>
 
@@ -176,7 +182,7 @@
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">deeplearning.ai学习笔记（三）浅层神经网络（Shallow neural networks）</h1>
+        <h1 class="post-card-title">deeplearning.ai学习笔记（三）浅层神经网络（Shallow Neural Networks）</h1>
         <div class="post-meta">
             <time class="post-time" title="2019-08-12 21:44:29" datetime="2019-08-12T13:44:29.000Z"  itemprop="datePublished">2019-08-12</time>
 
@@ -199,8 +205,112 @@
                 </div>
                 <div class="image-caption">1565685520229</div>
             </figure>
-<h2 id="神经网络的输出"><a href="#神经网络的输出" class="headerlink" title="神经网络的输出"></a>神经网络的输出</h2><h2 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h2><h3 id="s"><a href="#s" class="headerlink" title="s"></a>s</h3><h3 id="t"><a href="#t" class="headerlink" title="t"></a>t</h3><h3 id="R"><a href="#R" class="headerlink" title="R"></a>R</h3><h2 id="神经网络的梯度下降法"><a href="#神经网络的梯度下降法" class="headerlink" title="神经网络的梯度下降法"></a>神经网络的梯度下降法</h2><h3 id="算法过程"><a href="#算法过程" class="headerlink" title="算法过程"></a>算法过程</h3><h3 id="神经网络的前向传播（Forward-propagation）"><a href="#神经网络的前向传播（Forward-propagation）" class="headerlink" title="神经网络的前向传播（Forward propagation）"></a>神经网络的前向传播（Forward propagation）</h3><p>即计算神经网络的输出。</p>
-<h3 id="神经网络的反向传播（Back-propagation）"><a href="#神经网络的反向传播（Back-propagation）" class="headerlink" title="神经网络的反向传播（Back propagation）"></a>神经网络的反向传播（Back propagation）</h3>
+<p><strong>结构上</strong>，从左到右，可以分成三层：<code>输入层</code>（Input layer），<code>隐藏层</code>（Hidden layer）和<code>输出层</code>（Output layer）。输入层和输出层，对应着训练样本的输入和输出。隐藏层是抽象的非线性中间层，中间这一层节点的真实值并没有所观察，这也是其被命名为隐藏层的原因。</p>
+<p>注：单隐藏层神经网络属于为两层神经网络，<strong>输入层不计入</strong>。</p>
+<p><strong>记法上</strong>：</p>
+<ol>
+<li><p>把输入矩阵X记为<em>a</em>[0]，把隐藏层输出记为<em>a</em>[1]，输出层输出记为<em>a</em>[2]（即ŷ）。</p>
+</li>
+<li><p>用下标表示第几个神经元（下标从1开始）。例如<em>a</em>1[1]表示隐藏层第1个神经元，<em>a</em>2[1]表示隐藏层第2个神经元。隐藏层的输出可以写成矩阵形式：</p>
+<script type="math/tex; mode=display">
+a^{[1]}=
+\begin{bmatrix}
+a_1^{[1]}\\
+a_2^{[1]}\\
+a_3^{[1]}\\
+a_4^{[1]}
+\end{bmatrix}</script></li>
+</ol>
+<ol>
+<li>参数</li>
+</ol>
+<ul>
+<li>隐藏层参数：权重<em>W</em>[1]，维度是（4,3），4对应着隐藏层神经元个数，3对应着输入层x特征向量包含元素个数。常数项<em>b</em>[1]，维度是（4,1），4同样对应着隐藏层神经元个数。</li>
+<li>输出层参数：权重<em>W</em>[2]，维度是（1,4），1对应着输出层神经元个数，4对应着输出层神经元个数。常数项<em>b</em>[2]，维度是（1,1），因为输出只有一个神经元。</li>
+</ul>
+<p><strong>总结：第i层的权重<em>W</em>[<em>i</em>]维度的行等于i层神经元的个数，列等于i-1层神经元的个数；第i层常数项<em>b</em>[<em>i</em>]维度的行等于i层神经元的个数，列始终为1。</strong></p>
+<h2 id="神经网络的输出（正向传播）"><a href="#神经网络的输出（正向传播）" class="headerlink" title="神经网络的输出（正向传播）"></a>神经网络的输出（正向传播）</h2><h3 id="单个神经元的输出"><a href="#单个神经元的输出" class="headerlink" title="单个神经元的输出"></a>单个神经元的输出</h3><p>每个神经元进行两个计算：<strong>线性加权</strong>（计算z）、<strong>非线性激活</strong>（计算a）。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1565784165727.png" alt="1565784165727" title>
+                </div>
+                <div class="image-caption">1565784165727</div>
+            </figure>
+<script type="math/tex; mode=display">
+z=w^{T}x+b \\
+a=\sigma(z)</script><h3 id="单个样本的神经网络正向传播过程"><a href="#单个样本的神经网络正向传播过程" class="headerlink" title="单个样本的神经网络正向传播过程"></a>单个样本的神经网络正向传播过程</h3><p>每个节点的计算都对应着一次逻辑运算的过程，分别由计算z和a两部分组成。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1565784307544.png" alt="1565784307544" title>
+                </div>
+                <div class="image-caption">1565784307544</div>
+            </figure>
+<h4 id="非向量化计算过程"><a href="#非向量化计算过程" class="headerlink" title="非向量化计算过程"></a>非向量化计算过程</h4><p>从输入层到隐藏层：</p>
+<script type="math/tex; mode=display">
+z_1^{[1]}=w_1^{[1]T}x+b_1^{[1]},a_1^{[1]}=\sigma(z_1^{[1]}) \\
+z_2^{[1]}=w_2^{[1]T}x+b_2^{[1]},a_2^{[1]}=\sigma(z_2^{[1]}) \\
+z_3^{[1]}=w_3^{[1]T}x+b_3^{[1]},a_3^{[1]}=\sigma(z_3^{[1]}) \\
+z_4^{[1]}=w_4^{[1]T}x+b_4^{[1]},a_4^{[1]}=\sigma(z_4^{[1]})</script><p>从隐藏层到输出层：</p>
+<script type="math/tex; mode=display">
+z_1^{[2]}=w_1^{[2]T}a^{[1]}+b_1^{[2]},a_1^{[2]}=\sigma(z_1^{[2]})</script><h4 id="向量化计算过程"><a href="#向量化计算过程" class="headerlink" title="向量化计算过程"></a>向量化计算过程</h4><script type="math/tex; mode=display">
+z^{[1]}=W^{[1]}x+b^{[1]},a^{[1]}=\sigma(z^{[1]}) \\
+z^{[2]}=W^{[2]}a^{[1]}+b^{[2]},a^{[2]}=\sigma(z^{[2]})</script><h3 id="m个训练样本的神经网络正向传播过程"><a href="#m个训练样本的神经网络正向传播过程" class="headerlink" title="m个训练样本的神经网络正向传播过程"></a>m个训练样本的神经网络正向传播过程</h3><h4 id="非向量化计算过程-1"><a href="#非向量化计算过程-1" class="headerlink" title="非向量化计算过程"></a>非向量化计算过程</h4><p>for i=1 to m:</p>
+<script type="math/tex; mode=display">
+z^{[1](i)}=W^{[1]}x^{(i)}+b^{[1]},a^{[1](i)}=\sigma(z^{[1](i)}) \\
+z^{[2](i)}=W^{[2]}a^{[1](i)}+b^{[2]},a^{[2](i)}=\sigma(z^{[2](i)})</script><h4 id="向量化计算过程-1"><a href="#向量化计算过程-1" class="headerlink" title="向量化计算过程"></a>向量化计算过程</h4><script type="math/tex; mode=display">
+Z^{[1]}=W^{[1]}X+b^{[1]},A^{[1]}=\sigma(Z^{[1]}) \\
+Z^{[2]}=W^{[2]}A^{[1]}+b^{[2]},A^{[2]}=\sigma(Z^{[2]})</script><p>其中，<em>Z</em>[1]的维度是（4,m），4是隐藏层神经元的个数；<em>A</em>[1]的维度与<em>Z</em>[1]相同；<em>Z</em>[2]和<em>A</em>[2]的维度均为（1,m）。（行表示神经元个数，列表示样本数目m）</p>
+<h2 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h2><h3 id="几种常见激活函数"><a href="#几种常见激活函数" class="headerlink" title="几种常见激活函数"></a>几种常见激活函数</h3><h4 id="sigmoid函数"><a href="#sigmoid函数" class="headerlink" title="sigmoid函数"></a>sigmoid函数</h4><ul>
+<li><p>表达式及图像：</p>
+<p><img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1565785824354.png" alt="1565785824354"></p>
+</li>
+<li><p>导数：</p>
+<script type="math/tex; mode=display">
+g^{'}(z)=a(1-a)</script></li>
+</ul>
+<h4 id="tanh函数"><a href="#tanh函数" class="headerlink" title="tanh函数"></a>tanh函数</h4><ul>
+<li><p>表达式及图像：</p>
+<p><img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1565785866005.png" alt="1565785866005"></p>
+</li>
+<li><p>导数：</p>
+<script type="math/tex; mode=display">
+g^{'}(z)=1-a^{2}</script></li>
+</ul>
+<h4 id="ReLU函数（线性整流函数，Rectified-Linear-Unit）"><a href="#ReLU函数（线性整流函数，Rectified-Linear-Unit）" class="headerlink" title="ReLU函数（线性整流函数，Rectified Linear Unit）"></a>ReLU函数（线性整流函数，Rectified Linear Unit）</h4><ul>
+<li><p>表达式及图像：</p>
+<p><img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1565785882232.png" alt="1565785882232"></p>
+</li>
+<li><p>导数：</p>
+<script type="math/tex; mode=display">
+g^{'}(z)=\begin{cases}
+1 & ,z>0 \\
+0 & ,z<0 \\
+Undefined & ,z=0
+\end{cases}</script></li>
+</ul>
+<h4 id="Leaky-ReLU函数"><a href="#Leaky-ReLU函数" class="headerlink" title="Leaky ReLU函数"></a>Leaky ReLU函数</h4><ul>
+<li><p>表达式及图像：</p>
+<p><img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1565785892312.png" alt="1565785892312"></p>
+</li>
+<li><p>导数：</p>
+<script type="math/tex; mode=display">
+g^{'}(z)=\begin{cases}
+1 & ,z>0 \\
+0.01 & ,z<0 \\
+Undefined & ,z=0
+\end{cases}</script></li>
+</ul>
+<h3 id="激活函数的比较与选择"><a href="#激活函数的比较与选择" class="headerlink" title="激活函数的比较与选择"></a>激活函数的比较与选择</h3><ul>
+<li><strong>sigmoid VS tanh：</strong>对于隐藏层的激活函数，一般来说，tanh函数要比sigmoid函数表现更好一些。特别的，对于二分类问题的输出层，由于取值为[0,1]，所以一般会选择sigmoid作为激活函数。</li>
+<li><strong>ReLU &amp; Leaky ReLU：</strong>sigmoid函数和tanh函数，当|z|很大的时候，激活函数的斜率（梯度）很小，梯度下降算法会运行得比较慢。对于隐藏层，选择ReLU作为激活函数能够保证z大于零时梯度始终为1，从而提高神经网络梯度下降算法运算速度。但当z小于零时，存在梯度为0的缺点（实际影响不大），而Leaky ReLU激活函数能够保证z小于零是梯度不为0。</li>
+</ul>
+<p><strong>实际应用中，通常会会选择使用ReLU/Leaky ReLU，保证梯度下降速度不会太小。</strong>具体选择哪个函数作为激活函数没有一个固定的准确的答案，要根据具体实际问题进行验证。</p>
+<h3 id="为什么要用非线性函数做激活函数？"><a href="#为什么要用非线性函数做激活函数？" class="headerlink" title="为什么要用非线性函数做激活函数？"></a>为什么要用<strong>非线性函数</strong>做激活函数？</h3><h2 id="神经网络的梯度下降法"><a href="#神经网络的梯度下降法" class="headerlink" title="神经网络的梯度下降法"></a>神经网络的梯度下降法</h2><h3 id="算法过程"><a href="#算法过程" class="headerlink" title="算法过程"></a>算法过程</h3><h3 id="参数的随机初始化"><a href="#参数的随机初始化" class="headerlink" title="参数的随机初始化"></a>参数的随机初始化</h3><h3 id="神经网络的前向传播（Forward-propagation）"><a href="#神经网络的前向传播（Forward-propagation）" class="headerlink" title="神经网络的前向传播（Forward propagation）"></a>神经网络的前向传播（Forward propagation）</h3><p>即计算神经网络的输出。</p>
+<h3 id="神经网络的反向传播（Back-propagation）"><a href="#神经网络的反向传播（Back-propagation）" class="headerlink" title="神经网络的反向传播（Back propagation）"></a>神经网络的反向传播（Back propagation）</h3><p><strong>推导过程：</strong></p>
+<p>神经网络的计算图（部分）如下：</p>
+
         </div>
 
         <blockquote class="post-copyright">
@@ -208,7 +318,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-08-13T15:08:46.042Z" itemprop="dateUpdated">2019-08-13 23:08:46</time>
+    Last updated: <time datetime="2019-08-14T13:50:19.719Z" itemprop="dateUpdated">2019-08-14 21:50:19</time>
 </span><br>
 
 
@@ -244,7 +354,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/08/12/deeplearning-ai学习笔记（三）浅层神经网络/&title=《deeplearning.ai学习笔记（三）浅层神经网络（Shallow neural networks）》 — 一只程序喵&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/08/12/deeplearning-ai学习笔记（三）浅层神经网络/&title=《deeplearning.ai学习笔记（三）浅层神经网络（Shallow Neural Networks）》 — 一只程序喵&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -254,7 +364,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/12/deeplearning-ai学习笔记（三）浅层神经网络/&title=《deeplearning.ai学习笔记（三）浅层神经网络（Shallow neural networks）》 — 一只程序喵&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/12/deeplearning-ai学习笔记（三）浅层神经网络/&title=《deeplearning.ai学习笔记（三）浅层神经网络（Shallow Neural Networks）》 — 一只程序喵&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -264,7 +374,7 @@
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《deeplearning.ai学习笔记（三）浅层神经网络（Shallow neural networks）》 — 一只程序喵&url=http://yoursite.com/2019/08/12/deeplearning-ai学习笔记（三）浅层神经网络/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《deeplearning.ai学习笔记（三）浅层神经网络（Shallow Neural Networks）》 — 一只程序喵&url=http://yoursite.com/2019/08/12/deeplearning-ai学习笔记（三）浅层神经网络/&via=http://yoursite.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
@@ -396,7 +506,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/08/12/deeplearning-ai学习笔记（三）浅层神经网络/&title=《deeplearning.ai学习笔记（三）浅层神经网络（Shallow neural networks）》 — 一只程序喵&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/08/12/deeplearning-ai学习笔记（三）浅层神经网络/&title=《deeplearning.ai学习笔记（三）浅层神经网络（Shallow Neural Networks）》 — 一只程序喵&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -406,7 +516,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/12/deeplearning-ai学习笔记（三）浅层神经网络/&title=《deeplearning.ai学习笔记（三）浅层神经网络（Shallow neural networks）》 — 一只程序喵&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/12/deeplearning-ai学习笔记（三）浅层神经网络/&title=《deeplearning.ai学习笔记（三）浅层神经网络（Shallow Neural Networks）》 — 一只程序喵&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -416,7 +526,7 @@
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《deeplearning.ai学习笔记（三）浅层神经网络（Shallow neural networks）》 — 一只程序喵&url=http://yoursite.com/2019/08/12/deeplearning-ai学习笔记（三）浅层神经网络/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《deeplearning.ai学习笔记（三）浅层神经网络（Shallow Neural Networks）》 — 一只程序喵&url=http://yoursite.com/2019/08/12/deeplearning-ai学习笔记（三）浅层神经网络/&via=http://yoursite.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>

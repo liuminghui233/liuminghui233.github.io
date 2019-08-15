@@ -21,15 +21,23 @@
     
     
     <meta name="keywords" content="学习笔记,deeplearning.ai">
-    <meta name="keywords" content="学习笔记,deeplearning.ai">
+    <meta name="description" content="深度神经网络其实就是包含更多的隐藏层神经网络。                                                                                              越来越“深”的神经网络              深度神经网络为何如此有效？（Why deep representations?)神经网络效果显著，其强大能力主要源自">
+<meta name="keywords" content="学习笔记,deeplearning.ai">
 <meta property="og:type" content="article">
 <meta property="og:title" content="deeplearning.ai学习笔记（四）深度神经网络（Deep Neural Network）">
 <meta property="og:url" content="http://yoursite.com/2019/08/14/deeplearning-ai学习笔记（四）深度神经网络（Deep-Neural-Network）/index.html">
 <meta property="og:site_name" content="一只程序喵">
+<meta property="og:description" content="深度神经网络其实就是包含更多的隐藏层神经网络。                                                                                              越来越“深”的神经网络              深度神经网络为何如此有效？（Why deep representations?)神经网络效果显著，其强大能力主要源自">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-14T14:29:00.500Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mVik1s.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mVieBV.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mViPhQ.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mViFpj.png">
+<meta property="og:updated_time" content="2019-08-15T11:11:41.698Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="deeplearning.ai学习笔记（四）深度神经网络（Deep Neural Network）">
+<meta name="twitter:description" content="深度神经网络其实就是包含更多的隐藏层神经网络。                                                                                              越来越“深”的神经网络              深度神经网络为何如此有效？（Why deep representations?)神经网络效果显著，其强大能力主要源自">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/08/15/mVik1s.png">
     
         <link rel="alternate" type="application/atom+xml" title="一只程序喵" href="/atom.xml">
     
@@ -123,7 +131,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -159,6 +167,13 @@
 
 <div class="container body-wrap">
     
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#深度神经网络为何如此有效？（Why-deep-representations"><span class="post-toc-number">1.</span> <span class="post-toc-text">深度神经网络为何如此有效？（Why deep representations?)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#由“浅”到“深”的特征提取"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">由“浅”到“深”的特征提取</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#深度网络能减少神经元个数"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">深度网络能减少神经元个数</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#构建深度神经网络"><span class="post-toc-number">2.</span> <span class="post-toc-text">构建深度神经网络</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前向传播和反向传播流程块图"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">前向传播和反向传播流程块图</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前向传播和反向传播计算表达式"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">前向传播和反向传播计算表达式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#正向传播"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">正向传播</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#反向传播"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">反向传播</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参数（Parameters）-vs-超参数（Hyperparameters）"><span class="post-toc-number">3.</span> <span class="post-toc-text">参数（Parameters） vs 超参数（Hyperparameters）</span></a></li></ol>
+        </nav>
+    </aside>
+
 
 <article id="post-deeplearning-ai学习笔记（四）深度神经网络（Deep-Neural-Network）"
   class="post-article article-type-post fade" itemprop="blogPost">
@@ -179,7 +194,91 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            
+            <p><strong>深度神经网络</strong>其实就是包含更多的隐藏层神经网络。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s2.ax1x.com/2019/08/15/mVik1s.png" alt="越来越“深”的神经网络" title>
+                </div>
+                <div class="image-caption">越来越“深”的神经网络</div>
+            </figure>
+<h2 id="深度神经网络为何如此有效？（Why-deep-representations"><a href="#深度神经网络为何如此有效？（Why-deep-representations" class="headerlink" title="深度神经网络为何如此有效？（Why deep representations?)"></a>深度神经网络为何如此有效？（Why deep representations?)</h2><p>神经网络效果显著，其强大能力主要源自神经网络足够“深”，即<strong>网络层数越多，神经网络就更加复杂和深入，学习也更加准确</strong>。</p>
+<a id="more"></a>
+<h3 id="由“浅”到“深”的特征提取"><a href="#由“浅”到“深”的特征提取" class="headerlink" title="由“浅”到“深”的特征提取"></a>由“浅”到“深”的特征提取</h3><p>以人脸识别为例：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s2.ax1x.com/2019/08/15/mVieBV.png" alt="人脸识别的特征提取" title>
+                </div>
+                <div class="image-caption">人脸识别的特征提取</div>
+            </figure>
+<p>经过训练，神经网络第一层所做的事就是从原始图片中提取出人脸的轮廓与边缘，即边缘检测。这样每个神经元得到的是一些边缘信息。神经网络第二层所做的事情就是将前一层的边缘进行组合，组合成人脸一些局部特征，比如眼睛、鼻子、嘴巴等。再往后面，就将这些局部特征组合起来，融合成人脸的模样。</p>
+<h3 id="深度网络能减少神经元个数"><a href="#深度网络能减少神经元个数" class="headerlink" title="深度网络能减少神经元个数"></a>深度网络能减少神经元个数</h3><p>以计算逻辑输出为例</p>
+<script type="math/tex; mode=display">
+y=x_1 \oplus x_2 \oplus \cdots \oplus x_n</script><p><strong>使用深度网络：</strong></p>
+<p>每层将前一层的两两单元进行异或，最后到一个输出。整个深度网络的层数是<em>l<strong>o</strong>g</em>2(<em>n</em>)，神经元个数为：</p>
+<script type="math/tex; mode=display">
+1+2+\cdots+2^{log_2(n)-1}=n-1</script><p><strong>不使用深度网络：</strong></p>
+<p>仅仅使用单个隐藏层，由于包含了所有的逻辑位，需要的神经元个数达到指数级别。</p>
+<h2 id="构建深度神经网络"><a href="#构建深度神经网络" class="headerlink" title="构建深度神经网络"></a>构建深度神经网络</h2><h3 id="前向传播和反向传播流程块图"><a href="#前向传播和反向传播流程块图" class="headerlink" title="前向传播和反向传播流程块图"></a>前向传播和反向传播流程块图</h3><p><strong>对于第<em>l</em>层来说：</strong></p>
+<p>正向传播时：</p>
+<script type="math/tex; mode=display">
+输入:a^{[l-1]} \\
+输出:a^{[l]} \\
+参数:W^{[l]},b^{[l]} \\
+缓存:z^{[l]}</script><p>反向传播时：</p>
+<script type="math/tex; mode=display">
+输入:da^{[l]} \\
+输出:da^{[l-1]},dW^{[l]},db^{[l]}\\
+参数:W^{[l]},b^{[l]}</script><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s2.ax1x.com/2019/08/15/mViPhQ.png" alt="第l层流程块图" title>
+                </div>
+                <div class="image-caption">第l层流程块图</div>
+            </figure>
+<p><strong>对于整个神经网络：</strong></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s2.ax1x.com/2019/08/15/mViFpj.png" alt="神经网络流程块图" title>
+                </div>
+                <div class="image-caption">神经网络流程块图</div>
+            </figure>
+<h3 id="前向传播和反向传播计算表达式"><a href="#前向传播和反向传播计算表达式" class="headerlink" title="前向传播和反向传播计算表达式"></a>前向传播和反向传播计算表达式</h3><h4 id="正向传播"><a href="#正向传播" class="headerlink" title="正向传播"></a>正向传播</h4><script type="math/tex; mode=display">
+\begin{cases}
+z^{[l]}=W^{[l]}a^{[l-1]}+b^{[l]} \\
+a^{[l]}=g^{[l]}(z^{[l]})
+\end{cases}</script><p><strong>m个训练样本：</strong></p>
+<script type="math/tex; mode=display">
+\begin{cases}
+Z^{[l]}=W^{[l]}A^{[l-1]}+b^{[l]} \\
+A^{[l]}=g^{[l]}(Z^{[l]})
+\end{cases}</script><h4 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h4><script type="math/tex; mode=display">
+\begin{cases}
+dz^{[l]}=da^{[l]}*g^{[l]'}(z^{[l]}) \\
+dW^{[l]}=dz^{[l]}\centerdot a^{[l-1]}\\
+db^{[l]}=dz^{[l]}\\
+da^{[l-1]}=W^{[l]T}\centerdot dz^{[l]}\\
+\end{cases}\\
+进一步推导可得递推关系:dz^{[l]}=W^{[l+1]T}\centerdot dz^{[l+1]}*g^{[l]'}(z^{[l]})</script><p><strong>m个训练样本：</strong></p>
+<script type="math/tex; mode=display">
+\begin{cases}
+dZ^{[l]}=dA^{[l]}*g^{[l]'}(Z^{[l]}) \\
+dW^{[l]}=\frac{1}{m}dZ^{[l]}\centerdot A^{[l-1]T}\\
+db^{[l]}=\frac{1}{m}np.sum(dZ^{[l]},axis=1,keepdim=True) \\
+dA^{[l-1]}=W^{[l]T}\centerdot dZ^{[l]}\\
+\end{cases}\\
+进一步推导可得递推关系:dZ^{[l]}=W^{[l+1]T}\centerdot dZ^{[l+1]}*g^{[l]'}(Z^{[l]})</script><p>注：这里的“*”运算符表示矩阵对应位置相乘。</p>
+<h2 id="参数（Parameters）-vs-超参数（Hyperparameters）"><a href="#参数（Parameters）-vs-超参数（Hyperparameters）" class="headerlink" title="参数（Parameters） vs 超参数（Hyperparameters）"></a>参数（Parameters） vs 超参数（Hyperparameters）</h2><ul>
+<li>参数（parameters）：如<em>W</em>[l]、<em>b</em>[l]</li>
+<li>超参数（hyperparameters）：学习率<em>α</em>，迭代次数N，神经网络层数L，各层神经元个数<em>n</em>[<em>l</em>]，激活函数<em>g</em>(<em>z</em>)等。它们决定了参数<em>W</em>[<em>l</em>]和<em>b</em>[<em>l</em>]的值，因此称为超参数。</li>
+</ul>
+<blockquote>
+<p>Applied deep learning is a very empirical process.</p>
+</blockquote>
+<p>如何设置最优的超参数是一个比较困难的、需要经验知识的问题。通常的做法是选择超参数一定范围内的值，分别代入神经网络进行训练，测试cost function随着迭代次数增加的变化，根据结果选择cost function最小时对应的超参数值。</p>
+
         </div>
 
         <blockquote class="post-copyright">
@@ -187,7 +286,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-08-14T14:29:00.500Z" itemprop="dateUpdated">2019-08-14 22:29:00</time>
+    最終更新：<time datetime="2019-08-15T11:11:41.698Z" itemprop="dateUpdated">2019-08-15 19:11:41</time>
 </span><br>
 
 
@@ -233,7 +332,11 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/14/deeplearning-ai学习笔记（四）深度神经网络（Deep-Neural-Network）/&title=《deeplearning.ai学习笔记（四）深度神经网络（Deep Neural Network）》 — 一只程序喵&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/14/deeplearning-ai学习笔记（四）深度神经网络（Deep-Neural-Network）/&title=《deeplearning.ai学习笔记（四）深度神经网络（Deep Neural Network）》 — 一只程序喵&source=深度神经网络其实就是包含更多的隐藏层神经网络。
+
+                
+                    
+              ..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -353,7 +456,7 @@
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
         </p>
     </div>
     <div class="bottom">
@@ -385,7 +488,11 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/14/deeplearning-ai学习笔记（四）深度神经网络（Deep-Neural-Network）/&title=《deeplearning.ai学习笔记（四）深度神经网络（Deep Neural Network）》 — 一只程序喵&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/14/deeplearning-ai学习笔记（四）深度神经网络（Deep-Neural-Network）/&title=《deeplearning.ai学习笔记（四）深度神经网络（Deep Neural Network）》 — 一只程序喵&source=深度神经网络其实就是包含更多的隐藏层神经网络。
+
+                
+                    
+              ..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-15T11:11:41.698Z</updated>
+  <updated>2019-08-17T09:28:51.932Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>deeplearning.ai学习笔记（五）优化深度神经网络之应用层面的深度学习</title>
+    <link href="http://yoursite.com/2019/08/16/deeplearning-ai%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E4%BC%98%E5%8C%96%E6%B7%B1%E5%BA%A6%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E4%B9%8B%E5%BA%94%E7%94%A8%E5%B1%82%E9%9D%A2%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    <id>http://yoursite.com/2019/08/16/deeplearning-ai学习笔记（五）优化深度神经网络之应用层面的深度学习/</id>
+    <published>2019-08-16T12:03:14.000Z</published>
+    <updated>2019-08-17T09:28:51.932Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="数据集：训练集-开发集-测试集（-Train-Dev-Test-sets）"><a href="#数据集：训练集-开发集-测试集（-Train-Dev-Test-sets）" class="headerlink" title="数据集：训练集/开发集/测试集（ Train/Dev/Test sets）"></a>数据集：训练集/开发集/测试集（ Train/Dev/Test sets）</h2><h2 id="偏差（Bias）与方差（Variance）"><a href="#偏差（Bias）与方差（Variance）" class="headerlink" title="偏差（Bias）与方差（Variance）"></a>偏差（Bias）与方差（Variance）</h2><h2 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h2><h3 id="L2正则化"><a href="#L2正则化" class="headerlink" title="L2正则化"></a>L2正则化</h3><h4 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h4><h4 id="直观解释"><a href="#直观解释" class="headerlink" title="直观解释"></a>直观解释</h4><h3 id="Dropout正则化"><a href="#Dropout正则化" class="headerlink" title="Dropout正则化"></a>Dropout正则化</h3><h3 id="其他正则化方法"><a href="#其他正则化方法" class="headerlink" title="其他正则化方法"></a>其他正则化方法</h3><h4 id="数据增强"><a href="#数据增强" class="headerlink" title="数据增强"></a>数据增强</h4><h4 id="提前终止"><a href="#提前终止" class="headerlink" title="提前终止"></a>提前终止</h4>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;数据集：训练集-开发集-测试集（-Train-Dev-Test-sets）&quot;&gt;&lt;a href=&quot;#数据集：训练集-开发集-测试集（-Train-Dev-Test-sets）&quot; class=&quot;headerlink&quot; title=&quot;数据集：训练集/开发集/测试集（ T
+      
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="deeplearning.ai" scheme="http://yoursite.com/tags/deeplearning-ai/"/>
+    
+  </entry>
   
   <entry>
     <title>deeplearning.ai学习笔记（四）深度神经网络（Deep Neural Network）</title>

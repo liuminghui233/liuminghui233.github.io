@@ -21,18 +21,27 @@
     
     
     <meta name="keywords" content="学习笔记,deeplearning.ai">
-    <meta name="description" content="数据集：训练集/开发集/测试集（ Train/Dev/Test sets）偏差（Bias）与方差（Variance）正则化L2正则化计算直观解释Dropout正则化其他正则化方法数据增强提前终止">
+    <meta name="description" content="数据集：训练集/开发集/测试集（Train/Dev/Test sets）为实现交叉验证（cross validation），数据集一般会划分为三个部分：  训练集（Train sets）：用于训练算法模型； 开发集（Dev sets）：用于验证不同算法模型的表现情况，从中选择最好的算法模型； 测试集（Test sets）：用于测试最好算法的实际表现（算法的无偏估计）。  注：Test sets的目">
 <meta name="keywords" content="学习笔记,deeplearning.ai">
 <meta property="og:type" content="article">
 <meta property="og:title" content="deeplearning.ai学习笔记（五）优化深度神经网络之应用层面的深度学习">
 <meta property="og:url" content="http://yoursite.com/2019/08/16/deeplearning-ai学习笔记（五）优化深度神经网络之应用层面的深度学习/index.html">
 <meta property="og:site_name" content="一只程序喵">
-<meta property="og:description" content="数据集：训练集/开发集/测试集（ Train/Dev/Test sets）偏差（Bias）与方差（Variance）正则化L2正则化计算直观解释Dropout正则化其他正则化方法数据增强提前终止">
+<meta property="og:description" content="数据集：训练集/开发集/测试集（Train/Dev/Test sets）为实现交叉验证（cross validation），数据集一般会划分为三个部分：  训练集（Train sets）：用于训练算法模型； 开发集（Dev sets）：用于验证不同算法模型的表现情况，从中选择最好的算法模型； 测试集（Test sets）：用于测试最好算法的实际表现（算法的无偏估计）。  注：Test sets的目">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-17T09:28:51.932Z">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566052911870.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566054806290.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566059806819.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566059814042.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566059998314.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566061138945.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566061348698.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566061536863.png">
+<meta property="og:updated_time" content="2019-08-17T17:21:07.833Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="deeplearning.ai学习笔记（五）优化深度神经网络之应用层面的深度学习">
-<meta name="twitter:description" content="数据集：训练集/开发集/测试集（ Train/Dev/Test sets）偏差（Bias）与方差（Variance）正则化L2正则化计算直观解释Dropout正则化其他正则化方法数据增强提前终止">
+<meta name="twitter:description" content="数据集：训练集/开发集/测试集（Train/Dev/Test sets）为实现交叉验证（cross validation），数据集一般会划分为三个部分：  训练集（Train sets）：用于训练算法模型； 开发集（Dev sets）：用于验证不同算法模型的表现情况，从中选择最好的算法模型； 测试集（Test sets）：用于测试最好算法的实际表现（算法的无偏估计）。  注：Test sets的目">
+<meta name="twitter:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566052911870.png">
     
         <link rel="alternate" type="application/atom+xml" title="一只程序喵" href="/atom.xml">
     
@@ -126,7 +135,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜尋">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -165,7 +174,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据集：训练集-开发集-测试集（-Train-Dev-Test-sets）"><span class="post-toc-number">1.</span> <span class="post-toc-text">数据集：训练集/开发集/测试集（ Train/Dev/Test sets）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#偏差（Bias）与方差（Variance）"><span class="post-toc-number">2.</span> <span class="post-toc-text">偏差（Bias）与方差（Variance）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#正则化"><span class="post-toc-number">3.</span> <span class="post-toc-text">正则化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#L2正则化"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">L2正则化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#计算"><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">计算</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#直观解释"><span class="post-toc-number">3.1.2.</span> <span class="post-toc-text">直观解释</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Dropout正则化"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Dropout正则化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其他正则化方法"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">其他正则化方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#数据增强"><span class="post-toc-number">3.3.1.</span> <span class="post-toc-text">数据增强</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#提前终止"><span class="post-toc-number">3.3.2.</span> <span class="post-toc-text">提前终止</span></a></li></ol></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据集：训练集-开发集-测试集（Train-Dev-Test-sets）"><span class="post-toc-number">1.</span> <span class="post-toc-text">数据集：训练集/开发集/测试集（Train/Dev/Test sets）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#偏差（Bias）与方差（Variance）"><span class="post-toc-number">2.</span> <span class="post-toc-text">偏差（Bias）与方差（Variance）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#偏差、方差与算法的优劣"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">偏差、方差与算法的优劣</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#机器学习中算法评价的基本原则"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">机器学习中算法评价的基本原则</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#高偏差和高方差的解决策略"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">高偏差和高方差的解决策略</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#正则化（Regularization）"><span class="post-toc-number">3.</span> <span class="post-toc-text">正则化（Regularization）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#L2正则化"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">L2正则化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#具体实现"><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">具体实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#直观解释（Why-regularization-reduces-overfitting-）"><span class="post-toc-number">3.1.2.</span> <span class="post-toc-text">直观解释（Why regularization reduces overfitting?）</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#L1正则化"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">L1正则化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#随机失活（Dropout）正则化"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">随机失活（Dropout）正则化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#方法思想"><span class="post-toc-number">3.3.1.</span> <span class="post-toc-text">方法思想</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#实现方法：反向随机失活（Inverted-dropout）"><span class="post-toc-number">3.3.2.</span> <span class="post-toc-text">实现方法：反向随机失活（Inverted dropout）</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其他正则化方法"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">其他正则化方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#数据增强（Data-Augmentation）"><span class="post-toc-number">3.4.1.</span> <span class="post-toc-text">数据增强（Data Augmentation）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#提前终止（Early-Stopping）"><span class="post-toc-number">3.4.2.</span> <span class="post-toc-text">提前终止（Early Stopping）</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#标准化输入（Normalizing-inputs）"><span class="post-toc-number">4.</span> <span class="post-toc-text">标准化输入（Normalizing inputs）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#概念"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">概念</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#进行标准化的好处"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">进行标准化的好处</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#梯度消失和梯度爆炸（Vanishing-and-Exploding-gradients）"><span class="post-toc-number">5.</span> <span class="post-toc-text">梯度消失和梯度爆炸（Vanishing and Exploding gradients）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#概念-1"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">概念</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#改善方法：对权展w进行初始化处理"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">改善方法：对权展w进行初始化处理</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#梯度检验（Gradient-Checking）"><span class="post-toc-number">6.</span> <span class="post-toc-text">梯度检验（Gradient Checking）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#梯度近似值求解"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">梯度近似值求解</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#梯度检查的过程"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">梯度检查的过程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#几点注意"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">几点注意</span></a></li></ol></li></ol>
         </nav>
     </aside>
 
@@ -189,7 +198,175 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="数据集：训练集-开发集-测试集（-Train-Dev-Test-sets）"><a href="#数据集：训练集-开发集-测试集（-Train-Dev-Test-sets）" class="headerlink" title="数据集：训练集/开发集/测试集（ Train/Dev/Test sets）"></a>数据集：训练集/开发集/测试集（ Train/Dev/Test sets）</h2><h2 id="偏差（Bias）与方差（Variance）"><a href="#偏差（Bias）与方差（Variance）" class="headerlink" title="偏差（Bias）与方差（Variance）"></a>偏差（Bias）与方差（Variance）</h2><h2 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h2><h3 id="L2正则化"><a href="#L2正则化" class="headerlink" title="L2正则化"></a>L2正则化</h3><h4 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h4><h4 id="直观解释"><a href="#直观解释" class="headerlink" title="直观解释"></a>直观解释</h4><h3 id="Dropout正则化"><a href="#Dropout正则化" class="headerlink" title="Dropout正则化"></a>Dropout正则化</h3><h3 id="其他正则化方法"><a href="#其他正则化方法" class="headerlink" title="其他正则化方法"></a>其他正则化方法</h3><h4 id="数据增强"><a href="#数据增强" class="headerlink" title="数据增强"></a>数据增强</h4><h4 id="提前终止"><a href="#提前终止" class="headerlink" title="提前终止"></a>提前终止</h4>
+            <h2 id="数据集：训练集-开发集-测试集（Train-Dev-Test-sets）"><a href="#数据集：训练集-开发集-测试集（Train-Dev-Test-sets）" class="headerlink" title="数据集：训练集/开发集/测试集（Train/Dev/Test sets）"></a>数据集：训练集/开发集/测试集（Train/Dev/Test sets）</h2><p><strong>为实现<code>交叉验证</code>（cross validation），数据集一般会划分为三个部分：</strong></p>
+<ul>
+<li>训练集（Train sets）：用于训练算法模型；</li>
+<li>开发集（Dev sets）：用于验证不同算法模型的表现情况，从中选择最好的算法模型；</li>
+<li>测试集（Test sets）：用于测试最好算法的实际表现（算法的无偏估计）。</li>
+</ul>
+<p>注：Test sets的目标主要是进行无偏估计。如果不需要无偏估计，也可以没有Test sets，可以通过Train sets训练不同的算法模型，然后分别在Dev sets上进行验证，根据结果选择最好的算法模型。（如果只有Train sets和Dev sets，通常把这里的Dev sets称为Test sets）</p>
+<p><strong>比例分配：</strong></p>
+<ul>
+<li>样本数量不是很大（如100、1000、10000）：Train sets和Test sets的数量比例为70%/30%；如果有Dev sets，则设置比例为60%/20%/20%。</li>
+<li>样本数量很大（如100万）：Dev sets和Test sets大到足以完成其目标即可，对于100万的样本，往往也只需要10000个样本就够了。因此，对于大数据样本，Train/Dev/Test sets的比例可设置为98%/1%/1%或99%/0.5%/0.5%。样本数据量越大，相应的Dev/Test sets的比例可以设置的越低一些。</li>
+</ul>
+<p><strong>训练样本和测试样本分布不匹配问题：</strong></p>
+<p>训练样本和验证/测试样本可能来自不同的分布。一条经验原则是<strong>尽量保证Dev sets和Test sets来自于同一分布</strong>。</p>
+<h2 id="偏差（Bias）与方差（Variance）"><a href="#偏差（Bias）与方差（Variance）" class="headerlink" title="偏差（Bias）与方差（Variance）"></a>偏差（Bias）与方差（Variance）</h2><h3 id="偏差、方差与算法的优劣"><a href="#偏差、方差与算法的优劣" class="headerlink" title="偏差、方差与算法的优劣"></a>偏差、方差与算法的优劣</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566052911870.png" alt="偏差方差的各种情况" title>
+                </div>
+                <div class="image-caption">偏差方差的各种情况</div>
+            </figure>
+<ol>
+<li>高偏差（欠拟合，underfitting）：算法模型在训练样本和测试样本上的表现相差不大，但都不太好。（如：Train set error为15%，而Dev set error为16%）</li>
+<li>高方差（过拟合，overfitting）：算法模型在训练样本上的表现很好，但是在测试样本上的表现却不太好。这说明了该<strong>模型泛化能力不强</strong>。（如：Train set error为1%，而Dev set error为11%）</li>
+<li>低偏差&amp;低方差：最好情况的算法。</li>
+<li>高偏差&amp;高方差：可以理解成某段区域是欠拟合的，某段区域是过拟合的，是最差情况的算法。</li>
+</ol>
+<p>总结：一般来说，<strong>Train set error体现了是否出现high bias</strong>；<strong>Dev set error与Train set error的相对差值体现了是否出现high variance</strong>。</p>
+<h3 id="机器学习中算法评价的基本原则"><a href="#机器学习中算法评价的基本原则" class="headerlink" title="机器学习中算法评价的基本原则"></a>机器学习中算法评价的基本原则</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566054806290.png" alt="算法评价流程" title>
+                </div>
+                <div class="image-caption">算法评价流程</div>
+            </figure>
+<h3 id="高偏差和高方差的解决策略"><a href="#高偏差和高方差的解决策略" class="headerlink" title="高偏差和高方差的解决策略"></a>高偏差和高方差的解决策略</h3><p><strong>对于高偏差：</strong></p>
+<ul>
+<li>增加神经网络的隐藏层个数、神经元个数</li>
+<li>延长训练时间</li>
+<li>选择其它更复杂的神经网络模型</li>
+<li>……</li>
+</ul>
+<p><strong>对于高方差：</strong></p>
+<ul>
+<li>增加训练样本数据</li>
+<li><strong>进行正则化</strong>（Regularization）</li>
+<li>选择其他更复杂的神经网络模型</li>
+<li>……</li>
+</ul>
+<h2 id="正则化（Regularization）"><a href="#正则化（Regularization）" class="headerlink" title="正则化（Regularization）"></a>正则化（Regularization）</h2><h3 id="L2正则化"><a href="#L2正则化" class="headerlink" title="L2正则化"></a>L2正则化</h3><h4 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h4><p><strong>对于Logistic regression：</strong></p>
+<script type="math/tex; mode=display">
+J(w,b)=\frac{1}{m} \sum_{i=1}^{m}L(\hat{y}^{(i)},y^{(i)})+\frac{\lambda}{2m}||w||_2^{2} \\
+||w||_2^{2}=\sum_{j=1}^{n_x}w_j^{2}=w^{T}w</script><p>注：</p>
+<ul>
+<li>由于<em>W</em>的维度很大，而<em>b</em>只是一个常数，参数很大程度上由<em>W</em>决定，改变<em>b</em>值对整体模型影响较小，所以没有对<em>b</em>进行正则化。</li>
+<li><em>λ</em>——<strong>正则化参数</strong>，属于超参数的一种。可以设置<em>λ</em>为不同的值，在Dev set中进行验证，选择最佳的<em>λ</em>。</li>
+</ul>
+<p><strong>对于深度神经网络：</strong></p>
+<script type="math/tex; mode=display">
+J(w^{[1]},b^{[1]},\cdots,w^{[L]},b^{[L]})=\frac{1}{m} \sum_{i=1}^{m}L(\hat{y}^{(i)},y^{(i)})+\frac{\lambda}{2m}||w^{[l]}||^{2} \\
+||w||_F^{2}=\sum_{i=1}^{n^{[l]}} \sum_{j=1}^{n^{[l-1]}}(w_{ij}^{[l]})^{2} ~~~~~~~~(Frobenius范数)\\
+dw^{[l]}=dw_{before}^{[l]}+\frac{\lambda}{m}w^{[l]}\\
+w^{[l]}:=w^{[l]}-\alpha \centerdot dw^{[l]}</script><p>由于加上了正则项，<em>dw</em>[<em>l</em>]有个增量，在更新<em>w</em>[<em>l</em>]的时候，会多减去这个增量，使得<em>w</em>[<em>l</em>]比没有正则项的值要小一些。因此，L2 regularization也被称做<strong>权重衰减</strong>（weight decay）。</p>
+<script type="math/tex; mode=display">
+w^{[l]}:=w^{[l]}-\alpha \centerdot dw^{[l]}=w^{[l]}-\alpha \centerdot (dw_{before}^{[l]}+\frac{\lambda}{m}w^{[l]})=(1-\alpha \frac{\lambda}{m})w^{[l]}-\alpha \centerdot dw_{before}^{[l]}</script><h4 id="直观解释（Why-regularization-reduces-overfitting-）"><a href="#直观解释（Why-regularization-reduces-overfitting-）" class="headerlink" title="直观解释（Why regularization reduces overfitting?）"></a>直观解释（Why regularization reduces overfitting?）</h4><p>假如选择了非常复杂的神经网络模型，在未使用正则化的情况下出现了过拟合。但是，如果使用L2 regularization，当<em>λ</em>很大时，<em>w</em>[<em>l</em>]近似为零，意味着该神经网络模型中的某些神经元实际的作用很小，<strong>原本过于复杂的神经网络模型就被简单化了</strong>。因此，正则化方法可以减轻过拟合程度。</p>
+<h3 id="L1正则化"><a href="#L1正则化" class="headerlink" title="L1正则化"></a>L1正则化</h3><script type="math/tex; mode=display">
+J(w,b)=\frac{1}{m} \sum_{i=1}^{m}L(\hat{y}^{(i)},y^{(i)})+\frac{\lambda}{2m}||w||_1 \\
+||w||_1=\sum_{j=1}^{n_x}|w_j|</script><p>与L2 regularization相比，L1 regularization得到的w更加稀疏，即很多w为零值。其优点是节约存储空间，因为大部分w为0。然而，实际上L1 regularization在解决high variance方面比L2 regularization并不更具优势。而且，L1的在微分求导方面比较复杂。所以，一般<strong>L2 regularization更加常用</strong>。</p>
+<h3 id="随机失活（Dropout）正则化"><a href="#随机失活（Dropout）正则化" class="headerlink" title="随机失活（Dropout）正则化"></a>随机失活（<strong>Dropout</strong>）正则化</h3><h4 id="方法思想"><a href="#方法思想" class="headerlink" title="方法思想"></a>方法思想</h4><p>随机失活（Dropout）是指在深度学习网络的训练过程中，<strong>对于每层的神经元，按照一定的概率将其暂时从网络中丢弃</strong>。也就是说，每次训练时，每一层都有部分神经元不工作，起到简化复杂网络模型的效果，从而避免发生过拟合。</p>
+<p>注：使用dropout训练结束后，在测试和实际应用模型时，不需要进行dropout</p>
+<h4 id="实现方法：反向随机失活（Inverted-dropout）"><a href="#实现方法：反向随机失活（Inverted-dropout）" class="headerlink" title="实现方法：反向随机失活（Inverted dropout）"></a>实现方法：反向随机失活（Inverted dropout）</h4><p>假设对于第<em>l</em>层神经元，设定<strong>神经元保留概率keep_prob</strong>=0.8，即该层有20%的神经元停止工作。<em>dl</em>为随机失活向量，其中80%的元素为1，20%的元素为0。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dl = np.random.rand(al.shape[<span class="number">0</span>],al.shape[<span class="number">1</span>])&lt;keep_prob  //生成随机失活向量</span><br><span class="line">al = np.multiply(al,dl) //第l层经过dropout的输出</span><br><span class="line">al /= keep_prob //进行缩放（scale up）以尽可能保持al的期望值相比之前没有大的变化，测试时就不需要再对样本数据进行类似的尺度伸缩操作</span><br></pre></td></tr></table></figure>
+<p>对于m个样本，单次迭代训练时，随机失活隐藏层一定数量的神经元；然后，在删除后的剩下的神经元上正向和反向更新参数；接着，下一次迭代中，恢复之前失活的神经元，重新随机失活一定数量的神经元，进行正向和反向更新参数；不断重复上述过程，直至迭代训练完成。</p>
+<h3 id="其他正则化方法"><a href="#其他正则化方法" class="headerlink" title="其他正则化方法"></a>其他正则化方法</h3><h4 id="数据增强（Data-Augmentation）"><a href="#数据增强（Data-Augmentation）" class="headerlink" title="数据增强（Data Augmentation）"></a>数据增强（Data Augmentation）</h4><p>增加训练样本数量通常成本较高，难以获得额外的训练样本。但可以对已有的训练样本进行一些处理来“制造”出更多的样本。虽然这些是基于原有样本的，但是对增大训练样本数量还是有很有帮助的，不需要增加额外成本，却能起到防止过拟合的效果。</p>
+<p>例如：</p>
+<ul>
+<li>在图片识别问题中，可以对已有的图片进行水平翻转、垂直翻转、任意角度旋转、缩放或扩大等等。</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566059806819.png" alt="图片识别中的数据增强" title>
+                </div>
+                <div class="image-caption">图片识别中的数据增强</div>
+            </figure>
+<ul>
+<li>在数字识别问题中，可以将原有的数字图片进行任意旋转或者扭曲，增加一些noise。</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566059814042.png" alt="数字识别中的数据增强" title>
+                </div>
+                <div class="image-caption">数字识别中的数据增强</div>
+            </figure>
+<h4 id="提前终止（Early-Stopping）"><a href="#提前终止（Early-Stopping）" class="headerlink" title="提前终止（Early Stopping）"></a>提前终止（Early Stopping）</h4><p>个神经网络模型随着迭代训练次数增加，train set error一般是单调减小的，而dev set error 先减小，之后又增大。也就是说训练次数过多时，模型会对训练样本拟合的越来越好，但是对验证集拟合效果逐渐变差，即发生了过拟合。因此，迭代训练次数不是越多越好，可以<strong>通过train set error和dev set error随迭代次数的变化趋势，选择合适的迭代次数</strong>，即early stopping。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566059998314.png" alt="随迭代次数的变化趋势" title>
+                </div>
+                <div class="image-caption">随迭代次数的变化趋势</div>
+            </figure>
+<p><strong>Early Stopping的缺点：</strong></p>
+<p>机器学习训练模型有两个目标：一是优化cost function，尽量减小J；二是防止过拟合。通过减少迭代次数来防止过拟合，会使得cost function不会足够小。即将两个目标融合在一起，同时优化，但可能没有“分而治之”的效果好。</p>
+<p><strong>Early Stopping vs L2 regularization：</strong></p>
+<p>与Early Stopping相比，L2 regularization可以实现“分而治之”的效果，但正则化参数<em>λ</em>的选择比较复杂。对这一点来说，early stopping比较简单。<strong>总的来说，L2 regularization更加常用一些。</strong></p>
+<h2 id="标准化输入（Normalizing-inputs）"><a href="#标准化输入（Normalizing-inputs）" class="headerlink" title="标准化输入（Normalizing inputs）"></a>标准化输入（Normalizing inputs）</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>标准化输入就是对训练数据集进行<strong>归一化</strong>的操作，即将原始数据<strong>减去其均值<em>μ</em>后，再除以其方差<em>σ</em>²</strong>。</p>
+<script type="math/tex; mode=display">
+\mu = \frac{1}{m} \sum_{i=1}^{m} X^{(i)}\\
+\sigma^{2} = \frac{1}{m} \sum_{i=1}^{m}(X^{(i)})^2\\
+X :=  \frac{X-\mu}{\sigma^2}</script><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566061138945.png" alt="归一化过程" title>
+                </div>
+                <div class="image-caption">归一化过程</div>
+            </figure>
+<p>注：由于训练集进行了标准化处理，那么对于测试集或在实际应用时，应该使用同样的\mu<em>μ</em>和<em>σ</em>²对其进行标准化处理。</p>
+<h3 id="进行标准化的好处"><a href="#进行标准化的好处" class="headerlink" title="进行标准化的好处"></a>进行标准化的好处</h3><p>让所有输入归一到同样的尺度上，<strong>方便进行梯度下降算法时能够更快更准确地找到全局最优解</strong>。</p>
+<ul>
+<li>如果不进行标准化处理，x1与x2之间分布极不平衡，训练得到的w1和w2也会在数量级上差别很大。这样导致的结果是cost function与w和b的关系可能是一个非常细长的椭圆形碗。对其进行梯度下降算法时，由于w1和w2数值差异很大，只能选择很小的学习因子<em>α</em>，来避免J发生振荡。一旦<em>α</em>较大，必然发生振荡，J不再单调下降。</li>
+<li>如果进行了标准化操作，x1与x2分布均匀，w1和w2数值差别不大，得到的cost function与w和b的关系是类似圆形碗。对其进行梯度下降算法时，<em>α</em>可以选择相对大一些，且J一般不会发生振荡，保证了J是单调下降的。</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566061348698.png" alt="归一化的好处图示" title>
+                </div>
+                <div class="image-caption">归一化的好处图示</div>
+            </figure>
+<h2 id="梯度消失和梯度爆炸（Vanishing-and-Exploding-gradients）"><a href="#梯度消失和梯度爆炸（Vanishing-and-Exploding-gradients）" class="headerlink" title="梯度消失和梯度爆炸（Vanishing and Exploding gradients）"></a>梯度消失和梯度爆炸（Vanishing and Exploding gradients）</h2><h3 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h3><p>在梯度函数上出现的以指数级递增或者递减的情况分别称为<strong>梯度爆炸</strong>或者<strong>梯度消失</strong>。</p>
+<p>假定 g(z)=z,b[l]=0，对于目标输出有：</p>
+<script type="math/tex; mode=display">
+\hat{y} = (W^{[L]}W^{[L-1]}\cdots W^{[2]}W^{[1]})X</script><ul>
+<li>对于 W[l]的值大于 1 的情况，激活函数的值将以指数级递增（数值爆炸）；</li>
+<li>对于 W[l]的值小于 1 的情况，激活函数的值将以指数级递减（数值消失）。</li>
+</ul>
+<p>同样，这种情况也会引起梯度呈现同样的指数型增大或减小的变化，引起每次更新的步进长度过大或者过小，这让训练过程十分困难。</p>
+<h3 id="改善方法：对权展w进行初始化处理"><a href="#改善方法：对权展w进行初始化处理" class="headerlink" title="改善方法：对权展w进行初始化处理"></a>改善方法：对权展w进行初始化处理</h3><p>由下式</p>
+<script type="math/tex; mode=display">
+z = w_1x_1+w_2x_2+\cdots + w_nx_n+b</script><p>可知，当输入的数量 n 较大时，我们希望每个wi的值都小一些，这样它们的和得到的 z 也较小。为了<strong>得到较小的wi</strong>，可进行如下初始化：</p>
+<ul>
+<li>若激活函数为sigmod/tanh函数，令其方差为1/n：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">w[l] = np.random.randn(n[l],n[l<span class="number">-1</span>])*np.sqrt(<span class="number">1</span>/n[l<span class="number">-1</span>])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>若激活函数为ReLU函数，令其方差为2/n：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">w[l] = np.random.randn(n[l],n[l<span class="number">-1</span>])*np.sqrt(<span class="number">1</span>/n[l<span class="number">-1</span>])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>另外还有：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">w[l] = np.random.randn(n[l],n[l<span class="number">-1</span>])*np.sqrt(<span class="number">2</span>/n[l<span class="number">-1</span>]*n[l])</span><br></pre></td></tr></table></figure>
+<h2 id="梯度检验（Gradient-Checking）"><a href="#梯度检验（Gradient-Checking）" class="headerlink" title="梯度检验（Gradient Checking）"></a>梯度检验（Gradient Checking）</h2><p>检查验证<strong>反向传播过程中梯度下降算法是否正确</strong>。</p>
+<h3 id="梯度近似值求解"><a href="#梯度近似值求解" class="headerlink" title="梯度近似值求解"></a>梯度近似值求解</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566061536863.png" alt="梯度近似值" title>
+                </div>
+                <div class="image-caption">梯度近似值</div>
+            </figure>
+<h3 id="梯度检查的过程"><a href="#梯度检查的过程" class="headerlink" title="梯度检查的过程"></a>梯度检查的过程</h3><h3 id="几点注意"><a href="#几点注意" class="headerlink" title="几点注意"></a>几点注意</h3><ol>
+<li>不要在整个训练过程中都进行梯度检查，仅仅作为debug使用。</li>
+<li>如果梯度检查出现错误，找到对应出错的梯度，检查其推导是否出现错误。</li>
+<li>计算近似梯度的时候不能忽略正则项。</li>
+<li>梯度检查时关闭dropout，检查完毕后再打开dropout</li>
+</ol>
+
         </div>
 
         <blockquote class="post-copyright">
@@ -197,7 +374,7 @@
     <div class="content">
         
 <span class="post-time">
-    最後更新時間：<time datetime="2019-08-17T09:28:51.932Z" itemprop="dateUpdated">2019-08-17 17:28:51</time>
+    Last updated: <time datetime="2019-08-17T17:21:07.833Z" itemprop="dateUpdated">2019-08-18 01:21:07</time>
 </span><br>
 
 
@@ -363,7 +540,7 @@
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>本部落格係採用<a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh_TW">創用 CC 姓名標示 4.0 國際 授權條款授權</a></span>
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">

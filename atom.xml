@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-17T17:21:07.833Z</updated>
+  <updated>2019-08-18T15:31:12.045Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>deeplearning.ai学习笔记（六）优化深度神经网络之优化算法（Optimization algorithms）</title>
+    <link href="http://yoursite.com/2019/08/18/deeplearning-ai%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E4%BC%98%E5%8C%96%E6%B7%B1%E5%BA%A6%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E4%B9%8B%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95%EF%BC%88Optimization-algorithms%EF%BC%89/"/>
+    <id>http://yoursite.com/2019/08/18/deeplearning-ai学习笔记（六）优化深度神经网络之优化算法（Optimization-algorithms）/</id>
+    <published>2019-08-18T08:47:56.000Z</published>
+    <updated>2019-08-18T15:31:12.045Z</updated>
+    
+    <content type="html"><![CDATA[<p>本节课学习深度神经网络中的一些优化算法，通过使用这些技巧和方法来<strong>提高神经网络的训练速度和精度</strong>。</p><h2 id="小批量梯度下降算法（mini-batch-gradient-descent）"><a href="#小批量梯度下降算法（mini-batch-gradient-descent）" class="headerlink" title="小批量梯度下降算法（mini-batch gradient descent）"></a>小批量梯度下降算法（<strong>mini-batch</strong> gradient descent）</h2><h3 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h3><p>如果样本数量m很大，如达到百万数量级，由于受到矩阵运算速度的限制，训练速度往往会很慢。因此，<strong>把m个训练样本分成若干个子集（mini-batches），然后每次在单一子集上进行神经网络训练</strong>。</p><p>例：假设总的训练样本个数m=5000000，其维度为(n_x,m)。将其分成5000个子集，每个mini-batch含有1000个样本。我们将每个mini-batch记为X^{t}，其维度为(n_x,1000)。相应的每个mini-batch的输出记为Y^{t}，其维度为(1,1000)，且t=1,2,⋯,5000。</p><h3 id="算法过程"><a href="#算法过程" class="headerlink" title="算法过程"></a>算法过程</h3><p>先将总的训练样本分成T个子集（mini-batches），然后对每个mini-batch进行神经网络训练，包括Forward Propagation，Compute Cost Function，Backward Propagation，循环至T个mini-batch都训练完毕。</p><script type="math/tex; mode=display">\begin{align}& for~~t=1,\cdots,T\\&~~~~Forward~Propagation\\&~~~~Compute~Cost~Function\\&~~~~Backward~Propagation\\&~~~~W^{\{ t \}}:=W^{\{ t \}} - \alpha \centerdot dW^{\{ t \}}\\&~~~~b^{\{ t \}}:=b^{\{ t \}} - \alpha \centerdot db^{\{ t \}}\\\end{align}</script><p>经过T次循环之后，所有m个训练样本都进行了梯度下降计算。这个过程称为一个epoch，一个epoch会进行T次梯度下降算法。</p><p>注：对于Mini-Batches Gradient Descent，可以进行多次epoch训练；每次epoch最好将总体训练数据重新打乱、重新分成T组mini-batches。</p><p><strong>cost曲线：</strong></p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566140876305.png" alt="cost曲线比较" title>                </div>                <div class="image-caption">cost曲线比较</div>            </figure><p>出现细微振荡的原因是不同的mini-batch之间是有差异的，但整体的趋势是下降的，最终也能得到较低的cost值。</p><h3 id="超参数-mini-batch-size-选取"><a href="#超参数-mini-batch-size-选取" class="headerlink" title="超参数 mini-batch size 选取"></a>超参数 <code>mini-batch size</code> 选取</h3><p><strong>考虑两种极端情况：</strong></p><ul><li>如果<strong>mini-batch size=m</strong>，即为Batch gradient descent，只包含一个子集为(X^{1},Y^{1})=(X,Y)。会比较平稳地接近全局最小值，但是因为使用了所有m个样本，每次前进的速度有些慢。</li><li>如果<strong>mini-batch size=1</strong>，即为随机梯度下降（Stachastic gradient descent），每个样本就是一个子集(X^{i},Y^{i})=(x^(i),y^(i))，共有m个子集。每次前进速度很快，但是路线曲折，有较大的振荡，最终会在最小值附近来回波动，难以真正达到最小值处。而且在数值处理上就不能使用向量化的方法来提高运算速度。</li></ul><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566141355390.png" alt="两种极端情况下梯度下降图示" title>                </div>                <div class="image-caption">两种极端情况下梯度下降图示</div>            </figure><p><strong>正确选取原则：</strong></p><ul><li>一般来说，如果总体样本数量m不太大时（如<em>m</em>≤2000），建议直接使用Batch gradient descent。</li><li>如果总体样本数量m很大时，建议将样本分成许多mini-batches。mini-batch size不能设置得太大，也不能太小。推荐选取2的幂做为mini-batch size的值（计算机存储数据一般是2的幂，这样设置可以提高运算速度），<strong>常用的有64、128、256、512</strong>。</li></ul><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566141548914.png" alt="1566141548914" title>                </div>                <div class="image-caption">1566141548914</div>            </figure><h2 id="动量梯度下降算法（Gradient-descent-with-momentum）"><a href="#动量梯度下降算法（Gradient-descent-with-momentum）" class="headerlink" title="动量梯度下降算法（Gradient descent with momentum）"></a>动量梯度下降算法（Gradient descent with momentum）</h2><h3 id="数学基础：指数加权平均（exponentially-weighted-averages）"><a href="#数学基础：指数加权平均（exponentially-weighted-averages）" class="headerlink" title="数学基础：指数加权平均（exponentially weighted averages）"></a>数学基础：指数加权平均（exponentially weighted averages）</h3><h3 id="算法思想-1"><a href="#算法思想-1" class="headerlink" title="算法思想"></a>算法思想</h3><h2 id="均方根传递（RMSprop-Root-Mean-Square-prop）"><a href="#均方根传递（RMSprop-Root-Mean-Square-prop）" class="headerlink" title="均方根传递（RMSprop, Root Mean Square prop）"></a>均方根传递（<strong>RMSprop</strong>, Root Mean Square prop）</h2><h2 id="Adam优化算法"><a href="#Adam优化算法" class="headerlink" title="Adam优化算法"></a>Adam优化算法</h2><h2 id="学习率衰减（Learning-rate-decay）"><a href="#学习率衰减（Learning-rate-decay）" class="headerlink" title="学习率衰减（Learning rate decay）"></a>学习率衰减（Learning rate decay）</h2><h2 id="局部最优-Local-Optima-问题"><a href="#局部最优-Local-Optima-问题" class="headerlink" title="局部最优(Local Optima)问题"></a>局部最优(Local Optima)问题</h2>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;本节课学习深度神经网络中的一些优化算法，通过使用这些技巧和方法来&lt;strong&gt;提高神经网络的训练速度和精度&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id=&quot;小批量梯度下降算法（mini-batch-gradient-descent）&quot;&gt;&lt;a href=&quot;#小批量梯度下降算法（
+      
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="deeplearning.ai" scheme="http://yoursite.com/tags/deeplearning-ai/"/>
+    
+  </entry>
   
   <entry>
     <title>deeplearning.ai学习笔记（五）优化深度神经网络之应用层面的深度学习</title>

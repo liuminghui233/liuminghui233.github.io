@@ -29,22 +29,22 @@
 <meta property="og:site_name" content="一只程序喵">
 <meta property="og:description" content="本节课学习深度神经网络中的一些优化算法，通过使用这些技巧和方法来提高神经网络的训练速度和精度。 小批量梯度下降算法（mini-batch gradient descent）算法思想如果样本数量m很大，如达到百万数量级，由于受到矩阵运算速度的限制，训练速度往往会很慢。因此，把m个训练样本分成若干个子集（mini-batches），然后每次在单一子集上进行神经网络训练。 例：假设总的训练样本个数m=5">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566140876305.png">
-<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566141355390.png">
-<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566141548914.png">
-<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566187868529.png">
-<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566189568549.png">
-<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566189748851.png">
-<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566213750959.png">
-<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566215850361.png">
-<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566216795457.png">
-<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566221422191.png">
-<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566221447760.png">
-<meta property="og:updated_time" content="2019-08-19T14:24:52.832Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/19/m8lcVJ.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/19/m8lf8x.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/19/m8l4xK.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/19/m8lIKO.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/19/m8lh26.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/19/m8lTqe.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/19/m8lorD.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/19/m8lHVH.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/19/m8lbad.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/19/m8lOPI.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/19/m8lqIA.png">
+<meta property="og:updated_time" content="2019-08-19T14:36:11.721Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="deeplearning.ai学习笔记（六）优化深度神经网络之优化算法（Optimization algorithms）">
 <meta name="twitter:description" content="本节课学习深度神经网络中的一些优化算法，通过使用这些技巧和方法来提高神经网络的训练速度和精度。 小批量梯度下降算法（mini-batch gradient descent）算法思想如果样本数量m很大，如达到百万数量级，由于受到矩阵运算速度的限制，训练速度往往会很慢。因此，把m个训练样本分成若干个子集（mini-batches），然后每次在单一子集上进行神经网络训练。 例：假设总的训练样本个数m=5">
-<meta name="twitter:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566140876305.png">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/08/19/m8lcVJ.png">
     
         <link rel="alternate" type="application/atom+xml" title="一只程序喵" href="/atom.xml">
     
@@ -138,7 +138,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -219,7 +219,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566140876305.png" alt="cost曲线比较" title>
+                    <img src="https://s2.ax1x.com/2019/08/19/m8lcVJ.png" alt="cost曲线比较" title>
                 </div>
                 <div class="image-caption">cost曲线比较</div>
             </figure>
@@ -232,7 +232,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566141355390.png" alt="两种极端情况下梯度下降图示" title>
+                    <img src="https://s2.ax1x.com/2019/08/19/m8lf8x.png" alt="两种极端情况下梯度下降图示" title>
                 </div>
                 <div class="image-caption">两种极端情况下梯度下降图示</div>
             </figure>
@@ -244,14 +244,14 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566141548914.png" alt="适中mini-batch size时的梯度下降" title>
+                    <img src="https://s2.ax1x.com/2019/08/19/m8l4xK.png" alt="适中mini-batch size时的梯度下降" title>
                 </div>
                 <div class="image-caption">适中mini-batch size时的梯度下降</div>
             </figure>
 <h2 id="动量梯度下降算法（Gradient-descent-with-momentum）"><a href="#动量梯度下降算法（Gradient-descent-with-momentum）" class="headerlink" title="动量梯度下降算法（Gradient descent with momentum）"></a>动量梯度下降算法（Gradient descent with momentum）</h2><h3 id="数学基础：指数加权平均（exponentially-weighted-averages）"><a href="#数学基础：指数加权平均（exponentially-weighted-averages）" class="headerlink" title="数学基础：指数加权平均（exponentially weighted averages）"></a>数学基础：指数加权平均（exponentially weighted averages）</h3><h4 id="实例：伦敦市半年内气温整体变化趋势"><a href="#实例：伦敦市半年内气温整体变化趋势" class="headerlink" title="实例：伦敦市半年内气温整体变化趋势"></a>实例：伦敦市半年内气温整体变化趋势</h4><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566187868529.png" alt="伦敦市半年内气温散点图" title>
+                    <img src="https://s2.ax1x.com/2019/08/19/m8lIKO.png" alt="伦敦市半年内气温散点图" title>
                 </div>
                 <div class="image-caption">伦敦市半年内气温散点图</div>
             </figure>
@@ -278,7 +278,7 @@ N=\frac{1}{1-\beta}</script><p><em>β</em>值越大，则指数加权平均的�
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566189568549.png" alt="不同β值指数加权平均的结果" title>
+                    <img src="https://s2.ax1x.com/2019/08/19/m8lh26.png" alt="不同β值指数加权平均的结果" title>
                 </div>
                 <div class="image-caption">不同β值指数加权平均的结果</div>
             </figure>
@@ -286,7 +286,7 @@ N=\frac{1}{1-\beta}</script><p><em>β</em>值越大，则指数加权平均的�
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566189748851.png" alt="真实情况下的指数加权平均结果" title>
+                    <img src="https://s2.ax1x.com/2019/08/19/m8lTqe.png" alt="真实情况下的指数加权平均结果" title>
                 </div>
                 <div class="image-caption">真实情况下的指数加权平均结果</div>
             </figure>
@@ -301,7 +301,7 @@ V_t:=\frac{V_t}{1-\beta^t}</script><ul>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566213750959.png" alt="动量梯度下降算法" title>
+                    <img src="https://s2.ax1x.com/2019/08/19/m8lorD.png" alt="动量梯度下降算法" title>
                 </div>
                 <div class="image-caption">动量梯度下降算法</div>
             </figure>
@@ -330,7 +330,7 @@ W:=W-\alpha \frac{dW}{\sqrt{S_w}+\epsilon},b:=b-\alpha \frac{db}{\sqrt{S_b}+\eps
 <h3 id="算法原理"><a href="#算法原理" class="headerlink" title="算法原理"></a>算法原理</h3><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566215850361.png" alt="RMSprop算法原理" title>
+                    <img src="https://s2.ax1x.com/2019/08/19/m8lHVH.png" alt="RMSprop算法原理" title>
                 </div>
                 <div class="image-caption">RMSprop算法原理</div>
             </figure>
@@ -351,7 +351,7 @@ W:=W-\alpha \frac{dW}{\sqrt{S_w}+\epsilon},b:=b-\alpha \frac{db}{\sqrt{S_b}+\eps
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566216795457.png" alt="学习率衰减时的梯度下降" title>
+                    <img src="https://s2.ax1x.com/2019/08/19/m8lbad.png" alt="学习率衰减时的梯度下降" title>
                 </div>
                 <div class="image-caption">学习率衰减时的梯度下降</div>
             </figure>
@@ -372,7 +372,7 @@ W:=W-\alpha \frac{dW}{\sqrt{S_w}+\epsilon},b:=b-\alpha \frac{db}{\sqrt{S_b}+\eps
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566221422191.png" alt="局部最优点 VS 鞍点" title>
+                    <img src="https://s2.ax1x.com/2019/08/19/m8lOPI.png" alt="局部最优点 VS 鞍点" title>
                 </div>
                 <div class="image-caption">局部最优点 VS 鞍点</div>
             </figure>
@@ -380,7 +380,7 @@ W:=W-\alpha \frac{dW}{\sqrt{S_w}+\epsilon},b:=b-\alpha \frac{db}{\sqrt{S_b}+\eps
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566221447760.png" alt="停滞区的梯度下降" title>
+                    <img src="https://s2.ax1x.com/2019/08/19/m8lqIA.png" alt="停滞区的梯度下降" title>
                 </div>
                 <div class="image-caption">停滞区的梯度下降</div>
             </figure>
@@ -397,7 +397,7 @@ W:=W-\alpha \frac{dW}{\sqrt{S_w}+\epsilon},b:=b-\alpha \frac{db}{\sqrt{S_b}+\eps
     <div class="content">
         
 <span class="post-time">
-    最終更新：<time datetime="2019-08-19T14:24:52.832Z" itemprop="dateUpdated">2019-08-19 22:24:52</time>
+    Last updated: <time datetime="2019-08-19T14:36:11.721Z" itemprop="dateUpdated">2019-08-19 22:36:11</time>
 </span><br>
 
 
@@ -563,7 +563,7 @@ W:=W-\alpha \frac{dW}{\sqrt{S_w}+\epsilon},b:=b-\alpha \frac{db}{\sqrt{S_b}+\eps
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">

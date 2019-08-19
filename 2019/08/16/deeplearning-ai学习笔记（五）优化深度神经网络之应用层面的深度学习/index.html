@@ -37,7 +37,7 @@
 <meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566061138945.png">
 <meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566061348698.png">
 <meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566061536863.png">
-<meta property="og:updated_time" content="2019-08-17T17:21:07.833Z">
+<meta property="og:updated_time" content="2019-08-19T14:24:50.243Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="deeplearning.ai学习笔记（五）优化深度神经网络之应用层面的深度学习">
 <meta name="twitter:description" content="数据集：训练集/开发集/测试集（Train/Dev/Test sets）为实现交叉验证（cross validation），数据集一般会划分为三个部分：  训练集（Train sets）：用于训练算法模型； 开发集（Dev sets）：用于验证不同算法模型的表现情况，从中选择最好的算法模型； 测试集（Test sets）：用于测试最好算法的实际表现（算法的无偏估计）。  注：Test sets的目">
@@ -135,7 +135,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -174,7 +174,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据集：训练集-开发集-测试集（Train-Dev-Test-sets）"><span class="post-toc-number">1.</span> <span class="post-toc-text">数据集：训练集/开发集/测试集（Train/Dev/Test sets）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#偏差（Bias）与方差（Variance）"><span class="post-toc-number">2.</span> <span class="post-toc-text">偏差（Bias）与方差（Variance）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#偏差、方差与算法的优劣"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">偏差、方差与算法的优劣</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#机器学习中算法评价的基本原则"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">机器学习中算法评价的基本原则</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#高偏差和高方差的解决策略"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">高偏差和高方差的解决策略</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#正则化（Regularization）"><span class="post-toc-number">3.</span> <span class="post-toc-text">正则化（Regularization）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#L2正则化"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">L2正则化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#具体实现"><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">具体实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#直观解释（Why-regularization-reduces-overfitting-）"><span class="post-toc-number">3.1.2.</span> <span class="post-toc-text">直观解释（Why regularization reduces overfitting?）</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#L1正则化"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">L1正则化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#随机失活（Dropout）正则化"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">随机失活（Dropout）正则化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#方法思想"><span class="post-toc-number">3.3.1.</span> <span class="post-toc-text">方法思想</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#实现方法：反向随机失活（Inverted-dropout）"><span class="post-toc-number">3.3.2.</span> <span class="post-toc-text">实现方法：反向随机失活（Inverted dropout）</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其他正则化方法"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">其他正则化方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#数据增强（Data-Augmentation）"><span class="post-toc-number">3.4.1.</span> <span class="post-toc-text">数据增强（Data Augmentation）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#提前终止（Early-Stopping）"><span class="post-toc-number">3.4.2.</span> <span class="post-toc-text">提前终止（Early Stopping）</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#标准化输入（Normalizing-inputs）"><span class="post-toc-number">4.</span> <span class="post-toc-text">标准化输入（Normalizing inputs）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#概念"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">概念</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#进行标准化的好处"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">进行标准化的好处</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#梯度消失和梯度爆炸（Vanishing-and-Exploding-gradients）"><span class="post-toc-number">5.</span> <span class="post-toc-text">梯度消失和梯度爆炸（Vanishing and Exploding gradients）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#概念-1"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">概念</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#改善方法：对权展w进行初始化处理"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">改善方法：对权展w进行初始化处理</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#梯度检验（Gradient-Checking）"><span class="post-toc-number">6.</span> <span class="post-toc-text">梯度检验（Gradient Checking）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#梯度近似值求解"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">梯度近似值求解</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#梯度检查的过程"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">梯度检查的过程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#几点注意"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">几点注意</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据集：训练集-开发集-测试集（Train-Dev-Test-sets）"><span class="post-toc-number">1.</span> <span class="post-toc-text">数据集：训练集/开发集/测试集（Train/Dev/Test sets）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#偏差（Bias）与方差（Variance）"><span class="post-toc-number">2.</span> <span class="post-toc-text">偏差（Bias）与方差（Variance）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#偏差、方差与算法的优劣"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">偏差、方差与算法的优劣</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#机器学习中算法评价的基本原则"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">机器学习中算法评价的基本原则</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#高偏差和高方差的解决策略"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">高偏差和高方差的解决策略</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#正则化（Regularization）"><span class="post-toc-number">3.</span> <span class="post-toc-text">正则化（Regularization）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#L2正则化"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">L2正则化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#具体实现"><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">具体实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#直观解释（Why-regularization-reduces-overfitting-）"><span class="post-toc-number">3.1.2.</span> <span class="post-toc-text">直观解释（Why regularization reduces overfitting?）</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#L1正则化"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">L1正则化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#随机失活（Dropout）正则化"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">随机失活（Dropout）正则化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#方法思想"><span class="post-toc-number">3.3.1.</span> <span class="post-toc-text">方法思想</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#实现方法：反向随机失活（Inverted-dropout）"><span class="post-toc-number">3.3.2.</span> <span class="post-toc-text">实现方法：反向随机失活（Inverted dropout）</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其他正则化方法"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">其他正则化方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#数据增强（Data-Augmentation）"><span class="post-toc-number">3.4.1.</span> <span class="post-toc-text">数据增强（Data Augmentation）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#提前终止（Early-Stopping）"><span class="post-toc-number">3.4.2.</span> <span class="post-toc-text">提前终止（Early Stopping）</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#标准化输入（Normalizing-inputs）"><span class="post-toc-number">4.</span> <span class="post-toc-text">标准化输入（Normalizing inputs）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#概念"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">概念</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#进行标准化的好处"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">进行标准化的好处</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#梯度消失和梯度爆炸（Vanishing-and-Exploding-gradients）"><span class="post-toc-number">5.</span> <span class="post-toc-text">梯度消失和梯度爆炸（Vanishing and Exploding gradients）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#概念-1"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">概念</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#改善方法：对权展w进行初始化处理"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">改善方法：对权展w进行初始化处理</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#梯度检验（Gradient-Checking）"><span class="post-toc-number">6.</span> <span class="post-toc-text">梯度检验（Gradient Checking）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#梯度的数值近似"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">梯度的数值近似</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#梯度检查的过程"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">梯度检查的过程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#几点注意"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">几点注意</span></a></li></ol></li></ol>
         </nav>
     </aside>
 
@@ -353,14 +353,35 @@ z = w_1x_1+w_2x_2+\cdots + w_nx_n+b</script><p>可知，当输入的数量 n 较
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">w[l] = np.random.randn(n[l],n[l<span class="number">-1</span>])*np.sqrt(<span class="number">2</span>/n[l<span class="number">-1</span>]*n[l])</span><br></pre></td></tr></table></figure>
 <h2 id="梯度检验（Gradient-Checking）"><a href="#梯度检验（Gradient-Checking）" class="headerlink" title="梯度检验（Gradient Checking）"></a>梯度检验（Gradient Checking）</h2><p>检查验证<strong>反向传播过程中梯度下降算法是否正确</strong>。</p>
-<h3 id="梯度近似值求解"><a href="#梯度近似值求解" class="headerlink" title="梯度近似值求解"></a>梯度近似值求解</h3><figure class="image-bubble">
+<h3 id="梯度的数值近似"><a href="#梯度的数值近似" class="headerlink" title="梯度的数值近似"></a>梯度的数值近似</h3><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566061536863.png" alt="梯度近似值" title>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566061536863.png" alt="梯度近似值求解" title>
                 </div>
-                <div class="image-caption">梯度近似值</div>
+                <div class="image-caption">梯度近似值求解</div>
             </figure>
-<h3 id="梯度检查的过程"><a href="#梯度检查的过程" class="headerlink" title="梯度检查的过程"></a>梯度检查的过程</h3><h3 id="几点注意"><a href="#几点注意" class="headerlink" title="几点注意"></a>几点注意</h3><ol>
+<p>函数在θ出的导数近似为：</p>
+<script type="math/tex; mode=display">
+g(\theta)=\frac{f(\theta+\epsilon)-f(\theta-\epsilon)}{2\epsilon}</script><p>其中，<em>ε</em>&gt;0，且足够小。</p>
+<h3 id="梯度检查的过程"><a href="#梯度检查的过程" class="headerlink" title="梯度检查的过程"></a>梯度检查的过程</h3><ol>
+<li><p>将<em>W</em>[1],<em>b</em>[1],⋯,<em>W</em>[<em>L</em>],<em>b</em>[<em>L</em>]这些矩阵构造成一维向量，然后将这些一维向量组合起来构成一个更大的一维向量<em>θ</em>。这样<em>J</em>(<em>W</em>[1],<em>b</em>[1],⋯,<em>W</em>[<em>L</em>],<em>b</em>[<em>L</em>])就可以表示为<em>J</em>(<em>θ</em>)。</p>
+</li>
+<li><p>将反向传播过程通过梯度下降算法得到的d<em>W</em>[1],d<em>b</em>[1],⋯,d<em>W</em>[<em>L</em>],d<em>b</em>[<em>L</em>]按照一样的顺序构造成一个一维向量<em>dθ</em>。<em>dθ</em>的维度与<em>θ</em>一致。</p>
+</li>
+<li><p>接着利用<em>J</em>(<em>θ</em>)对每个<em>θ</em>i计算近似梯度，其值与反向传播算法得到的<em>dθ</em>i相比较，检查是否一致。例如，对于第i个元素，近似梯度为：</p>
+<script type="math/tex; mode=display">
+d\theta_{approx}[i]=\frac{J(\theta_1,\theta_2,\cdots,\theta_i+\epsilon,\cdots)-J(\theta_1,\theta_2,\cdots,\theta_i-\epsilon,\cdots)}{2\epsilon}</script></li>
+<li><p>计算<em>dθ</em>approx与<em>dθ</em>的欧氏距离来比较二者的相似度。公式如下：</p>
+</li>
+</ol>
+<script type="math/tex; mode=display">
+\frac{||d\theta_{approx}-d\theta||_2}{||d\theta_{approx}||_2+||d\theta||_2}</script><p>一般来说：</p>
+<ul>
+<li>如果欧氏距离很小，例如10^−7，甚至更小，则表明反向梯度计算是正确的;</li>
+<li>如果欧氏距离较大，例如10^-5，则表明梯度计算可能出现问题，需要再次检查是否有bugs存在;</li>
+<li>如果欧氏距离很大，例如10^-3，甚至更大，则表明梯度下降计算过程有bugs，需要仔细检查。</li>
+</ul>
+<h3 id="几点注意"><a href="#几点注意" class="headerlink" title="几点注意"></a>几点注意</h3><ol>
 <li>不要在整个训练过程中都进行梯度检查，仅仅作为debug使用。</li>
 <li>如果梯度检查出现错误，找到对应出错的梯度，检查其推导是否出现错误。</li>
 <li>计算近似梯度的时候不能忽略正则项。</li>
@@ -374,7 +395,7 @@ z = w_1x_1+w_2x_2+\cdots + w_nx_n+b</script><p>可知，当输入的数量 n 较
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-08-17T17:21:07.833Z" itemprop="dateUpdated">2019-08-18 01:21:07</time>
+    最終更新：<time datetime="2019-08-19T14:24:50.243Z" itemprop="dateUpdated">2019-08-19 22:24:50</time>
 </span><br>
 
 
@@ -547,7 +568,7 @@ z = w_1x_1+w_2x_2+\cdots + w_nx_n+b</script><p>可知，当输入的数量 n 较
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
         </p>
     </div>
     <div class="bottom">

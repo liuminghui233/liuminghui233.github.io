@@ -32,7 +32,15 @@
 <meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566140876305.png">
 <meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566141355390.png">
 <meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566141548914.png">
-<meta property="og:updated_time" content="2019-08-18T15:31:12.045Z">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566187868529.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566189568549.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566189748851.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566213750959.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566215850361.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566216795457.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566221422191.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566221447760.png">
+<meta property="og:updated_time" content="2019-08-19T14:24:52.832Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="deeplearning.ai学习笔记（六）优化深度神经网络之优化算法（Optimization algorithms）">
 <meta name="twitter:description" content="本节课学习深度神经网络中的一些优化算法，通过使用这些技巧和方法来提高神经网络的训练速度和精度。 小批量梯度下降算法（mini-batch gradient descent）算法思想如果样本数量m很大，如达到百万数量级，由于受到矩阵运算速度的限制，训练速度往往会很慢。因此，把m个训练样本分成若干个子集（mini-batches），然后每次在单一子集上进行神经网络训练。 例：假设总的训练样本个数m=5">
@@ -130,7 +138,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -169,7 +177,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#小批量梯度下降算法（mini-batch-gradient-descent）"><span class="post-toc-number">1.</span> <span class="post-toc-text">小批量梯度下降算法（mini-batch gradient descent）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#算法思想"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">算法思想</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#算法过程"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">算法过程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#超参数-mini-batch-size-选取"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">超参数 mini-batch size 选取</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动量梯度下降算法（Gradient-descent-with-momentum）"><span class="post-toc-number">2.</span> <span class="post-toc-text">动量梯度下降算法（Gradient descent with momentum）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数学基础：指数加权平均（exponentially-weighted-averages）"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">数学基础：指数加权平均（exponentially weighted averages）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#算法思想-1"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">算法思想</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#均方根传递（RMSprop-Root-Mean-Square-prop）"><span class="post-toc-number">3.</span> <span class="post-toc-text">均方根传递（RMSprop, Root Mean Square prop）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Adam优化算法"><span class="post-toc-number">4.</span> <span class="post-toc-text">Adam优化算法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#学习率衰减（Learning-rate-decay）"><span class="post-toc-number">5.</span> <span class="post-toc-text">学习率衰减（Learning rate decay）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#局部最优-Local-Optima-问题"><span class="post-toc-number">6.</span> <span class="post-toc-text">局部最优(Local Optima)问题</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#小批量梯度下降算法（mini-batch-gradient-descent）"><span class="post-toc-number">1.</span> <span class="post-toc-text">小批量梯度下降算法（mini-batch gradient descent）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#算法思想"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">算法思想</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#算法过程"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">算法过程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#超参数-mini-batch-size-选取"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">超参数 mini-batch size 选取</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动量梯度下降算法（Gradient-descent-with-momentum）"><span class="post-toc-number">2.</span> <span class="post-toc-text">动量梯度下降算法（Gradient descent with momentum）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数学基础：指数加权平均（exponentially-weighted-averages）"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">数学基础：指数加权平均（exponentially weighted averages）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#实例：伦敦市半年内气温整体变化趋势"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">实例：伦敦市半年内气温整体变化趋势</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#指数加权平均的一般形式"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">指数加权平均的一般形式</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#偏差修正（bias-correction）"><span class="post-toc-number">2.1.3.</span> <span class="post-toc-text">偏差修正（bias correction）</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#动量梯度下降算法思想"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">动量梯度下降算法思想</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#动量梯度下降算法过程"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">动量梯度下降算法过程</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#均方根传递优化算法（RMSprop-Root-Mean-Square-prop）"><span class="post-toc-number">3.</span> <span class="post-toc-text">均方根传递优化算法（RMSprop, Root Mean Square prop）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#算法过程-1"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">算法过程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#算法原理"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">算法原理</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#自适应矩估计优化算法-Adam-Adaptive-Moment-Estimation"><span class="post-toc-number">4.</span> <span class="post-toc-text">自适应矩估计优化算法(Adam, Adaptive Moment Estimation)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#算法过程-2"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">算法过程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#超参数选取"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">超参数选取</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#学习率衰减（Learning-rate-decay）"><span class="post-toc-number">5.</span> <span class="post-toc-text">学习率衰减（Learning rate decay）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#算法思想-1"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">算法思想</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#学习率衰减的方式"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">学习率衰减的方式</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#局部最优-Local-Optima-问题-amp-停滞区-Plateaus-问题"><span class="post-toc-number">6.</span> <span class="post-toc-text">局部最优(Local Optima)问题 &amp; 停滞区(Plateaus)问题</span></a></li></ol>
         </nav>
     </aside>
 
@@ -236,11 +244,152 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566141548914.png" alt="1566141548914" title>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566141548914.png" alt="适中mini-batch size时的梯度下降" title>
                 </div>
-                <div class="image-caption">1566141548914</div>
+                <div class="image-caption">适中mini-batch size时的梯度下降</div>
             </figure>
-<h2 id="动量梯度下降算法（Gradient-descent-with-momentum）"><a href="#动量梯度下降算法（Gradient-descent-with-momentum）" class="headerlink" title="动量梯度下降算法（Gradient descent with momentum）"></a>动量梯度下降算法（Gradient descent with momentum）</h2><h3 id="数学基础：指数加权平均（exponentially-weighted-averages）"><a href="#数学基础：指数加权平均（exponentially-weighted-averages）" class="headerlink" title="数学基础：指数加权平均（exponentially weighted averages）"></a>数学基础：指数加权平均（exponentially weighted averages）</h3><h3 id="算法思想-1"><a href="#算法思想-1" class="headerlink" title="算法思想"></a>算法思想</h3><h2 id="均方根传递（RMSprop-Root-Mean-Square-prop）"><a href="#均方根传递（RMSprop-Root-Mean-Square-prop）" class="headerlink" title="均方根传递（RMSprop, Root Mean Square prop）"></a>均方根传递（<strong>RMSprop</strong>, Root Mean Square prop）</h2><h2 id="Adam优化算法"><a href="#Adam优化算法" class="headerlink" title="Adam优化算法"></a>Adam优化算法</h2><h2 id="学习率衰减（Learning-rate-decay）"><a href="#学习率衰减（Learning-rate-decay）" class="headerlink" title="学习率衰减（Learning rate decay）"></a>学习率衰减（Learning rate decay）</h2><h2 id="局部最优-Local-Optima-问题"><a href="#局部最优-Local-Optima-问题" class="headerlink" title="局部最优(Local Optima)问题"></a>局部最优(Local Optima)问题</h2>
+<h2 id="动量梯度下降算法（Gradient-descent-with-momentum）"><a href="#动量梯度下降算法（Gradient-descent-with-momentum）" class="headerlink" title="动量梯度下降算法（Gradient descent with momentum）"></a>动量梯度下降算法（Gradient descent with momentum）</h2><h3 id="数学基础：指数加权平均（exponentially-weighted-averages）"><a href="#数学基础：指数加权平均（exponentially-weighted-averages）" class="headerlink" title="数学基础：指数加权平均（exponentially weighted averages）"></a>数学基础：指数加权平均（exponentially weighted averages）</h3><h4 id="实例：伦敦市半年内气温整体变化趋势"><a href="#实例：伦敦市半年内气温整体变化趋势" class="headerlink" title="实例：伦敦市半年内气温整体变化趋势"></a>实例：伦敦市半年内气温整体变化趋势</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566187868529.png" alt="伦敦市半年内气温散点图" title>
+                </div>
+                <div class="image-caption">伦敦市半年内气温散点图</div>
+            </figure>
+<p>通过移动平均（moving average）的方法来对每天气温进行平滑处理：</p>
+<p>设<em>V</em>0=0，做为第0天的气温值。第一天至第t天气温可按如下计算：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+&V_1=0.9V_0+0.1 \theta_1 \\
+&V_2=0.9V_1+0.1 \theta_2 = 0.9(0.9V_0+0.1 \theta_1)+0.1 \theta_2 = 0.9^2V_0+0.9 \centerdot 0.1\theta_1+0.1\theta_2\\
+&V_3=0.9V_2+0.1 \theta_3=0.9(0.9^2V_0+0.9 \centerdot 0.1\theta_1+0.1\theta_2)+0.1 \theta_3 \\
+&~~~~= 0.9^3V_0+0.9^2 \centerdot 0.1\theta_1+0.9 \centerdot 0.1\theta_2+0.1\theta_3 \\
+&~~~~~~~~~~~~~\vdots \\
+&V_t=0.9V_{t-1}+0.1 \theta_t=0.9^tV_0+0.9^{t-1}\centerdot 0.1\theta_1 + 0.9^{t-2}\centerdot 0.1\theta_2 + \cdots + 0.9\centerdot 0.1\theta_{t-1} + 0.1\theta_t
+\end{align}</script><p>这种滑动平均算法称为指数加权平均。</p>
+<h4 id="指数加权平均的一般形式"><a href="#指数加权平均的一般形式" class="headerlink" title="指数加权平均的一般形式"></a>指数加权平均的一般形式</h4><script type="math/tex; mode=display">
+V_t=\beta V_{t-1} +(1-\beta)\theta_t</script><p><em>β</em>值决定了指数加权平均的天数。</p>
+<script type="math/tex; mode=display">
+\begin{align}
+& 当\beta\rightarrow0,N=\frac{1}{1-\beta}\rightarrow \infty时:\\
+&~~~~~~ \beta^{\frac{1}{1-\beta}}=(1-\frac{1}{N})^N=\frac{1}{e}
+\end{align}</script><p>一般认为衰减到1/e就可以忽略不计了，故指数加权平均的天数的计算公式为：</p>
+<script type="math/tex; mode=display">
+N=\frac{1}{1-\beta}</script><p><em>β</em>值越大，则指数加权平均的天数越多，平均后的趋势线就越平缓，同时向右平移。下图绿色曲线和黄色曲线分别表示了<em>β</em>=0.98和<em>β</em>=0.5时，指数加权平均的结果。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566189568549.png" alt="不同β值指数加权平均的结果" title>
+                </div>
+                <div class="image-caption">不同β值指数加权平均的结果</div>
+            </figure>
+<h4 id="偏差修正（bias-correction）"><a href="#偏差修正（bias-correction）" class="headerlink" title="偏差修正（bias correction）"></a>偏差修正（bias correction）</h4><p>当<em>β</em>=0.98时，指数加权平均结果如绿色曲线所示。但是实际上，真实曲线如紫色曲线所示。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566189748851.png" alt="真实情况下的指数加权平均结果" title>
+                </div>
+                <div class="image-caption">真实情况下的指数加权平均结果</div>
+            </figure>
+<p>由于开始时设置<em>V</em>0=0，所以初始值会相对小一些，直到后面受前面的影响渐渐变小，趋于正常。</p>
+<p><strong>偏差修正：</strong></p>
+<script type="math/tex; mode=display">
+V_t:=\frac{V_t}{1-\beta^t}</script><ul>
+<li>刚开始t比较小，(1−<em>β</em>^t)&lt;1，这样就将<em>V</em>t修正得更大一些；</li>
+<li>随着t增大，(1−<em>β</em>^t)≈1，<em>V</em>t基本不变。</li>
+</ul>
+<h3 id="动量梯度下降算法思想"><a href="#动量梯度下降算法思想" class="headerlink" title="动量梯度下降算法思想"></a>动量梯度下降算法思想</h3><p>在每次训练时，<strong>对梯度进行指数加权平均</strong>，然后用得到的梯度值更新权重W和常数项b。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566213750959.png" alt="动量梯度下降算法" title>
+                </div>
+                <div class="image-caption">动量梯度下降算法</div>
+            </figure>
+<ul>
+<li>原始的梯度下降算法如上图蓝色折线所示。在梯度下降过程中，对于W、b之间数值范围差别较大的情况，梯度下降的振荡较大。此时每一点处的梯度只与当前方向有关，产生类似折线的效果，前进缓慢。</li>
+<li>如果对梯度进行指数加权平均，这样使当前梯度不仅与当前方向有关，还与之前的方向有关，这样处理让梯度前进方向更加平滑，减少振荡，能够更快地到达最小值处。</li>
+</ul>
+<h3 id="动量梯度下降算法过程"><a href="#动量梯度下降算法过程" class="headerlink" title="动量梯度下降算法过程"></a>动量梯度下降算法过程</h3><script type="math/tex; mode=display">
+\begin{align}
+& 初始化:V_{dW}=0,V_{db}=0,\beta=0.9 \\
+& On~iteration~t:\\
+&~~~~~Compute~dW,db~on~the~current~mini-binch\\
+&~~~~~V_{dW}=\beta V_{dW}+(1-\beta)dW\\
+&~~~~~V_{db}=\beta V_{db}+(1-\beta)db\\
+&~~~~~W:=W-\alpha V_{dW}\\
+&~~~~~b:=b-\alpha V_{db}\\
+\end{align}</script><h2 id="均方根传递优化算法（RMSprop-Root-Mean-Square-prop）"><a href="#均方根传递优化算法（RMSprop-Root-Mean-Square-prop）" class="headerlink" title="均方根传递优化算法（RMSprop, Root Mean Square prop）"></a>均方根传递优化算法（<strong>RMSprop</strong>, Root Mean Square prop）</h2><h3 id="算法过程-1"><a href="#算法过程-1" class="headerlink" title="算法过程"></a>算法过程</h3><p>按如下方式更新参数：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+&S_W=\beta S_{dW}+(1-\beta)dW^2\\
+&S_b=\beta S_{db}+(1-\beta)db^2\\
+&W:=W-\alpha \frac{dW}{\sqrt{S_w}},b:=b-\alpha \frac{db}{\sqrt{S_b}}\\
+\end{align}</script><p>为了避免RMSprop算法中分母为零，通常可以在分母增加一个极小的常数<em>ε</em>：</p>
+<script type="math/tex; mode=display">
+W:=W-\alpha \frac{dW}{\sqrt{S_w}+\epsilon},b:=b-\alpha \frac{db}{\sqrt{S_b}+\epsilon}</script><p>其中，<em>ε</em>一般取10^−8。</p>
+<h3 id="算法原理"><a href="#算法原理" class="headerlink" title="算法原理"></a>算法原理</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566215850361.png" alt="RMSprop算法原理" title>
+                </div>
+                <div class="image-caption">RMSprop算法原理</div>
+            </figure>
+<p>从图中可以看出，梯度下降（蓝色折线）在垂直方向（b）上振荡较大，在水平方向（W）上振荡较小，表示在b方向上梯度较大，即<em>db</em>较大，而在W方向上梯度较小，即<em>dW</em>较小。因此，上述表达式中<em>Sb</em>较大，而<em>SW</em>较小。在更新W和b的表达式中，使得W变化得多一些，b变化得少一些。即加快了W方向的速度，减小了b方向的速度，减小振荡，实现快速梯度下降算法，其梯度下降过程如绿色折线所示。</p>
+<h2 id="自适应矩估计优化算法-Adam-Adaptive-Moment-Estimation"><a href="#自适应矩估计优化算法-Adam-Adaptive-Moment-Estimation" class="headerlink" title="自适应矩估计优化算法(Adam, Adaptive Moment Estimation)"></a>自适应矩估计优化算法(<strong>Adam</strong>, Adaptive Moment Estimation)</h2><p><code>Adam优化算法</code>本质上是<strong>将动量算法和RMSprop结合</strong>起来。</p>
+<h3 id="算法过程-2"><a href="#算法过程-2" class="headerlink" title="算法过程"></a>算法过程</h3><script type="math/tex; mode=display">
+\begin{align}
+& 初始化:V_{dW}=0,S_{dW}=0,V_{db}=0,S_{db}=0\\
+& On~iteration~t:\\
+&~~~~~Compute~dW,db~on~the~current~mini-binch\\
+&~~~~~V_{dW}=\beta_1 V_{dW}+(1-\beta_1)dW,V_{db}=\beta_1 V_{db}+(1-\beta_1)db\\
+&~~~~~S_{dW}=\beta_2 S_{dW}+(1-\beta_2)dW^2,S_{db}=\beta_2 S_{db}+(1-\beta_2)db^2\\
+&~~~~~V_{dW}^{corrected}=\frac{V_{dW}}{1-\beta_1^t},V_{db}^{corrected}=\frac{V_{db}}{1-\beta_1^t}\\
+&~~~~~S_{dW}^{corrected}=\frac{S_{dW}}{1-\beta_2^t},S_{db}^{corrected}=\frac{S_{db}}{1-\beta_2^t}\\
+&~~~~~W:=W-\alpha \frac{V_{dW}^{corrected}}{\sqrt{S_{dW}^{corrected}}+\epsilon},b:=b-\alpha \frac{V_{db}^{corrected}}{\sqrt{S_{db}^{corrected}}+\epsilon}\\
+\end{align}</script><h3 id="超参数选取"><a href="#超参数选取" class="headerlink" title="超参数选取"></a>超参数选取</h3><p><em>β</em>1通常设置为0.9，<em>β</em>2通常设置为0.999，<em>ε</em>通常设置为10^-8。(一般不会调整)</p>
+<h2 id="学习率衰减（Learning-rate-decay）"><a href="#学习率衰减（Learning-rate-decay）" class="headerlink" title="学习率衰减（Learning rate decay）"></a>学习率衰减（Learning rate decay）</h2><h3 id="算法思想-1"><a href="#算法思想-1" class="headerlink" title="算法思想"></a>算法思想</h3><p><strong>随着迭代次数增加，学习因子<em>α</em>逐渐减小。</strong></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566216795457.png" alt="学习率衰减时的梯度下降" title>
+                </div>
+                <div class="image-caption">学习率衰减时的梯度下降</div>
+            </figure>
+<ul>
+<li>蓝色折线表示使用恒定的学习因子<em>α</em>，由于每次训练<em>α</em>相同，步进长度不变，在接近最优值处的振荡也大，在最优值附近较大范围内振荡，与最优值距离就比较远。</li>
+<li>绿色折线表示使用衰减的<em>α</em>，随着训练次数增加，<em>α</em>逐渐减小，步进长度减小，使得能够在最优值处较小范围内微弱振荡，不断逼近最优值。</li>
+</ul>
+<h3 id="学习率衰减的方式"><a href="#学习率衰减的方式" class="headerlink" title="学习率衰减的方式"></a>学习率衰减的方式</h3><script type="math/tex; mode=display">
+\begin{align}
+& 1.~\alpha = \frac{1}{1+decay\_rate*epoch\_num}\alpha_0\\
+& （其中衰减率deacy\_rate为可调超参数、epoch\_num为迭代次数）\\
+&2.~\alpha = 0.95^{epoch\_num}\centerdot \alpha_0\\
+&3.~\alpha = \frac{k}{\sqrt{epoch\_num}} \centerdot \alpha_0~~or~~\frac{k}{\sqrt{mini-bach\_number}} \centerdot \alpha_0\\
+&（其中k为可调超参数）\\
+&4.~设置\alpha为关于t的离散值，随着t增加，\alpha呈阶梯式减小。
+\end{align}</script><h2 id="局部最优-Local-Optima-问题-amp-停滞区-Plateaus-问题"><a href="#局部最优-Local-Optima-问题-amp-停滞区-Plateaus-问题" class="headerlink" title="局部最优(Local Optima)问题 &amp; 停滞区(Plateaus)问题"></a>局部最优(Local Optima)问题 &amp; 停滞区(Plateaus)问题</h2><p>在使用梯度下降算法不断减小cost function时，可能会得到<strong>局部最优解（local optima）</strong>而不是<strong>全局最优解（global optima）</strong>。</p>
+<p>在神经网络中，局部最优不能理解为如左图形碗状的凹槽，因为大部分梯度为零的点并不是这些凹槽处，而是形如右边所示的马鞍状，称为鞍点（saddle point）。特别是在神经网络中参数很多的情况下，所有参数梯度为零的点很可能是鞍点。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566221422191.png" alt="局部最优点 VS 鞍点" title>
+                </div>
+                <div class="image-caption">局部最优点 VS 鞍点</div>
+            </figure>
+<p>类似马鞍状的停滞区（plateaus）会降低神经网络学习速度。停滞区是梯度接近于零的平缓区域，在停滞区上梯度很小，前进缓慢，到达鞍点需要很长时间。到达鞍点后，由于随机扰动，梯度一般能够沿着图中绿色箭头，离开鞍点，继续前进，只是在停滞区上花费了太多时间。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566221447760.png" alt="停滞区的梯度下降" title>
+                </div>
+                <div class="image-caption">停滞区的梯度下降</div>
+            </figure>
+<p><strong>总结：</strong></p>
+<ul>
+<li>只要选择合理强大的神经网络，一般不太可能陷入局部最优处；</li>
+<li>停滞区可能会使梯度下降变慢，降低学习速度。动量梯度下降、RMSprop、Adam算法都能有效解决停滞区下降过慢的问题。</li>
+</ul>
+
         </div>
 
         <blockquote class="post-copyright">
@@ -248,7 +397,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-08-18T15:31:12.045Z" itemprop="dateUpdated">2019-08-18 23:31:12</time>
+    最終更新：<time datetime="2019-08-19T14:24:52.832Z" itemprop="dateUpdated">2019-08-19 22:24:52</time>
 </span><br>
 
 
@@ -414,7 +563,7 @@
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
         </p>
     </div>
     <div class="bottom">

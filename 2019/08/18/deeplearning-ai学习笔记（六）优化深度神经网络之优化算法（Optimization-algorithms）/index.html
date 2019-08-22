@@ -21,13 +21,13 @@
     
     
     <meta name="keywords" content="学习笔记,deeplearning.ai">
-    <meta name="description" content="本节课学习深度神经网络中的一些优化算法，通过使用这些技巧和方法来提高神经网络的训练速度和精度。 小批量梯度下降算法（mini-batch gradient descent）算法思想如果样本数量m很大，如达到百万数量级，由于受到矩阵运算速度的限制，训练速度往往会很慢。因此，把m个训练样本分成若干个子集（mini-batches），然后每次在单一子集上进行神经网络训练。 例：假设总的训练样本个数m=5">
+    <meta name="description" content="本节课学习深度神经网络中的一些优化算法，通过使用这些技巧和方法来提高神经网络的训练速度和精度。 小批量梯度下降算法（mini-batch gradient descent）算法思想如果样本数量m很大，如达到百万数量级，由于受到矩阵运算速度的限制，训练速度往往会很慢。因此，把m个训练样本分成若干个子集（mini-batches），然后每次在单一子集上进行神经网络训练。">
 <meta name="keywords" content="学习笔记,deeplearning.ai">
 <meta property="og:type" content="article">
 <meta property="og:title" content="deeplearning.ai学习笔记（六）优化深度神经网络之优化算法（Optimization algorithms）">
 <meta property="og:url" content="http://yoursite.com/2019/08/18/deeplearning-ai学习笔记（六）优化深度神经网络之优化算法（Optimization-algorithms）/index.html">
 <meta property="og:site_name" content="一只程序喵">
-<meta property="og:description" content="本节课学习深度神经网络中的一些优化算法，通过使用这些技巧和方法来提高神经网络的训练速度和精度。 小批量梯度下降算法（mini-batch gradient descent）算法思想如果样本数量m很大，如达到百万数量级，由于受到矩阵运算速度的限制，训练速度往往会很慢。因此，把m个训练样本分成若干个子集（mini-batches），然后每次在单一子集上进行神经网络训练。 例：假设总的训练样本个数m=5">
+<meta property="og:description" content="本节课学习深度神经网络中的一些优化算法，通过使用这些技巧和方法来提高神经网络的训练速度和精度。 小批量梯度下降算法（mini-batch gradient descent）算法思想如果样本数量m很大，如达到百万数量级，由于受到矩阵运算速度的限制，训练速度往往会很慢。因此，把m个训练样本分成若干个子集（mini-batches），然后每次在单一子集上进行神经网络训练。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/19/m8lcVJ.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/19/m8lf8x.png">
@@ -40,10 +40,10 @@
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/19/m8lbad.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/19/m8lOPI.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/19/m8lqIA.png">
-<meta property="og:updated_time" content="2019-08-19T14:36:11.721Z">
+<meta property="og:updated_time" content="2019-08-21T09:51:40.138Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="deeplearning.ai学习笔记（六）优化深度神经网络之优化算法（Optimization algorithms）">
-<meta name="twitter:description" content="本节课学习深度神经网络中的一些优化算法，通过使用这些技巧和方法来提高神经网络的训练速度和精度。 小批量梯度下降算法（mini-batch gradient descent）算法思想如果样本数量m很大，如达到百万数量级，由于受到矩阵运算速度的限制，训练速度往往会很慢。因此，把m个训练样本分成若干个子集（mini-batches），然后每次在单一子集上进行神经网络训练。 例：假设总的训练样本个数m=5">
+<meta name="twitter:description" content="本节课学习深度神经网络中的一些优化算法，通过使用这些技巧和方法来提高神经网络的训练速度和精度。 小批量梯度下降算法（mini-batch gradient descent）算法思想如果样本数量m很大，如达到百万数量级，由于受到矩阵运算速度的限制，训练速度往往会很慢。因此，把m个训练样本分成若干个子集（mini-batches），然后每次在单一子集上进行神经网络训练。">
 <meta name="twitter:image" content="https://s2.ax1x.com/2019/08/19/m8lcVJ.png">
     
         <link rel="alternate" type="application/atom+xml" title="一只程序喵" href="/atom.xml">
@@ -138,7 +138,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -203,6 +203,7 @@
         <div class="post-content" id="post-content" itemprop="postContent">
             <p>本节课学习深度神经网络中的一些优化算法，通过使用这些技巧和方法来<strong>提高神经网络的训练速度和精度</strong>。</p>
 <h2 id="小批量梯度下降算法（mini-batch-gradient-descent）"><a href="#小批量梯度下降算法（mini-batch-gradient-descent）" class="headerlink" title="小批量梯度下降算法（mini-batch gradient descent）"></a>小批量梯度下降算法（<strong>mini-batch</strong> gradient descent）</h2><h3 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h3><p>如果样本数量m很大，如达到百万数量级，由于受到矩阵运算速度的限制，训练速度往往会很慢。因此，<strong>把m个训练样本分成若干个子集（mini-batches），然后每次在单一子集上进行神经网络训练</strong>。</p>
+<a id="more"></a>
 <p>例：假设总的训练样本个数m=5000000，其维度为(n_x,m)。将其分成5000个子集，每个mini-batch含有1000个样本。我们将每个mini-batch记为X^{t}，其维度为(n_x,1000)。相应的每个mini-batch的输出记为Y^{t}，其维度为(1,1000)，且t=1,2,⋯,5000。</p>
 <h3 id="算法过程"><a href="#算法过程" class="headerlink" title="算法过程"></a>算法过程</h3><p>先将总的训练样本分成T个子集（mini-batches），然后对每个mini-batch进行神经网络训练，包括Forward Propagation，Compute Cost Function，Backward Propagation，循环至T个mini-batch都训练完毕。</p>
 <script type="math/tex; mode=display">
@@ -397,7 +398,7 @@ W:=W-\alpha \frac{dW}{\sqrt{S_w}+\epsilon},b:=b-\alpha \frac{db}{\sqrt{S_b}+\eps
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-08-19T14:36:11.721Z" itemprop="dateUpdated">2019-08-19 22:36:11</time>
+    最后更新时间：<time datetime="2019-08-21T09:51:40.138Z" itemprop="dateUpdated">2019-08-21 17:51:40</time>
 </span><br>
 
 
@@ -443,7 +444,8 @@ W:=W-\alpha \frac{dW}{\sqrt{S_w}+\epsilon},b:=b-\alpha \frac{db}{\sqrt{S_b}+\eps
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/18/deeplearning-ai学习笔记（六）优化深度神经网络之优化算法（Optimization-algorithms）/&title=《deeplearning.ai学习笔记（六）优化深度神经网络之优化算法（Optimization algorithms）》 — 一只程序喵&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/18/deeplearning-ai学习笔记（六）优化深度神经网络之优化算法（Optimization-algorithms）/&title=《deeplearning.ai学习笔记（六）优化深度神经网络之优化算法（Optimization algorithms）》 — 一只程序喵&source=本节课学习深度神经网络中的一些优化算法，通过使用这些技巧和方法来提高神经网络的训练速度和精度。
+小批量梯度下降算法（mini-batch gradient..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -478,7 +480,14 @@ W:=W-\alpha \frac{dW}{\sqrt{S_w}+\epsilon},b:=b-\alpha \frac{db}{\sqrt{S_b}+\eps
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/08/20/deeplearning-ai学习笔记（七）优化深度神经网络之超参数调试、Batch标准化与深度学习框架/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">deeplearning.ai学习笔记（七）优化深度神经网络之超参数调试、批标准化与深度学习框架</h4>
+      </a>
+    </div>
   
 
   
@@ -563,7 +572,7 @@ W:=W-\alpha \frac{dW}{\sqrt{S_w}+\epsilon},b:=b-\alpha \frac{db}{\sqrt{S_b}+\eps
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
         </p>
     </div>
     <div class="bottom">
@@ -595,7 +604,8 @@ W:=W-\alpha \frac{dW}{\sqrt{S_w}+\epsilon},b:=b-\alpha \frac{db}{\sqrt{S_b}+\eps
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/18/deeplearning-ai学习笔记（六）优化深度神经网络之优化算法（Optimization-algorithms）/&title=《deeplearning.ai学习笔记（六）优化深度神经网络之优化算法（Optimization algorithms）》 — 一只程序喵&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/18/deeplearning-ai学习笔记（六）优化深度神经网络之优化算法（Optimization-algorithms）/&title=《deeplearning.ai学习笔记（六）优化深度神经网络之优化算法（Optimization algorithms）》 — 一只程序喵&source=本节课学习深度神经网络中的一些优化算法，通过使用这些技巧和方法来提高神经网络的训练速度和精度。
+小批量梯度下降算法（mini-batch gradient..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>

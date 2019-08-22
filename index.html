@@ -121,7 +121,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -155,6 +155,114 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-deeplearning-ai学习笔记（八）构建机器学习项目之机器学习策略（上）"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-08-22 15:49:48" datetime="2019-08-22T07:49:48.000Z"  itemprop="datePublished">2019-08-22</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/08/22/deeplearning-ai学习笔记（八）构建机器学习项目之机器学习策略（上）/">deeplearning.ai学习笔记（八）构建机器学习项目之机器学习策略（上）</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        正交化（Orthogonalization）方法正交化（Orthogonalization）的核心在于每次调整只会影响模型某一方面的性能，而对其他功能没有影响。这种方法有助于更快更有效地进行机器学习模型的调试和优化。
+对于机器学习系统，可以大致分成四个独立的目标，且都有其对应的正交化方法：
+    
+
+        <a href="/2019/08/22/deeplearning-ai学习笔记（八）构建机器学习项目之机器学习策略（上）/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/deeplearning-ai/">deeplearning.ai</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-deeplearning-ai学习笔记（七）优化深度神经网络之超参数调试、Batch标准化与深度学习框架"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-08-20 15:00:21" datetime="2019-08-20T07:00:21.000Z"  itemprop="datePublished">2019-08-20</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/08/20/deeplearning-ai学习笔记（七）优化深度神经网络之超参数调试、Batch标准化与深度学习框架/">deeplearning.ai学习笔记（七）优化深度神经网络之超参数调试、批标准化与深度学习框架</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        超参数调试不同超参数的重要性排序第一梯队：
+
+学习率α：最重要
+
+第二梯队：
+
+动量衰减参数β：一般设置为0.9
+各隐藏层神经元个数#hidden units
+小批量大小mini-batch size
+
+第三梯队：
+
+神经网络层数#layers
+学习率衰减率decay_rate
+
+第四梯队：
+
+Adam优化算法超参数β1、β2、ε：一般设置为0.9、0.99、10^-8
+    
+
+        <a href="/2019/08/20/deeplearning-ai学习笔记（七）优化深度神经网络之超参数调试、Batch标准化与深度学习框架/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/deeplearning-ai/">deeplearning.ai</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-deeplearning-ai学习笔记（六）优化深度神经网络之优化算法（Optimization-algorithms）"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -183,11 +291,10 @@
     
         本节课学习深度神经网络中的一些优化算法，通过使用这些技巧和方法来提高神经网络的训练速度和精度。
 小批量梯度下降算法（mini-batch gradient descent）算法思想如果样本数量m很大，如达到百万数量级，由于受到矩阵运算速度的限制，训练速度往往会很慢。因此，把m个训练样本分成若干个子集（mini-batches），然后每次在单一子集上进行神经网络训练。
-例：假设总的训练样本个数...
     
 
         <a href="/2019/08/18/deeplearning-ai学习笔记（六）优化深度神经网络之优化算法（Optimization-algorithms）/" class="post-more waves-effect waves-button">
-            Continue reading...
+            阅读全文…
         </a>
     </div>
     
@@ -234,11 +341,10 @@
 开发集（Dev sets）：用于验证不同算法模型的表现情况，从中选择最好的算法模型；
 测试集（Test sets）：用于测试最好算法的实际表现（算法的无偏估计）。
 
-注：Test set...
     
 
         <a href="/2019/08/16/deeplearning-ai学习笔记（五）优化深度神经网络之应用层面的深度学习/" class="post-more waves-effect waves-button">
-            Continue reading...
+            阅读全文…
         </a>
     </div>
     
@@ -291,7 +397,7 @@
     
 
         <a href="/2019/08/14/deeplearning-ai学习笔记（四）深度神经网络（Deep-Neural-Network）/" class="post-more waves-effect waves-button">
-            Continue reading...
+            阅读全文…
         </a>
     </div>
     
@@ -344,7 +450,7 @@
     
 
         <a href="/2019/08/12/deeplearning-ai学习笔记（三）浅层神经网络/" class="post-more waves-effect waves-button">
-            Continue reading...
+            阅读全文…
         </a>
     </div>
     
@@ -392,7 +498,7 @@
     
 
         <a href="/2019/08/11/deeplearning-ai学习笔记（二）神经网络基础——以二值分类问题的逻辑回归模型为例/" class="post-more waves-effect waves-button">
-            Continue reading...
+            阅读全文…
         </a>
     </div>
     
@@ -441,7 +547,7 @@
     
 
         <a href="/2019/08/09/那些既熟悉又陌生的C-C-知识点（长期更新）/" class="post-more waves-effect waves-button">
-            Continue reading...
+            阅读全文…
         </a>
     </div>
     
@@ -489,7 +595,7 @@ AI is the new Electricity. ——吴恩达（Andrew Ng）
     
 
         <a href="/2019/08/09/deeplearning-ai学习笔记（一）深度学习引言/" class="post-more waves-effect waves-button">
-            Continue reading...
+            阅读全文…
         </a>
     </div>
     
@@ -526,7 +632,7 @@ AI is the new Electricity. ——吴恩达（Andrew Ng）
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
         </p>
     </div>
     <div class="bottom">

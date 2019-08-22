@@ -21,13 +21,13 @@
     
     
     <meta name="keywords" content="学习笔记,deeplearning.ai">
-    <meta name="description" content="数据集：训练集/开发集/测试集（Train/Dev/Test sets）为实现交叉验证（cross validation），数据集一般会划分为三个部分：  训练集（Train sets）：用于训练算法模型； 开发集（Dev sets）：用于验证不同算法模型的表现情况，从中选择最好的算法模型； 测试集（Test sets）：用于测试最好算法的实际表现（算法的无偏估计）。  注：Test sets的目">
+    <meta name="description" content="数据集：训练集/开发集/测试集（Train/Dev/Test sets）为实现交叉验证（cross validation），数据集一般会划分为三个部分：  训练集（Train sets）：用于训练算法模型； 开发集（Dev sets）：用于验证不同算法模型的表现情况，从中选择最好的算法模型； 测试集（Test sets）：用于测试最好算法的实际表现（算法的无偏估计）。">
 <meta name="keywords" content="学习笔记,deeplearning.ai">
 <meta property="og:type" content="article">
 <meta property="og:title" content="deeplearning.ai学习笔记（五）优化深度神经网络之应用层面的深度学习">
 <meta property="og:url" content="http://yoursite.com/2019/08/16/deeplearning-ai学习笔记（五）优化深度神经网络之应用层面的深度学习/index.html">
 <meta property="og:site_name" content="一只程序喵">
-<meta property="og:description" content="数据集：训练集/开发集/测试集（Train/Dev/Test sets）为实现交叉验证（cross validation），数据集一般会划分为三个部分：  训练集（Train sets）：用于训练算法模型； 开发集（Dev sets）：用于验证不同算法模型的表现情况，从中选择最好的算法模型； 测试集（Test sets）：用于测试最好算法的实际表现（算法的无偏估计）。  注：Test sets的目">
+<meta property="og:description" content="数据集：训练集/开发集/测试集（Train/Dev/Test sets）为实现交叉验证（cross validation），数据集一般会划分为三个部分：  训练集（Train sets）：用于训练算法模型； 开发集（Dev sets）：用于验证不同算法模型的表现情况，从中选择最好的算法模型； 测试集（Test sets）：用于测试最好算法的实际表现（算法的无偏估计）。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/19/m8lga9.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/19/m8l02V.png">
@@ -37,10 +37,10 @@
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/19/m8lsrF.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/19/m8lWP1.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/19/m8lyb4.png">
-<meta property="og:updated_time" content="2019-08-19T14:34:38.742Z">
+<meta property="og:updated_time" content="2019-08-21T09:47:02.045Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="deeplearning.ai学习笔记（五）优化深度神经网络之应用层面的深度学习">
-<meta name="twitter:description" content="数据集：训练集/开发集/测试集（Train/Dev/Test sets）为实现交叉验证（cross validation），数据集一般会划分为三个部分：  训练集（Train sets）：用于训练算法模型； 开发集（Dev sets）：用于验证不同算法模型的表现情况，从中选择最好的算法模型； 测试集（Test sets）：用于测试最好算法的实际表现（算法的无偏估计）。  注：Test sets的目">
+<meta name="twitter:description" content="数据集：训练集/开发集/测试集（Train/Dev/Test sets）为实现交叉验证（cross validation），数据集一般会划分为三个部分：  训练集（Train sets）：用于训练算法模型； 开发集（Dev sets）：用于验证不同算法模型的表现情况，从中选择最好的算法模型； 测试集（Test sets）：用于测试最好算法的实际表现（算法的无偏估计）。">
 <meta name="twitter:image" content="https://s2.ax1x.com/2019/08/19/m8lga9.png">
     
         <link rel="alternate" type="application/atom+xml" title="一只程序喵" href="/atom.xml">
@@ -135,7 +135,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -204,6 +204,7 @@
 <li>开发集（Dev sets）：用于验证不同算法模型的表现情况，从中选择最好的算法模型；</li>
 <li>测试集（Test sets）：用于测试最好算法的实际表现（算法的无偏估计）。</li>
 </ul>
+<a id="more"></a>
 <p>注：Test sets的目标主要是进行无偏估计。如果不需要无偏估计，也可以没有Test sets，可以通过Train sets训练不同的算法模型，然后分别在Dev sets上进行验证，根据结果选择最好的算法模型。（如果只有Train sets和Dev sets，通常把这里的Dev sets称为Test sets）</p>
 <p><strong>比例分配：</strong></p>
 <ul>
@@ -395,7 +396,7 @@ d\theta_{approx}[i]=\frac{J(\theta_1,\theta_2,\cdots,\theta_i+\epsilon,\cdots)-J
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-08-19T14:34:38.742Z" itemprop="dateUpdated">2019-08-19 22:34:38</time>
+    最后更新时间：<time datetime="2019-08-21T09:47:02.045Z" itemprop="dateUpdated">2019-08-21 17:47:02</time>
 </span><br>
 
 
@@ -441,7 +442,8 @@ d\theta_{approx}[i]=\frac{J(\theta_1,\theta_2,\cdots,\theta_i+\epsilon,\cdots)-J
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/16/deeplearning-ai学习笔记（五）优化深度神经网络之应用层面的深度学习/&title=《deeplearning.ai学习笔记（五）优化深度神经网络之应用层面的深度学习》 — 一只程序喵&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/16/deeplearning-ai学习笔记（五）优化深度神经网络之应用层面的深度学习/&title=《deeplearning.ai学习笔记（五）优化深度神经网络之应用层面的深度学习》 — 一只程序喵&source=数据集：训练集/开发集/测试集（Train/Dev/Test sets）为实现交叉验证（cross validation），数据集一般会划分为三个部分：
+..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -568,7 +570,7 @@ d\theta_{approx}[i]=\frac{J(\theta_1,\theta_2,\cdots,\theta_i+\epsilon,\cdots)-J
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
         </p>
     </div>
     <div class="bottom">
@@ -600,7 +602,8 @@ d\theta_{approx}[i]=\frac{J(\theta_1,\theta_2,\cdots,\theta_i+\epsilon,\cdots)-J
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/16/deeplearning-ai学习笔记（五）优化深度神经网络之应用层面的深度学习/&title=《deeplearning.ai学习笔记（五）优化深度神经网络之应用层面的深度学习》 — 一只程序喵&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/16/deeplearning-ai学习笔记（五）优化深度神经网络之应用层面的深度学习/&title=《deeplearning.ai学习笔记（五）优化深度神经网络之应用层面的深度学习》 — 一只程序喵&source=数据集：训练集/开发集/测试集（Train/Dev/Test sets）为实现交叉验证（cross validation），数据集一般会划分为三个部分：
+..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>

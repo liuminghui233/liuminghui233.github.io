@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>deeplearning.ai学习笔记（九）构建机器学习项目之机器学习策略（下） | 一只程序喵 | 刘明辉的个人博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="学习笔记,deeplearning.ai">
+    <meta name="description" content="错误分析（Error Analysis）通过人工检查机器学习模型得出的结果中出现的一些错误，有助于深入了解下一步要进行的工作。这个过程被称作错误分析。 分析方法对输出结果中分类错误的样本进行人工分析，建立一个表格来记录每一个分类错误的具体信息。通过统计不同错误标记类型占总数的百分比，发现哪些问题亟待解决，或者提供构思新优化方向的灵感。 例：     Image Dog Great Cat Blur">
+<meta name="keywords" content="学习笔记,deeplearning.ai">
+<meta property="og:type" content="article">
+<meta property="og:title" content="deeplearning.ai学习笔记（九）构建机器学习项目之机器学习策略（下）">
+<meta property="og:url" content="http://yoursite.com/2019/08/23/deeplearning-ai学习笔记（九）构建机器学习项目之机器学习策略（下）/index.html">
+<meta property="og:site_name" content="一只程序喵">
+<meta property="og:description" content="错误分析（Error Analysis）通过人工检查机器学习模型得出的结果中出现的一些错误，有助于深入了解下一步要进行的工作。这个过程被称作错误分析。 分析方法对输出结果中分类错误的样本进行人工分析，建立一个表格来记录每一个分类错误的具体信息。通过统计不同错误标记类型占总数的百分比，发现哪些问题亟待解决，或者提供构思新优化方向的灵感。 例：     Image Dog Great Cat Blur">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/23/msFt9H.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/23/msFJ4e.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/23/msFN3d.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/23/msFGND.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/23/msF8AO.png">
+<meta property="og:updated_time" content="2019-08-23T14:49:53.723Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="deeplearning.ai学习笔记（九）构建机器学习项目之机器学习策略（下）">
+<meta name="twitter:description" content="错误分析（Error Analysis）通过人工检查机器学习模型得出的结果中出现的一些错误，有助于深入了解下一步要进行的工作。这个过程被称作错误分析。 分析方法对输出结果中分类错误的样本进行人工分析，建立一个表格来记录每一个分类错误的具体信息。通过统计不同错误标记类型占总数的百分比，发现哪些问题亟待解决，或者提供构思新优化方向的灵感。 例：     Image Dog Great Cat Blur">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/08/23/msFt9H.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="一只程序喵" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">刘明辉</h5>
+          <a href="mailto:549208791@qq.com" title="549208791@qq.com" class="mail">549208791@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/liuminghui233" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">deeplearning.ai学习笔记（九）构建机器学习项目之机器学习策略（下）</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">deeplearning.ai学习笔记（九）构建机器学习项目之机器学习策略（下）</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-08-23T01:35:24.000Z" itemprop="datePublished" class="page-time">
+  2019-08-23
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#错误分析（Error-Analysis）"><span class="post-toc-number">1.</span> <span class="post-toc-text">错误分析（Error Analysis）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#分析方法"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">分析方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#错误标记（incorrectly-labeled）问题"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">错误标记（incorrectly labeled）问题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#总结：快速搭建系统并迭代"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">总结：快速搭建系统并迭代</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Train-set与Dev-Test-set分布不一致问题"><span class="post-toc-number">2.</span> <span class="post-toc-text">Train set与Dev/Test set分布不一致问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#分布不一致情况下的数据集划分"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">分布不一致情况下的数据集划分</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#分布不一致情况下的偏差-方差分析"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">分布不一致情况下的偏差/方差分析</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#分布不一致问题解决建议"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">分布不一致问题解决建议</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#迁移学习（Tranfer-Learning）"><span class="post-toc-number">3.</span> <span class="post-toc-text">迁移学习（Tranfer Learning）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#迁移学习的过程"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">迁移学习的过程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#迁移学习的适用条件"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">迁移学习的适用条件</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#多任务学习（Multi-Task-Learning）"><span class="post-toc-number">4.</span> <span class="post-toc-text">多任务学习（Multi-Task Learning）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#多任务学习的输出与代价函数"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">多任务学习的输出与代价函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#多任务学习的适用条件"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">多任务学习的适用条件</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#端到端深度学习（End-to-end-Deep-Learning）"><span class="post-toc-number">5.</span> <span class="post-toc-text">端到端深度学习（End-to-end Deep Learning）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#机器学习分块模型-vs-端到端深度学习"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">机器学习分块模型 vs. 端到端深度学习</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#端到端深度学习的优缺点"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">端到端深度学习的优缺点</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-deeplearning-ai学习笔记（九）构建机器学习项目之机器学习策略（下）"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">deeplearning.ai学习笔记（九）构建机器学习项目之机器学习策略（下）</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-08-23 09:35:24" datetime="2019-08-23T01:35:24.000Z"  itemprop="datePublished">2019-08-23</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="错误分析（Error-Analysis）"><a href="#错误分析（Error-Analysis）" class="headerlink" title="错误分析（Error Analysis）"></a>错误分析（Error Analysis）</h2><p>通过人工检查机器学习模型得出的结果中出现的一些错误，有助于深入了解下一步要进行的工作。这个过程被称作<strong>错误分析</strong>。</p>
+<h3 id="分析方法"><a href="#分析方法" class="headerlink" title="分析方法"></a>分析方法</h3><p>对输出结果中分类错误的样本进行人工分析，建立一个表格来记录每一个分类错误的具体信息。通过统计不同错误标记类型占总数的百分比，发现哪些问题亟待解决，或者提供构思新优化方向的灵感。</p>
+<p>例：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>Image</strong></th>
+<th style="text-align:center"><strong>Dog</strong></th>
+<th><strong>Great Cat</strong></th>
+<th><strong>Blurry</strong></th>
+<th><strong>Incorrectly labeled</strong></th>
+<th><strong>Comments</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>…</td>
+<td style="text-align:center"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>98</td>
+<td style="text-align:center"></td>
+<td></td>
+<td></td>
+<td>✓</td>
+<td>Labeler missed cat in background</td>
+</tr>
+<tr>
+<td>99</td>
+<td style="text-align:center"></td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>100</td>
+<td style="text-align:center"></td>
+<td></td>
+<td></td>
+<td>✓</td>
+<td>Drawing   of a cat;   Not   a real cat.</td>
+</tr>
+<tr>
+<td>% of total</td>
+<td style="text-align:center">8%</td>
+<td>43%</td>
+<td>61%</td>
+<td>6%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="错误标记（incorrectly-labeled）问题"><a href="#错误标记（incorrectly-labeled）问题" class="headerlink" title="错误标记（incorrectly labeled）问题"></a>错误标记（incorrectly labeled）问题</h3><p><strong>训练集中：</strong></p>
+<blockquote>
+<p>DL algorithms are quite robust to random errors in the training set.</p>
+</blockquote>
+<p>由于深度学习算法对于随机误差的<strong>鲁棒性（Robust）</strong>，只要出错的样本数量较小且分布<strong>近似随机</strong>，就不必花费时间一一修正。</p>
+<p><strong>验证/测试集中：</strong></p>
+<p>在进行误差分析时，通过统计人为标记错误所占的百分比，来大致分析这种情况对模型的识别准确率的影响，并比较该比例的大小和其他错误类型的比例，以此判断是否值得去将错误的标记一一进行修正，还是可以忽略。</p>
+<p>注：在验证集和测试集上<strong>同时使用同样的修正手段</strong>，以保证验证集和测试集来自相同的分布。</p>
+<h3 id="总结：快速搭建系统并迭代"><a href="#总结：快速搭建系统并迭代" class="headerlink" title="总结：快速搭建系统并迭代"></a><strong>总结：快速搭建系统并迭代</strong></h3><blockquote>
+<p>Build your first system quickly, then iterate.</p>
+</blockquote>
+<ol>
+<li>设置好训练、验证、测试集及衡量指标，确定目标；</li>
+<li>快速训练出一个初步的系统，用训练集来拟合参数，用验证集<strong>调参</strong>，用测试集评估；</li>
+<li>通过<strong>偏差/方差分析</strong>以及<strong>错误分析</strong>等方法，决定下一步优先处理的方向。</li>
+</ol>
+<h2 id="Train-set与Dev-Test-set分布不一致问题"><a href="#Train-set与Dev-Test-set分布不一致问题" class="headerlink" title="Train set与Dev/Test set分布不一致问题"></a>Train set与Dev/Test set分布不一致问题</h2><p>以猫咪识别为例：</p>
+<ul>
+<li>训练集：由网络爬取得到，图片比较清晰，而且规模较大（例如 20 万）；</li>
+<li>验证/测试集：来自用户手机拍摄，图片比较模糊，且数量较少（例如 1 万）。</li>
+</ul>
+<h3 id="分布不一致情况下的数据集划分"><a href="#分布不一致情况下的数据集划分" class="headerlink" title="分布不一致情况下的数据集划分"></a>分布不一致情况下的数据集划分</h3><p>策略：<strong>保证验证/测试集更接近实际应用场景</strong>。</p>
+<p>例：将 20 万张网络爬取的图片和 5000 张用户上传的图片作为训练集，而将剩下的 5000 张图片一半作验证集，一半作测试集。</p>
+<h3 id="分布不一致情况下的偏差-方差分析"><a href="#分布不一致情况下的偏差-方差分析" class="headerlink" title="分布不一致情况下的偏差/方差分析"></a>分布不一致情况下的偏差/方差分析</h3><p>在可能存在训练集和验证/测试集分布不一致的情况下，再定义一个<strong>训练-验证集（Training-dev Set）</strong>。训练-验证集和训练集的分布相同（或者是训练集分割出的子集），但是不参与训练过程。</p>
+<ul>
+<li>训练集错误率和训练-验证集错误率的差值反映了方差；</li>
+<li>训练-验证集错误率和验证集错误率的差值反映了样本分布不一致的问题。</li>
+</ul>
+<p><strong>总结：偏差/方差分析</strong></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s2.ax1x.com/2019/08/23/msFt9H.png" alt="偏差/方差分析" title>
+                </div>
+                <div class="image-caption">偏差/方差分析</div>
+            </figure>
+<h3 id="分布不一致问题解决建议"><a href="#分布不一致问题解决建议" class="headerlink" title="分布不一致问题解决建议"></a>分布不一致问题解决建议</h3><ul>
+<li>进行<strong>错误分析</strong>，了解训练集和验证/测试集的具体差异；</li>
+<li>尝试将训练数据调整得更像验证集，或者收集更多类似于验证/测试集的数据。（例如：进行<strong>人工合成数据</strong>，给训练集人工添加背景噪声，合成类似实际场景的声音，即类似验证/测试集。）</li>
+</ul>
+<h2 id="迁移学习（Tranfer-Learning）"><a href="#迁移学习（Tranfer-Learning）" class="headerlink" title="迁移学习（Tranfer Learning）"></a>迁移学习（Tranfer Learning）</h2><p><strong>迁移学习（Tranfer Learning）</strong>是通过将已训练好的神经网络模型的一部分网络结构应用到另一模型，将一个神经网络从某个任务中学到的知识和经验运用到另一个任务中，以显著提高学习任务的性能。</p>
+<h3 id="迁移学习的过程"><a href="#迁移学习的过程" class="headerlink" title="迁移学习的过程"></a>迁移学习的过程</h3><ol>
+<li><strong>预训练（Pre-Training）：</strong>初始<em>W</em>[<em>l</em>], <em>b</em>[<em>l</em>]由之前的模型训练得到。</li>
+<li><strong>微调（Fine-Tuning）</strong><ul>
+<li>若构建新模型的样本数量较少，<strong>只训练输出层的权重系数<em>W</em>[<em>L</em>], <em>b</em>[<em>L</em>]</strong>，保持其它层所有的权重系数<em>W</em>[<em>l</em>], <em>b</em>[<em>l</em>]不变；</li>
+<li>若构建新模型的样本数量足够多，保留网络结构，<strong>重新训练所有层的权重系数</strong>。</li>
+</ul>
+</li>
+</ol>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s2.ax1x.com/2019/08/23/msFJ4e.png" alt="迁移学习" title>
+                </div>
+                <div class="image-caption">迁移学习</div>
+            </figure>
+<p>迁移学习可以保留原神经网络的一部分，可以去掉输出层后再增加额外一些神经层。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s2.ax1x.com/2019/08/23/msFN3d.png" alt="迁移学习——增加网络层数" title>
+                </div>
+                <div class="image-caption">迁移学习——增加网络层数</div>
+            </figure>
+<h3 id="迁移学习的适用条件"><a href="#迁移学习的适用条件" class="headerlink" title="迁移学习的适用条件"></a>迁移学习的适用条件</h3><ol>
+<li>两个任务有同样的输入（比如都是图像或者都是音频）；</li>
+<li><strong>拥有更多数据的任务迁移到数据较少的任务</strong>；</li>
+<li>某一任务的低层次特征对另一个任务的学习有帮助。</li>
+</ol>
+<h2 id="多任务学习（Multi-Task-Learning）"><a href="#多任务学习（Multi-Task-Learning）" class="headerlink" title="多任务学习（Multi-Task Learning）"></a>多任务学习（Multi-Task Learning）</h2><p><strong>多任务学习（Multi-Task Learning）</strong>使用单个神经网络模型，利用共享表示并行地训练，同时学习多个任务。多任务学习的基本假设是<strong>多个任务之间具有相关性</strong>，并且任务之间可以利用相关性相互促进。</p>
+<p>在实践中，多任务学习的使用频率要远低于迁移学习。计算机视觉领域中的<strong>物体识别</strong>是一个多任务学习的例子。</p>
+<h3 id="多任务学习的输出与代价函数"><a href="#多任务学习的输出与代价函数" class="headerlink" title="多任务学习的输出与代价函数"></a>多任务学习的输出与代价函数</h3><p>以汽车自动驾驶为例，需要实现的多任务是识别行人、车辆、交通标志和信号灯。如果在输入的图像中检测出车辆和交通标志，则输出的 y 为：</p>
+<script type="math/tex; mode=display">
+ y=\begin{bmatrix}
+   0 \\
+   1\\
+  1\\
+  0
+  \end{bmatrix}</script><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s2.ax1x.com/2019/08/23/msFGND.png" alt="多任务学习实例——汽车自动驾驶" title>
+                </div>
+                <div class="image-caption">多任务学习实例——汽车自动驾驶</div>
+            </figure>
+<p><strong>多任务学习 vs. 多分类问题：</strong>Softmax 回归的输出向量 y 中只有一个元素为 1；多任务学习的输出向量 y 中可以有多个元素为 1。</p>
+<h3 id="多任务学习的适用条件"><a href="#多任务学习的适用条件" class="headerlink" title="多任务学习的适用条件"></a>多任务学习的适用条件</h3><ol>
+<li>训练的一组任务可以共用低层次特征；</li>
+<li>每个任务的数据量通常比较接近；</li>
+<li>能够训练一个足够大的神经网络，以同时做好所有的工作。与为每个任务训练单个神经网络相比，多任务学习神经网络足够大时性能不会差。</li>
+</ol>
+<h2 id="端到端深度学习（End-to-end-Deep-Learning）"><a href="#端到端深度学习（End-to-end-Deep-Learning）" class="headerlink" title="端到端深度学习（End-to-end Deep Learning）"></a>端到端深度学习（End-to-end Deep Learning）</h2><h3 id="机器学习分块模型-vs-端到端深度学习"><a href="#机器学习分块模型-vs-端到端深度学习" class="headerlink" title="机器学习分块模型 vs. 端到端深度学习"></a>机器学习分块模型 vs. 端到端深度学习</h3><ol>
+<li><p>概念</p>
+<ul>
+<li><strong>传统的机器学习分块模型：</strong>每一个模块处理一种输入，然后其输出作为下一个模块的输入，构成一条流水线。</li>
+<li><strong>端到端深度学习（End-to-end Deep Learning）：</strong>只用一个单一的神经网络模型来实现所有的功能，将所有模块混合在一起，只关心输入和输出。</li>
+</ul>
+</li>
+<li><p>应用情况</p>
+<ul>
+<li><p>若数据量较少，传统机器学习分块模型所构成的流水线效果较好；</p>
+</li>
+<li><p>若数据量足够大，且训练出的神经网络模型足够复杂，那么端到端深度学习模型的性能会比传统机器学习分块模型更好；</p>
+</li>
+<li><p>若数据量规模适中，可以使用流水线混合端到端深度学习。</p>
+<p><img src="https://s2.ax1x.com/2019/08/23/msF8AO.png" alt="机器学习分块模型 vs. 端到端深度学习"></p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="端到端深度学习的优缺点"><a href="#端到端深度学习的优缺点" class="headerlink" title="端到端深度学习的优缺点"></a>端到端深度学习的优缺点</h3><p><strong>优点：</strong></p>
+<ul>
+<li>让数据发挥主导作用：只要有足够多的数据和足够大的神经网络都可以拟合出X到Y的映射，而不需要用人类固有的认知（或者说，成见）来进行分析；</li>
+<li>所需手工设计的组件更少，简化设计工作流程。</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>需要大量的数据；</li>
+<li>排除了可能有用的人工设计组件。</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-08-23T14:49:53.723Z" itemprop="dateUpdated">2019-08-23 22:49:53</time>
+</span><br>
+
+
+        
+        版权声明:本文为博主原创文章,未经博主允许不得转载。<a href="/2019/08/23/deeplearning-ai学习笔记（九）构建机器学习项目之机器学习策略（下）/" target="_blank" rel="external">http://yoursite.com/2019/08/23/deeplearning-ai学习笔记（九）构建机器学习项目之机器学习策略（下）/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="刘明辉">
+            刘明辉
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/deeplearning-ai/">deeplearning.ai</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/08/23/deeplearning-ai学习笔记（九）构建机器学习项目之机器学习策略（下）/&title=《deeplearning.ai学习笔记（九）构建机器学习项目之机器学习策略（下）》 — 一只程序喵&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/23/deeplearning-ai学习笔记（九）构建机器学习项目之机器学习策略（下）/&title=《deeplearning.ai学习笔记（九）构建机器学习项目之机器学习策略（下）》 — 一只程序喵&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/08/23/deeplearning-ai学习笔记（九）构建机器学习项目之机器学习策略（下）/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《deeplearning.ai学习笔记（九）构建机器学习项目之机器学习策略（下）》 — 一只程序喵&url=http://yoursite.com/2019/08/23/deeplearning-ai学习笔记（九）构建机器学习项目之机器学习策略（下）/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/08/23/deeplearning-ai学习笔记（九）构建机器学习项目之机器学习策略（下）/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/08/22/deeplearning-ai学习笔记（八）构建机器学习项目之机器学习策略（上）/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">deeplearning.ai学习笔记（八）构建机器学习项目之机器学习策略（上）</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢打赏ο(=•ω＜=)ρ⌒☆
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>刘明辉 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/08/23/deeplearning-ai学习笔记（九）构建机器学习项目之机器学习策略（下）/&title=《deeplearning.ai学习笔记（九）构建机器学习项目之机器学习策略（下）》 — 一只程序喵&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/23/deeplearning-ai学习笔记（九）构建机器学习项目之机器学习策略（下）/&title=《deeplearning.ai学习笔记（九）构建机器学习项目之机器学习策略（下）》 — 一只程序喵&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/08/23/deeplearning-ai学习笔记（九）构建机器学习项目之机器学习策略（下）/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《deeplearning.ai学习笔记（九）构建机器学习项目之机器学习策略（下）》 — 一只程序喵&url=http://yoursite.com/2019/08/23/deeplearning-ai学习笔记（九）构建机器学习项目之机器学习策略（下）/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/08/23/deeplearning-ai学习笔记（九）构建机器学习项目之机器学习策略（下）/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAAD3UlEQVR42u3aQW4bQQwEQP//08o1gCG5m+QmPtSeDGslzdQaaJPDr6/4en27kt8nn/Du1e/3fL+/XcPZhQMHDhw4yq3m2/68+c1K3v2mfUj5HnHgwIEDxy1HHmY5QRKcCXH7APLQxYEDBw4cv41jv40WaBb2OHDgwIHjN3N8Xmi+vbY7NysIceDAgQPH/+JImoP55nPu24OovLl50CvFgQMHDhzzzPr6TPP7f35kvgMHDhw4cMThNBtxyN+bH0olG3sdXThw4MCBY88xG1ZYjQssAn523FUXcjhw4MCBY82xKd6SNmJ7xJU3B/N7ZgGPAwcOHDie4EgKp02TblPytZt/sJ+KAwcOHDji7SXhmkfvbNF5MZlH6Q9/Fzhw4MCBY82x2XAemfnIXdu43ER1FLc4cODAgaM8dpod8zwxrDAr/2YFGw4cOHDgeIJjtoi8zNsXh7Pyrz0kw4EDBw4cVxyv8toMKDzRi5s1Fn/4vwMHDhw4cIw4Pr9tFlRt9CabbzdW/H/x96s4cODAgeOIo22u7Y95ZgdIbZnXlnY4cODAgeOKI1l6Uhpt2nNP4yaPFgcOHDhw3HLMCrkWNGkOzoYekvcWQYsDBw4cONYc+w3kTF/l1Tb7ZivHgQMHDhxPcOQttjzGZuMLbWTOHk8xLYgDBw4cOMoMzbedvDorwzaNxShK85XjwIEDB44FR3KY9ER8zkq7HKU9xMKBAwcOHFccScrkW9oUdXmJ1Y5c5DGMAwcOHDhuOdqI3Y8gzAYj2vJydQyGAwcOHDhGHPsPnd2fLK49ZGobglGLEAcOHDhwBBz50U6eRG08J4dPmwZiEbE4cODAgeOI4/PGkkhro3E2HjcbmCh2hwMHDhw4jjjyQJ0B5d+SlIVtAzGJfBw4cODAccXRvjnZajvEdluwtXvBgQMHDhy3HFdNwCvK2ZHSjAAHDhw4cDzH0Qbk7YDCrDX5yM84cODAgeOI4+zYZhSfswGF/NCrbgjiwIEDB441R37MsymxPi80LwtnENE/BDhw4MCB44hjFlfFiVYZum35l9//Q8DjwIEDB441R94K3JRJswGFvIycfcvbz8eBAwcOHAuOV3ltGnxtudWWgknZ9sODxIEDBw4ca46rpSehm4/KtcdaV6w4cODAgeOKow3Xz4tum4OzAjJvAtZBiwMHDhw4jjjaJl3SOrwqmVrK2WfiwIEDB45/z7FpKc5mBvKwn436vS3hcODAgQPHP+HIC6QNaP6Ns4c0TGAcOHDgwFFytItrg3PW7NtD5Fg4cODAgeOKY9+emw093I4+zAJ+9qhw4MCBA8eb+/8A3nIWqLMF/MMAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '一只程序喵 | 刘明辉的个人博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '一只程序喵 | 刘明辉的个人博客';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>

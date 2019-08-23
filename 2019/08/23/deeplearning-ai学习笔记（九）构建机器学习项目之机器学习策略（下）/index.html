@@ -21,23 +21,23 @@
     
     
     <meta name="keywords" content="学习笔记,deeplearning.ai">
-    <meta name="description" content="错误分析（Error Analysis）通过人工检查机器学习模型得出的结果中出现的一些错误，有助于深入了解下一步要进行的工作。这个过程被称作错误分析。 分析方法对输出结果中分类错误的样本进行人工分析，建立一个表格来记录每一个分类错误的具体信息。通过统计不同错误标记类型占总数的百分比，发现哪些问题亟待解决，或者提供构思新优化方向的灵感。 例：     Image Dog Great Cat Blur">
+    <meta name="description" content="错误分析（Error Analysis）通过人工检查机器学习模型得出的结果中出现的一些错误，有助于深入了解下一步要进行的工作。这个过程被称作错误分析。 分析方法对输出结果中分类错误的样本进行人工分析，建立一个表格来记录每一个分类错误的具体信息。通过统计不同错误标记类型占总数的百分比，发现哪些问题亟待解决，或者提供构思新优化方向的灵感。">
 <meta name="keywords" content="学习笔记,deeplearning.ai">
 <meta property="og:type" content="article">
 <meta property="og:title" content="deeplearning.ai学习笔记（九）构建机器学习项目之机器学习策略（下）">
 <meta property="og:url" content="http://yoursite.com/2019/08/23/deeplearning-ai学习笔记（九）构建机器学习项目之机器学习策略（下）/index.html">
 <meta property="og:site_name" content="一只程序喵">
-<meta property="og:description" content="错误分析（Error Analysis）通过人工检查机器学习模型得出的结果中出现的一些错误，有助于深入了解下一步要进行的工作。这个过程被称作错误分析。 分析方法对输出结果中分类错误的样本进行人工分析，建立一个表格来记录每一个分类错误的具体信息。通过统计不同错误标记类型占总数的百分比，发现哪些问题亟待解决，或者提供构思新优化方向的灵感。 例：     Image Dog Great Cat Blur">
+<meta property="og:description" content="错误分析（Error Analysis）通过人工检查机器学习模型得出的结果中出现的一些错误，有助于深入了解下一步要进行的工作。这个过程被称作错误分析。 分析方法对输出结果中分类错误的样本进行人工分析，建立一个表格来记录每一个分类错误的具体信息。通过统计不同错误标记类型占总数的百分比，发现哪些问题亟待解决，或者提供构思新优化方向的灵感。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/23/msFt9H.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/23/msFJ4e.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/23/msFN3d.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/23/msFGND.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/23/msF8AO.png">
-<meta property="og:updated_time" content="2019-08-23T14:49:53.723Z">
+<meta property="og:updated_time" content="2019-08-23T14:54:33.932Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="deeplearning.ai学习笔记（九）构建机器学习项目之机器学习策略（下）">
-<meta name="twitter:description" content="错误分析（Error Analysis）通过人工检查机器学习模型得出的结果中出现的一些错误，有助于深入了解下一步要进行的工作。这个过程被称作错误分析。 分析方法对输出结果中分类错误的样本进行人工分析，建立一个表格来记录每一个分类错误的具体信息。通过统计不同错误标记类型占总数的百分比，发现哪些问题亟待解决，或者提供构思新优化方向的灵感。 例：     Image Dog Great Cat Blur">
+<meta name="twitter:description" content="错误分析（Error Analysis）通过人工检查机器学习模型得出的结果中出现的一些错误，有助于深入了解下一步要进行的工作。这个过程被称作错误分析。 分析方法对输出结果中分类错误的样本进行人工分析，建立一个表格来记录每一个分类错误的具体信息。通过统计不同错误标记类型占总数的百分比，发现哪些问题亟待解决，或者提供构思新优化方向的灵感。">
 <meta name="twitter:image" content="https://s2.ax1x.com/2019/08/23/msFt9H.png">
     
         <link rel="alternate" type="application/atom+xml" title="一只程序喵" href="/atom.xml">
@@ -197,6 +197,7 @@
         <div class="post-content" id="post-content" itemprop="postContent">
             <h2 id="错误分析（Error-Analysis）"><a href="#错误分析（Error-Analysis）" class="headerlink" title="错误分析（Error Analysis）"></a>错误分析（Error Analysis）</h2><p>通过人工检查机器学习模型得出的结果中出现的一些错误，有助于深入了解下一步要进行的工作。这个过程被称作<strong>错误分析</strong>。</p>
 <h3 id="分析方法"><a href="#分析方法" class="headerlink" title="分析方法"></a>分析方法</h3><p>对输出结果中分类错误的样本进行人工分析，建立一个表格来记录每一个分类错误的具体信息。通过统计不同错误标记类型占总数的百分比，发现哪些问题亟待解决，或者提供构思新优化方向的灵感。</p>
+<a id="more"></a>
 <p>例：</p>
 <div class="table-container">
 <table>
@@ -381,7 +382,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-08-23T14:49:53.723Z" itemprop="dateUpdated">2019-08-23 22:49:53</time>
+    Last updated: <time datetime="2019-08-23T14:54:33.932Z" itemprop="dateUpdated">2019-08-23 22:54:33</time>
 </span><br>
 
 
@@ -427,7 +428,8 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/23/deeplearning-ai学习笔记（九）构建机器学习项目之机器学习策略（下）/&title=《deeplearning.ai学习笔记（九）构建机器学习项目之机器学习策略（下）》 — 一只程序喵&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/23/deeplearning-ai学习笔记（九）构建机器学习项目之机器学习策略（下）/&title=《deeplearning.ai学习笔记（九）构建机器学习项目之机器学习策略（下）》 — 一只程序喵&source=错误分析（Error Analysis）通过人工检查机器学习模型得出的结果中出现的一些错误，有助于深入了解下一步要进行的工作。这个过程被称作错误分析。
+分..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -579,7 +581,8 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/23/deeplearning-ai学习笔记（九）构建机器学习项目之机器学习策略（下）/&title=《deeplearning.ai学习笔记（九）构建机器学习项目之机器学习策略（下）》 — 一只程序喵&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/23/deeplearning-ai学习笔记（九）构建机器学习项目之机器学习策略（下）/&title=《deeplearning.ai学习笔记（九）构建机器学习项目之机器学习策略（下）》 — 一只程序喵&source=错误分析（Error Analysis）通过人工检查机器学习模型得出的结果中出现的一些错误，有助于深入了解下一步要进行的工作。这个过程被称作错误分析。
+分..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>

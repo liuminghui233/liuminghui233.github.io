@@ -29,26 +29,26 @@
 <meta property="og:site_name" content="一只程序喵">
 <meta property="og:description" content="计算机视觉（CV, Computer Vision）是深度学习应用的主要方向之一。计算机视觉问题包括以下几类：  图像分类（Image Classification） 目标检测（Object detection） 风格迁移（Neural Style Transfer）  使用传统神经网络处理机器视觉的一个主要问题是输入层维度很大，使得网络权重W非常庞大。这样会造成两个后果：  神经网络结构复杂，数">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566654408046.png">
-<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566654522082.png">
-<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/Convolutional-operation-example.jpg">
-<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/Another-Convolutional-operation-example.jpg">
-<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/Padding.jpg">
-<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/Stride.jpg">
-<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/Convolutions-on-RGB-image.png">
-<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/More-Filters.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/24/m6bHQU.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/24/m6bXw9.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/24/m6q9SK.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/24/m6bzJx.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/24/m6qAwd.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/24/m6qETA.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/24/m6qCQO.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/24/m6qiOe.jpg">
 <meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/15.png">
-<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566658261336.png">
-<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/16.png">
-<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/Max-Pooling.png">
-<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/Average-Pooling.png">
-<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/19.png">
-<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/20.png">
-<meta property="og:updated_time" content="2019-08-24T14:52:14.337Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/24/m6bxF1.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/24/m6L9Nn.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/24/m6qPyD.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/24/m6qSW6.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/24/m6LpAs.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/24/m6bbyF.png">
+<meta property="og:updated_time" content="2019-08-24T15:13:00.258Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="deeplearning.ai学习笔记（十）卷积神经网络基础">
 <meta name="twitter:description" content="计算机视觉（CV, Computer Vision）是深度学习应用的主要方向之一。计算机视觉问题包括以下几类：  图像分类（Image Classification） 目标检测（Object detection） 风格迁移（Neural Style Transfer）  使用传统神经网络处理机器视觉的一个主要问题是输入层维度很大，使得网络权重W非常庞大。这样会造成两个后果：  神经网络结构复杂，数">
-<meta name="twitter:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566654408046.png">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/08/24/m6bHQU.png">
     
         <link rel="alternate" type="application/atom+xml" title="一只程序喵" href="/atom.xml">
     
@@ -221,7 +221,7 @@
 <h2 id="卷积运算（Convolutions）"><a href="#卷积运算（Convolutions）" class="headerlink" title="卷积运算（Convolutions）"></a>卷积运算（Convolutions）</h2><h3 id="引例：边缘检测（Edge-Detection）"><a href="#引例：边缘检测（Edge-Detection）" class="headerlink" title="引例：边缘检测（Edge Detection）"></a>引例：边缘检测（Edge Detection）</h3><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566654408046.png" alt="垂直边缘（Vertical Edges）检测和水平边缘（Horizontal Edges）检测" title>
+                    <img src="https://s2.ax1x.com/2019/08/24/m6bHQU.png" alt="垂直边缘（Vertical Edges）检测和水平边缘（Horizontal Edges）检测" title>
                 </div>
                 <div class="image-caption">垂直边缘（Vertical Edges）检测和水平边缘（Horizontal Edges）检测</div>
             </figure>
@@ -230,7 +230,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566654522082.png" alt="卷积运算示意图" title>
+                    <img src="https://s2.ax1x.com/2019/08/24/m6bXw9.png" alt="卷积运算示意图" title>
                 </div>
                 <div class="image-caption">卷积运算示意图</div>
             </figure>
@@ -240,14 +240,14 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\Convolutional-operation-example.jpg" alt="垂直边缘检测（由亮到暗）" title>
+                    <img src="https://s2.ax1x.com/2019/08/24/m6q9SK.png" alt="垂直边缘检测（由亮到暗）" title>
                 </div>
                 <div class="image-caption">垂直边缘检测（由亮到暗）</div>
             </figure>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\Another-Convolutional-operation-example.jpg" alt="垂直边缘检测（由暗到亮）" title>
+                    <img src="https://s2.ax1x.com/2019/08/24/m6bzJx.png" alt="垂直边缘检测（由暗到亮）" title>
                 </div>
                 <div class="image-caption">垂直边缘检测（由暗到亮）</div>
             </figure>
@@ -260,7 +260,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\Padding.jpg" alt="Padding" title>
+                    <img src="https://s2.ax1x.com/2019/08/24/m6qAwd.jpg" alt="Padding" title>
                 </div>
                 <div class="image-caption">Padding</div>
             </figure>
@@ -278,7 +278,7 @@ p=\frac{f-1}{2}</script><p>其中f通常为奇数（滤波器有一个便于表�
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\Stride.jpg" alt="带步长的卷积" title>
+                    <img src="https://s2.ax1x.com/2019/08/24/m6qETA.jpg" alt="带步长的卷积" title>
                 </div>
                 <div class="image-caption">带步长的卷积</div>
             </figure>
@@ -290,14 +290,14 @@ p=\frac{f-1}{2}</script><p>其中f通常为奇数（滤波器有一个便于表�
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\Convolutions-on-RGB-image.png" alt="三维卷积运算（单滤波器）" title>
+                    <img src="https://s2.ax1x.com/2019/08/24/m6qCQO.png" alt="三维卷积运算（单滤波器）" title>
                 </div>
                 <div class="image-caption">三维卷积运算（单滤波器）</div>
             </figure>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\More-Filters.jpg" alt="三维卷积运算（多滤波器）" title>
+                    <img src="https://s2.ax1x.com/2019/08/24/m6qiOe.jpg" alt="三维卷积运算（多滤波器）" title>
                 </div>
                 <div class="image-caption">三维卷积运算（多滤波器）</div>
             </figure>
@@ -314,7 +314,7 @@ p=\frac{f-1}{2}</script><p>其中f通常为奇数（滤波器有一个便于表�
 <h4 id="总结：卷积神经网络中的符号与计算"><a href="#总结：卷积神经网络中的符号与计算" class="headerlink" title="总结：卷积神经网络中的符号与计算"></a>总结：卷积神经网络中的符号与计算</h4><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566658261336.png" alt="符号总结" title>
+                    <img src="https://s2.ax1x.com/2019/08/24/m6bxF1.png" alt="符号总结" title>
                 </div>
                 <div class="image-caption">符号总结</div>
             </figure>
@@ -323,7 +323,7 @@ p=\frac{f-1}{2}</script><p>其中f通常为奇数（滤波器有一个便于表�
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\16.png" alt="简单CNN" title>
+                    <img src="https://s2.ax1x.com/2019/08/24/m6L9Nn.png" alt="简单CNN" title>
                 </div>
                 <div class="image-caption">简单CNN</div>
             </figure>
@@ -333,7 +333,7 @@ p=\frac{f-1}{2}</script><p>其中f通常为奇数（滤波器有一个便于表�
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\Max-Pooling.png" alt="最大池化" title>
+                    <img src="https://s2.ax1x.com/2019/08/24/m6qPyD.png" alt="最大池化" title>
                 </div>
                 <div class="image-caption">最大池化</div>
             </figure>
@@ -344,7 +344,7 @@ p=\frac{f-1}{2}</script><p>其中f通常为奇数（滤波器有一个便于表�
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\Average-Pooling.png" alt="平均池化" title>
+                    <img src="https://s2.ax1x.com/2019/08/24/m6qSW6.png" alt="平均池化" title>
                 </div>
                 <div class="image-caption">平均池化</div>
             </figure>
@@ -353,11 +353,11 @@ p=\frac{f-1}{2}</script><p>其中f通常为奇数（滤波器有一个便于表�
 <p>若池化过程的输入维度为：n_H×n_W×n_c，则输出维度为：</p>
 <script type="math/tex; mode=display">
 \lfloor \frac{n_H-f}{2}+1\rfloor × \lfloor \frac{n_W-f}{2}+1\rfloor × n_c</script><h5 id="全连接层（FC-Fully-Connected-Layer）"><a href="#全连接层（FC-Fully-Connected-Layer）" class="headerlink" title="全连接层（FC, Fully Connected Layer）"></a>全连接层（FC, Fully Connected Layer）</h5><p>全连接层即一般的神经网络结构，每一个结点都与上一层的所有结点相连，用来把前边提取到的特征综合起来。</p>
-<h4 id="深度卷积神经网络实例"><a href="#深度卷积神经网络实例" class="headerlink" title="深度卷积神经网络实例"></a>深度卷积神经网络实例</h4><p>以一个简单的数字识别CNN为例：</p>
+<h4 id="深度卷积神经网络实例"><a href="#深度卷积神经网络实例" class="headerlink" title="深度卷积神经网络实例"></a>深度卷积神经网络实例</h4><p>以一个简单的数字识别CNN为例</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\19.png" alt="数字识别CNN" title>
+                    <img src="https://s2.ax1x.com/2019/08/24/m6LpAs.png" alt="数字识别CNN" title>
                 </div>
                 <div class="image-caption">数字识别CNN</div>
             </figure>
@@ -366,7 +366,7 @@ p=\frac{f-1}{2}</script><p>其中f通常为奇数（滤波器有一个便于表�
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\20.png" alt="各层尺寸和参数数量" title>
+                    <img src="https://s2.ax1x.com/2019/08/24/m6bbyF.png" alt="各层尺寸和参数数量" title>
                 </div>
                 <div class="image-caption">各层尺寸和参数数量</div>
             </figure>
@@ -394,7 +394,7 @@ p=\frac{f-1}{2}</script><p>其中f通常为奇数（滤波器有一个便于表�
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-08-24T14:52:14.337Z" itemprop="dateUpdated">2019-08-24 22:52:14</time>
+    Last updated: <time datetime="2019-08-24T15:13:00.258Z" itemprop="dateUpdated">2019-08-24 23:13:00</time>
 </span><br>
 
 

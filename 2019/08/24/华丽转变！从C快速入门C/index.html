@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>华丽转变！从C快速入门C++ | 一只程序喵 | 刘明辉的个人博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="C/C++">
+    <meta name="description" content="C++简介C++基本程序框架C++新特性常量定义引用动态内存分配内联函数与函数重载标准模板库STLC++11标准新特性面向对象程序设计*">
+<meta name="keywords" content="C&#x2F;C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="华丽转变！从C快速入门C++">
+<meta property="og:url" content="http://yoursite.com/2019/08/24/华丽转变！从C快速入门C/index.html">
+<meta property="og:site_name" content="一只程序喵">
+<meta property="og:description" content="C++简介C++基本程序框架C++新特性常量定义引用动态内存分配内联函数与函数重载标准模板库STLC++11标准新特性面向对象程序设计*">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-24T10:24:18.587Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="华丽转变！从C快速入门C++">
+<meta name="twitter:description" content="C++简介C++基本程序框架C++新特性常量定义引用动态内存分配内联函数与函数重载标准模板库STLC++11标准新特性面向对象程序设计*">
+    
+        <link rel="alternate" type="application/atom+xml" title="一只程序喵" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">刘明辉</h5>
+          <a href="mailto:549208791@qq.com" title="549208791@qq.com" class="mail">549208791@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/liuminghui233" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">华丽转变！从C快速入门C++</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">华丽转变！从C快速入门C++</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-08-24T10:21:18.000Z" itemprop="datePublished" class="page-time">
+  2019-08-24
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#C-简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">C++简介</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#C-基本程序框架"><span class="post-toc-number">2.</span> <span class="post-toc-text">C++基本程序框架</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#C-新特性"><span class="post-toc-number">3.</span> <span class="post-toc-text">C++新特性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#常量定义"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">常量定义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#引用"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">引用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#动态内存分配"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">动态内存分配</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#内联函数与函数重载"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">内联函数与函数重载</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#标准模板库STL"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">标准模板库STL</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#C-11标准新特性"><span class="post-toc-number">3.6.</span> <span class="post-toc-text">C++11标准新特性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#面向对象程序设计"><span class="post-toc-number">3.7.</span> <span class="post-toc-text">面向对象程序设计*</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-华丽转变！从C快速入门C"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">华丽转变！从C快速入门C++</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-08-24 18:21:18" datetime="2019-08-24T10:21:18.000Z"  itemprop="datePublished">2019-08-24</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="C-简介"><a href="#C-简介" class="headerlink" title="C++简介"></a>C++简介</h2><h2 id="C-基本程序框架"><a href="#C-基本程序框架" class="headerlink" title="C++基本程序框架"></a>C++基本程序框架</h2><h2 id="C-新特性"><a href="#C-新特性" class="headerlink" title="C++新特性"></a>C++新特性</h2><h3 id="常量定义"><a href="#常量定义" class="headerlink" title="常量定义"></a>常量定义</h3><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><h3 id="动态内存分配"><a href="#动态内存分配" class="headerlink" title="动态内存分配"></a>动态内存分配</h3><h3 id="内联函数与函数重载"><a href="#内联函数与函数重载" class="headerlink" title="内联函数与函数重载"></a>内联函数与函数重载</h3><h3 id="标准模板库STL"><a href="#标准模板库STL" class="headerlink" title="标准模板库STL"></a>标准模板库STL</h3><h3 id="C-11标准新特性"><a href="#C-11标准新特性" class="headerlink" title="C++11标准新特性"></a>C++11标准新特性</h3><h3 id="面向对象程序设计"><a href="#面向对象程序设计" class="headerlink" title="面向对象程序设计*"></a>面向对象程序设计*</h3>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-08-24T10:24:18.587Z" itemprop="dateUpdated">2019-08-24 18:24:18</time>
+</span><br>
+
+
+        
+        版权声明:本文为博主原创文章,未经博主允许不得转载。<a href="/2019/08/24/华丽转变！从C快速入门C/" target="_blank" rel="external">http://yoursite.com/2019/08/24/华丽转变！从C快速入门C/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="刘明辉">
+            刘明辉
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/08/24/华丽转变！从C快速入门C/&title=《华丽转变！从C快速入门C++》 — 一只程序喵&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/24/华丽转变！从C快速入门C/&title=《华丽转变！从C快速入门C++》 — 一只程序喵&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/08/24/华丽转变！从C快速入门C/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《华丽转变！从C快速入门C++》 — 一只程序喵&url=http://yoursite.com/2019/08/24/华丽转变！从C快速入门C/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/08/24/华丽转变！从C快速入门C/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/08/24/deeplearning-ai学习笔记（十）卷积神经网络基础/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">deeplearning.ai学习笔记（十）卷积神经网络基础</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢打赏ο(=•ω＜=)ρ⌒☆
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>刘明辉 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/08/24/华丽转变！从C快速入门C/&title=《华丽转变！从C快速入门C++》 — 一只程序喵&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/24/华丽转变！从C快速入门C/&title=《华丽转变！从C快速入门C++》 — 一只程序喵&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/08/24/华丽转变！从C快速入门C/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《华丽转变！从C快速入门C++》 — 一只程序喵&url=http://yoursite.com/2019/08/24/华丽转变！从C快速入门C/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/08/24/华丽转变！从C快速入门C/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACqUlEQVR42u3ay24iQQwFUP7/pyfSrCIlIdevwOL0ChHoqtORysb24xFf//5fn19/fufrZ75+svr5n9Z9XFx4eHh4ra3/dOW3zjf3/G7J40j2jIeHh3fNS4LB8+WTv+bs5ysme8bDw8N7B97k6E/Y8/QaDw8P7914eWo7OdCrjxUPDw/vVbx8o3m6PCn7JrzlWgseHh5ezOs1wF77+ry/h4eHh9fqqidXtcibFxqqweCbb+Hh4eEd8HoF1ucJcb6VSfOsEDDw8PDwDniTL0/CRrWp1mvF4eHh4V3wquXUhBe1pmLMaNgLDw8Pb5U3aUHlD2IObrbl8PDw8A54vWQ6X77a0Mrvk7+Dh4eHd8fLkXlq2xuHqpZxl2steHh4eAGvGgDypLxX0k12laf4eHh4eNe8eSGgPBTVanQVSsZ4eHh4Z7zq8hfp+GSc65fAgIeHh7fKy9PoPJ2tBoa/GS/Aw8PDm/N6X8vf3z36y+vi4eHhHfDyA33Smuql4Pl9fgkteHh4eKu8fIF5oTZv/2813vDw8PAueHkhIEmCew+ol3CXay14eHh4Z7zdJZPUfKukGwUGPDw8vDGv18raHY3KC77lsQY8PDy8A97kmJ60rPJSbPURl7t8eHh4eKu8ScN+K0Gfhyg8PDy8C95kTCopNFSvaj7cHZnAw8PD6/OqpYRenTgPMHlSHo0s4OHh4Z3xqlvslYPzJtlWSMPDw8Pb5fWS3d4oQK+t1QsneHh4eHe8+eGbb25rdKA3BIaHh4e3y8uDQbWssBVI8sCAh4eH95e83qFcfTS98FANXXh4eHjvxqsOFkTHdzGhz4cP8PDw8F7Ly4/+XtOrGn6ifwMeHh7eGS9veiWPo9fEqpZro6QcDw8P74A3+qlfZPTaZkmC3uzs4eHh4dV4H+kkkpfs9fuCAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '一只程序喵 | 刘明辉的个人博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '一只程序喵 | 刘明辉的个人博客';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>

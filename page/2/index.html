@@ -14,7 +14,7 @@
     
     
     
-    <title>Tags: C/C++ | 一只程序喵 | 刘明辉的个人博客</title>
+    <title>一只程序喵 | 刘明辉的个人博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
@@ -23,7 +23,7 @@
     <meta name="keywords" content>
     <meta property="og:type" content="website">
 <meta property="og:title" content="一只程序喵">
-<meta property="og:url" content="http://yoursite.com/tags/C-C/index.html">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="一只程序喵">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
@@ -76,7 +76,7 @@
               </a>
             </li>
         
-            <li class="waves-block waves-effect active">
+            <li class="waves-block waves-effect">
               <a href="/tags"  >
                 <i class="icon icon-lg icon-tags"></i>
                 Tags
@@ -115,7 +115,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">Tags: C/C++</div>
+        <div class="flex-col header-title ellipsis">一只程序喵</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -134,90 +134,38 @@
         
     </div>
 </header>
-<header class="content-header tags-header">
+<header class="content-header index-header">
 
     <div class="container fade-scale">
-        <h1 class="title">Tags: C/C++</h1>
+        <h1 class="title">一只程序喵</h1>
         <h5 class="subtitle">
+            
+                刘明辉的个人博客
             
         </h5>
     </div>
 
     
-<div class="tabs-bar container">
-    <nav class="tags-list">
-        <a href="/tags" style="-webkit-order:-1;order:-1" class="tags-list-item waves-effect waves-button waves-light
-            ">All</a>
-        
-
-            <a href="/tags/学习笔记/" style="-webkit-order:2;order:2" class="tags-list-item waves-effect waves-button waves-light">学习笔记</a>
-
-        
-
-            <a href="/tags/deeplearning-ai/" style="-webkit-order:0;order:0" class="tags-list-item waves-effect waves-button waves-light">deeplearning.ai</a>
-
-        
-
-            <a href="/tags/C-C/" style="-webkit-order:1;order:1" class="tags-list-item waves-effect waves-button waves-light active">C/C++</a>
-
-        
-    </nav>
-    <!-- PC show more-->
-    <div class="tags-list-more">
-        <a href="javascript:;" onclick="BLOG.tabBar(this)" class="action tags-list-item waves-effect waves-circle waves-light"><i class="icon icon-ellipsis-h"></i></a>
-    </div>
-</div>
-
 
 
 </header>
 
-<div class="container body-wrap fade">
-    
-            <div class="waterfall">
-          
+<div class="container body-wrap">
 
-            <div class="waterfall-item">
-  <article class="article-card archive-article">
+    <ul class="post-list">
+    
+        <li class="post-list-item fade">
+            <article id="post-那些既熟悉又陌生的C-C-知识点（长期更新）"
+  class="article-card article-type-post" itemprop="blogPost">
+
     <div class="post-meta">
-      <time class="post-time" title="2019-08-24 18:21:18" datetime="2019-08-24T10:21:18.000Z"  itemprop="datePublished">2019-08-24</time>
-
-      
-
-
-    </div>
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/08/24/华丽转变！从C快速入门C/">华丽转变！从C快速入门C++</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-
-    </div>
-    
-  </article>
-</div>
+        <time class="post-time" title="2019-08-09 23:21:44" datetime="2019-08-09T15:21:44.000Z"  itemprop="datePublished">2019-08-09</time>
 
         
 
-            <div class="waterfall-item">
-  <article class="article-card archive-article">
-    <div class="post-meta">
-      <time class="post-time" title="2019-08-09 23:21:44" datetime="2019-08-09T15:21:44.000Z"  itemprop="datePublished">2019-08-09</time>
-
-      
-
 
     </div>
+
     
 
 
@@ -229,6 +177,21 @@
 
 
 
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        头文件的等价写法在C++标准中，stdio.h更推荐使用等价写法：cstdio，也就是在前面加一个c，然后去掉.h即可。
+123/* 以下两种写法等价 */#include&lt;stdio.h&gt;#include&lt;cstdio&gt;
+整型变量类型表示数的范围
+整型int：32位整数/绝对值在10^9范围以内的整数都可以定义为int型
+长整型long long：64位整数/10^...
+    
+
+        <a href="/2019/08/09/那些既熟悉又陌生的C-C-知识点（长期更新）/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
     
     <div class="post-footer">
         
@@ -236,15 +199,69 @@
 
     </div>
     
-  </article>
-</div>
+</article>
 
-        
-            </div>
-        
+        </li>
     
-</div>
+        <li class="post-list-item fade">
+            <article id="post-deeplearning-ai学习笔记（一）深度学习引言"
+  class="article-card article-type-post" itemprop="blogPost">
 
+    <div class="post-meta">
+        <time class="post-time" title="2019-08-09 14:30:38" datetime="2019-08-09T06:30:38.000Z"  itemprop="datePublished">2019-08-09</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/08/09/deeplearning-ai学习笔记（一）深度学习引言/">deeplearning.ai学习笔记（一）深度学习引言</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        
+AI is the new Electricity. ——吴恩达（Andrew Ng）
+
+大约在一百年前，社会的电气化改变了每个主要行业。而如今我们见到了 AI令人惊讶的能量会产生同样巨大的转变。显然 AI的各个分支中，发展最为迅速的就是深度学习（deep learning）。而深度学习，一般指的是训练神经网络（有时是非常非常大/深的神经网络）。
+    
+
+        <a href="/2019/08/09/deeplearning-ai学习笔记（一）深度学习引言/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/deeplearning-ai/">deeplearning.ai</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+    </ul>
+
+    
+<nav id="page-nav">
+    <div class="inner">
+    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </div>
+</nav>
+
+
+</div>
 
         <footer class="footer">
     <div class="top">
@@ -285,7 +302,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/tags/C-C/&title=一只程序喵&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/page/2/&title=一只程序喵&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -295,22 +312,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/tags/C-C/&title=一只程序喵&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/page/2/&title=一只程序喵&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/tags/C-C/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/page/2/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=一只程序喵&url=http://yoursite.com/tags/C-C/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=一只程序喵&url=http://yoursite.com/page/2/&via=http://yoursite.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/tags/C-C/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/page/2/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -321,7 +338,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABw0lEQVR42u3aQY7CMBAEQP7/aVba22pF0u0hJkjlEwoiLnMYedp+POLx/B3/n7wax789fv6GgYuLO+YmEydTHi/p1Vzt4nFxcXdyE8rJiw5rTrKMqNjh4uLejDtZzLxQ4uLi3pObNDZJscPFxf0WblJojqc5Xl7y7Zt7NVxc3AG3DUyv+HxhvouLi1tyn+XINyhtCxTNjouLu4WbRB5rx6J5m9S2Q7i4uFdz2/ajfT7ZTp2UMFxc3C3cSQlrD1PzeOXPE1xc3I3ctcPUtiQlf8fJXLi4uB/lzqOQ9uAkildwcXG3c9emmVDya1vF3S5cXNwxd20TM79+MYlicXFxr+bOi0veLK1FJycpDi4u7gXcensxvje1Fojg4uLu5OatzqR4tazo5AcXF/cybnLAmUDb0TZauLi4O7lrzUlxlaoMYk6WhIuLu5E7eWl7XaNtq3BxcT/FbbcmeZk75tZBDC4u7hZuW1AmcWdS8vJvcXFxr+bmEUYbkeRXNIq4BBcXdyN33vy0hy6LBRQXF/dm3HyvlG96Fm+L4OLi3p7bRhsJ9OU7cXFxN3LnVyXy7VEbhSzGIri4uAPu/unz4oiLi7ud+wNabGzDqhdTVQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABx0lEQVR42u3aQW7DMAwEwP7/0y7QUw+1s2vJTAqMToGhSKMLQZH6+orH8TOuvx+/RvvfzQMXF3eZe1yOs6VX5iTfzw6Pi4s7yc2D1IvlLrn5UU+/4+Lifhj3+l/Xx2gDJS4u7n/hJpu1c3BxcT+Zm4DyLfOg9uBdDRcXd4HbFkyf+P1gfRcXF7fkHuVIglTeVql3x8XFHeHmJY8nZt67DuHi4s5zk0WT3GM9nYqarLi4uA9w86dUbWvk3vOLF7vj4uIOcvNQUjQ8brVMrpMeXFzcGW7bSmnLGW0Sk4RCXFzcGW6eymy4aZVdkqLDg4uLu4mbF0HapxJFATRvuOLi4o5w8+CyUmBtk5j2qLi4uHu57QUmL6PkGRYuLu7nc9fDWZv0JEVSXFzcSW6SlOT0e9ehvLSKi4s7w82D1Ia2R7z+6ZFwcXEHuUkLJAleLaWuguLi4g5y26JG+8yiDZF1JxYXF3crtw0obfE0mdm2e3FxcWe4efBaaZzkAfHFgXFxcQe5bfFipZC6OX3BxcV9Kzef0157HglkuLi4H8DN+7p5weWP9XFxcQe5bZE0b720bdptZRFcXNwF7sqNI39+0eJwcXHfxP0GEhklC9XK3vUAAAAASUVORK5CYII=" alt="微信分享二维码">
 </div>
 
 

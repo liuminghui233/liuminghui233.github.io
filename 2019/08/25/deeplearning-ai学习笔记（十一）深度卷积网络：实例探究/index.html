@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>deeplearning.ai学习笔记（十一）深度卷积网络：实例探究 | 一只程序喵 | 刘明辉的个人博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="学习笔记,deeplearning.ai">
+    <meta name="description" content="经典卷积神经网络LeNet-5                                                                                             LeNet-5               一个或多个卷积层后面跟着一个池化层的模式至今仍十分常用。 当 LeNet-5模型被提出时，其池化层使用的是平均池化，而且各层激活函数一般选用">
+<meta name="keywords" content="学习笔记,deeplearning.ai">
+<meta property="og:type" content="article">
+<meta property="og:title" content="deeplearning.ai学习笔记（十一）深度卷积网络：实例探究">
+<meta property="og:url" content="http://yoursite.com/2019/08/25/deeplearning-ai学习笔记（十一）深度卷积网络：实例探究/index.html">
+<meta property="og:site_name" content="一只程序喵">
+<meta property="og:description" content="经典卷积神经网络LeNet-5                                                                                             LeNet-5               一个或多个卷积层后面跟着一个池化层的模式至今仍十分常用。 当 LeNet-5模型被提出时，其池化层使用的是平均池化，而且各层激活函数一般选用">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/LeNet-5.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/AlexNet.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566833109153.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/Residual-block.jpg">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/Residual-Network.jpg">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/ResNet-Paper.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/ResNet-Training-Error.jpg">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/Why-do-residual-networks-work.jpg">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1x1-Conv-2.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566876412138.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/Motivation-for-inception-network.jpg">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/The-problem-of-computational-cost.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/Using-1x1-convolution.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/Inception-module.jpg">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/Inception-network.jpg">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566878381364.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1566878476269.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/18-1.png">
+<meta property="og:updated_time" content="2019-08-27T07:17:46.329Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="deeplearning.ai学习笔记（十一）深度卷积网络：实例探究">
+<meta name="twitter:description" content="经典卷积神经网络LeNet-5                                                                                             LeNet-5               一个或多个卷积层后面跟着一个池化层的模式至今仍十分常用。 当 LeNet-5模型被提出时，其池化层使用的是平均池化，而且各层激活函数一般选用">
+<meta name="twitter:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/LeNet-5.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="一只程序喵" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">刘明辉</h5>
+          <a href="mailto:549208791@qq.com" title="549208791@qq.com" class="mail">549208791@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/liuminghui233" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">deeplearning.ai学习笔记（十一）深度卷积网络：实例探究</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">deeplearning.ai学习笔记（十一）深度卷积网络：实例探究</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-08-25T03:39:51.000Z" itemprop="datePublished" class="page-time">
+  2019-08-25
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#经典卷积神经网络"><span class="post-toc-number">1.</span> <span class="post-toc-text">经典卷积神经网络</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#LeNet-5"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">LeNet-5</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#AlexNet"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">AlexNet</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#VGG-16"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">VGG-16</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#残差网络（ResNets-Residual-Networks）"><span class="post-toc-number">2.</span> <span class="post-toc-text">残差网络（ResNets, Residual Networks）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#跳跃连接与残差块"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">跳跃连接与残差块</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#残差网络"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">残差网络</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#残差网络有效的原因"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">残差网络有效的原因</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1X1卷积（1×1-Convolutions-Networks-in-Networks）"><span class="post-toc-number">3.</span> <span class="post-toc-text">1X1卷积（1×1 Convolutions/Networks in Networks）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Inception-网络"><span class="post-toc-number">4.</span> <span class="post-toc-text">Inception 网络</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Inception-模块"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">Inception 模块</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#降低计算量"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">降低计算量</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Inception-网络结构"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">Inception 网络结构</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用卷积神经网络的实用建议"><span class="post-toc-number">5.</span> <span class="post-toc-text">使用卷积神经网络的实用建议</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-deeplearning-ai学习笔记（十一）深度卷积网络：实例探究"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">deeplearning.ai学习笔记（十一）深度卷积网络：实例探究</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-08-25 11:39:51" datetime="2019-08-25T03:39:51.000Z"  itemprop="datePublished">2019-08-25</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="经典卷积神经网络"><a href="#经典卷积神经网络" class="headerlink" title="经典卷积神经网络"></a>经典卷积神经网络</h2><h3 id="LeNet-5"><a href="#LeNet-5" class="headerlink" title="LeNet-5"></a>LeNet-5</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\LeNet-5.png" alt="LeNet-5" title>
+                </div>
+                <div class="image-caption">LeNet-5</div>
+            </figure>
+<ul>
+<li>一个或多个卷积层后面跟着一个池化层的模式至今仍十分常用。</li>
+<li>当 LeNet-5模型被提出时，其池化层使用的是平均池化，而且各层激活函数一般选用 Sigmoid 和 tanh。现在，我们可以根据需要，做出改进，<strong>使用最大池化</strong>并<strong>选用 ReLU 作为激活函数</strong>。</li>
+</ul>
+<p>相关论文：<a href="http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=726791&amp;tag=1" target="_blank" rel="noopener">LeCun et.al., 1998. Gradient-based learning applied to document recognition</a></p>
+<h3 id="AlexNet"><a href="#AlexNet" class="headerlink" title="AlexNet"></a>AlexNet</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\AlexNet.png" alt="AlexNet" title>
+                </div>
+                <div class="image-caption">AlexNet</div>
+            </figure>
+<ul>
+<li>当用于训练图像和数据集时，AlexNet 能够处理非常相似的基本构造模块，这些模块往往包含大量的隐藏单元或数据。</li>
+</ul>
+<p>相关论文：<a href="http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf" target="_blank" rel="noopener">Krizhevsky et al.,2012. ImageNet classification with deep convolutional neural networks</a></p>
+<h3 id="VGG-16"><a href="#VGG-16" class="headerlink" title="VGG-16"></a>VGG-16</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566833109153.png" alt="VGG-16" title>
+                </div>
+                <div class="image-caption">VGG-16</div>
+            </figure>
+<ul>
+<li>VGG-16 网络的“16”指网络中包含 16 个卷积层和全连接层。</li>
+<li>超参数较少，只需要专注于构建卷积层。</li>
+<li>结构不复杂且规整，在每一组卷积层进行滤波器翻倍操作。</li>
+</ul>
+<p>相关论文：<a href="https://arxiv.org/pdf/1409.1556.pdf" target="_blank" rel="noopener">Simonvan &amp; Zisserman 2015. Very deep convolutional networks for large-scale image recognition</a></p>
+<h2 id="残差网络（ResNets-Residual-Networks）"><a href="#残差网络（ResNets-Residual-Networks）" class="headerlink" title="残差网络（ResNets, Residual Networks）"></a>残差网络（<strong>ResNets</strong>, Residual Networks）</h2><p>因为存在梯度消失和梯度爆炸问题，网络越深就越难训练。<strong>残差网络</strong>可以有效解决这个问题。</p>
+<p>相关论文：<a href="https://arxiv.org/pdf/1512.03385.pdf" target="_blank" rel="noopener">He et al., 2015. Deep residual networks for image recognition</a></p>
+<h3 id="跳跃连接与残差块"><a href="#跳跃连接与残差块" class="headerlink" title="跳跃连接与残差块"></a>跳跃连接与残差块</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\Residual-block.jpg" alt="跳跃连接与残差块" title>
+                </div>
+                <div class="image-caption">跳跃连接与残差块</div>
+            </figure>
+<p>上图的结构被称为<strong>残差块（Residual block）</strong>。通过<strong>跳跃连接（Skip connections）</strong>可以将 a[l]添加到第二个 ReLU 过程中，直接建立 a[l]与 a[l+2]之间的隔层联系。表达式如下：</p>
+<script type="math/tex; mode=display">
+a^{[l+2]}=g(z^{[l+2]}+a^{[l]})=g(W^{[l+2]}a^{[l+1]}+b^{[l+2]}+a^{[l]})</script><p>注：如果a[l]与a[l+2]的维度不同，需要引入矩阵Ws与a[l]相乘，使得二者的维度相匹配。参数矩阵Ws既可以通过模型训练得到，也可以作为固定值，仅使a[l]截断或者补零。</p>
+<h3 id="残差网络"><a href="#残差网络" class="headerlink" title="残差网络"></a>残差网络</h3><p>残差网络就是将许多残差块堆积在一起，形成一个深度网络。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\Residual-Network.jpg" alt="简单残差网络" title>
+                </div>
+                <div class="image-caption">简单残差网络</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\ResNet-Paper.png" alt="CNN中ResNet的典型结构" title>
+                </div>
+                <div class="image-caption">CNN中ResNet的典型结构</div>
+            </figure>
+<p><strong>普通网络（Plain Network）与残差网络性能比较：</strong></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\ResNet-Training-Error.jpg" alt="两种网络错误率曲线比较" title>
+                </div>
+                <div class="image-caption">两种网络错误率曲线比较</div>
+            </figure>
+<h3 id="残差网络有效的原因"><a href="#残差网络有效的原因" class="headerlink" title="残差网络有效的原因"></a>残差网络有效的原因</h3><p>假设有一个大型神经网络，其输入为X，输出为a[l]。给这个神经网络额外增加两层，输出为a[l+2]。将这两层看作一个具有跳远连接的残差块。为了方便说明，假设整个网络中都选用 ReLU 作为激活函数，因此输出的所有激活值都大于等于 0。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\Why-do-residual-networks-work.jpg" alt="残差网络有效的原因" title>
+                </div>
+                <div class="image-caption">残差网络有效的原因</div>
+            </figure>
+<ul>
+<li><p>当发生梯度消失时：W[l+2]≈0，b[l+2]≈0，此时有</p>
+<script type="math/tex; mode=display">
+a^{[l+2]}=g(a^{[l]})=ReLU(a^{[l]})=a^{[l]}</script><p>变为恒等函数，这两层额外的残差块不会降低网络性能。</p>
+</li>
+<li><p>当没有发生梯度消失时：训练得到的非线性关系会使得表现效果进一步提高。</p>
+</li>
+</ul>
+<h2 id="1X1卷积（1×1-Convolutions-Networks-in-Networks）"><a href="#1X1卷积（1×1-Convolutions-Networks-in-Networks）" class="headerlink" title="1X1卷积（1×1 Convolutions/Networks in Networks）"></a>1X1卷积（1×1 Convolutions/Networks in Networks）</h2><p>1x1 卷积指滤波器的尺寸为 1x1 。</p>
+<ul>
+<li>当通道数为 1 时，1x1 卷积意味着卷积操作<strong>等同于乘积操作</strong>。</li>
+<li>当通道数更多时，1x1 卷积的作用实际上<strong>类似全连接层的神经网络结构</strong>，从而降低（或升高，取决于滤波器组数）数据的维度。</li>
+</ul>
+<p><strong>池化能压缩数据的高度（nH）及宽度（nW），而 1×1 卷积能压缩数据的通道数（nC）。</strong></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1x1-Conv-2.png" alt="1X1卷积压缩通道数" title>
+                </div>
+                <div class="image-caption">1X1卷积压缩通道数</div>
+            </figure>
+<p>相关论文：<a href="https://arxiv.org/pdf/1312.4400.pdf" target="_blank" rel="noopener">Lin et al., 2013. Network in network</a></p>
+<h2 id="Inception-网络"><a href="#Inception-网络" class="headerlink" title="Inception 网络"></a>Inception 网络</h2><p>Inception 网络的名字来自电影《盗梦空间（Inception ）》，思想源自台词“We need to do deeper”，意指使神经网络更深。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566876412138.png" alt="Inception" title>
+                </div>
+                <div class="image-caption">Inception</div>
+            </figure>
+<p>与其它只选择单一尺寸和功能的filter不同，Inception Network使用不同尺寸的filters并将CONV和POOL混合起来，将所有功能输出组合拼接，再由神经网络本身去学习参数并选择最好的模块。</p>
+<p> <strong>Inception 网络的作用</strong>：代替人工来确定卷积层中的滤波器尺寸与类型，或者确定是否需要创建卷积层或池化层。</p>
+<p>相关论文：<a href="https://arxiv.org/pdf/1409.4842.pdf" target="_blank" rel="noopener">Szegedy et al., 2014, Going Deeper with Convolutions</a></p>
+<h3 id="Inception-模块"><a href="#Inception-模块" class="headerlink" title="Inception 模块"></a>Inception 模块</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\Motivation-for-inception-network.jpg" alt="Inception 模块" title>
+                </div>
+                <div class="image-caption">Inception 模块</div>
+            </figure>
+<p>如图，Inception 网络选用不同尺寸的滤波器进行 Same 卷积，并将卷积和池化得到的输出组合拼接起来，最终让网络自己去学习需要的参数和采用的滤波器组合。</p>
+<p>注：为了将所有的输出组合起来，池化层也使用 Same 类型的填充（padding）来池化使得输出的宽高不变，通道数也不变。</p>
+<h3 id="降低计算量"><a href="#降低计算量" class="headerlink" title="降低计算量"></a>降低计算量</h3><p>在提升性能的同时，Inception 网络有着较大的计算成本。</p>
+<p>例：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\The-problem-of-computational-cost.png" alt="Inception网络计算成本" title>
+                </div>
+                <div class="image-caption">Inception网络计算成本</div>
+            </figure></p>
+<p>图中有 32 个滤波器，每个滤波器的大小为 5x5x192。输出大小为 28x28x32，所以需要计算 28x28x32 个数字，对于每个数，都要执行 5x5x192 次乘法运算。加法运算次数与乘法运算次数近似相等。因此，可以看作这一层的计算量为 28x28x32x5x5x192 = 1.2亿。</p>
+<p>为了解决计算量大的问题，可以<strong>引入 1x1 卷积来减少其计算量</strong>。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\Using-1x1-convolution.png" alt="瓶颈层" title>
+                </div>
+                <div class="image-caption">瓶颈层</div>
+            </figure>
+<p>对于同一个例子，我们使用 1x1 卷积把输入数据从 192 个通道减少到 16 个通道，然后对这个较小层运行 5x5 卷积，得到最终输出。这个 1x1 的卷积层通常被称作<strong>瓶颈层（Bottleneck layer）</strong>。</p>
+<p>改进后的计算量为 28x28x192x16 + 28x28x32x5x5x15 = 1.24 千万，减少了约 90%。</p>
+<p><strong>只要合理构建瓶颈层，就可以既显著缩小计算规模，又不会降低网络性能。</strong></p>
+<h3 id="Inception-网络结构"><a href="#Inception-网络结构" class="headerlink" title="Inception 网络结构"></a>Inception 网络结构</h3><p><strong>引入 1x1 卷积后的 Inception 模块：</strong></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\Inception-module.jpg" alt="引入 1x1 卷积后的 Inception 模块" title>
+                </div>
+                <div class="image-caption">引入 1x1 卷积后的 Inception 模块</div>
+            </figure>
+<p><strong>完整的 Inception 网络（GoogLeNet）：</strong></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\Inception-network.jpg" alt="GoogLeNet" title>
+                </div>
+                <div class="image-caption">GoogLeNet</div>
+            </figure>
+<p>黑色椭圆圈出 Softmax 的输出层，用来参与特征的计算及结果预测，起到调整并防止发生过拟合的作用。</p>
+<h2 id="使用卷积神经网络的实用建议"><a href="#使用卷积神经网络的实用建议" class="headerlink" title="使用卷积神经网络的实用建议"></a>使用卷积神经网络的实用建议</h2><ol>
+<li><p><strong>使用开源实现</strong>：很多神经网络复杂细致，并充斥着参数调节的细节问题，因而很难仅通过阅读论文来重现他人的成果。想要搭建一个同样的神经网络，搜索开源实现方案会快很多。</p>
+</li>
+<li><p><strong>运用迁移学习</strong>：在搭建计算机视觉的应用时，相比于从头训练权重，下载别人已经训练好的网络结构的权重，用其做<strong>预训练</strong>，然后转换到自己的任务上，有助于加速开发。</p>
+</li>
+<li><p><strong>数据增强（Data Augmentation）</strong>：计算机视觉领域的应用都需要大量的数据。当数据不够时，数据增强就有帮助。常用的数据扩增包括<strong>镜像翻转</strong>、<strong>随机裁剪</strong>、<strong>色彩转换</strong>。</p>
+<ul>
+<li><p>镜像翻转</p>
+<p><img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566878381364.png" alt="镜像翻转"></p>
+</li>
+<li><p>随机裁剪</p>
+<p><img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1566878476269.png" alt="随机裁剪"></p>
+</li>
+<li><p>色彩转换：对图片的 RGB 通道数值进行随意增加或者减少，改变图片色调。<strong>PCA 颜色增强</strong>指更有针对性地对图片的 RGB 通道进行主成分分析（Principles Components Analysis，PCA），对主要的通道颜色进行增加或减少，可以采用高斯扰动做法来增加有效的样本数量。</p>
+<p><img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\18-1.png" alt="色彩转换"></p>
+</li>
+</ul>
+</li>
+<li><p><strong>研究或者竞赛方面提升神经网络模型性能的方法</strong></p>
+<ul>
+<li>集成（Ensembling）：独立地训练几个神经网络，并平均输出它们的输出</li>
+<li>Multi-crop at test time：将数据增强应用到测试集，对结果进行平均</li>
+</ul>
+<p>注：这些方法计算和内存成本较大，一般不适用于构建实际的生产项目。</p>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-08-27T07:17:46.329Z" itemprop="dateUpdated">2019-08-27 15:17:46</time>
+</span><br>
+
+
+        
+        版权声明:本文为博主原创文章,未经博主允许不得转载。<a href="/2019/08/25/deeplearning-ai学习笔记（十一）深度卷积网络：实例探究/" target="_blank" rel="external">http://yoursite.com/2019/08/25/deeplearning-ai学习笔记（十一）深度卷积网络：实例探究/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="刘明辉">
+            刘明辉
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/deeplearning-ai/">deeplearning.ai</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/08/25/deeplearning-ai学习笔记（十一）深度卷积网络：实例探究/&title=《deeplearning.ai学习笔记（十一）深度卷积网络：实例探究》 — 一只程序喵&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/25/deeplearning-ai学习笔记（十一）深度卷积网络：实例探究/&title=《deeplearning.ai学习笔记（十一）深度卷积网络：实例探究》 — 一只程序喵&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/08/25/deeplearning-ai学习笔记（十一）深度卷积网络：实例探究/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《deeplearning.ai学习笔记（十一）深度卷积网络：实例探究》 — 一只程序喵&url=http://yoursite.com/2019/08/25/deeplearning-ai学习笔记（十一）深度卷积网络：实例探究/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/08/25/deeplearning-ai学习笔记（十一）深度卷积网络：实例探究/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/08/24/华丽转变！从C快速入门C/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">华丽转变！从C快速入门C++</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢打赏ο(=•ω＜=)ρ⌒☆
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>刘明辉 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/08/25/deeplearning-ai学习笔记（十一）深度卷积网络：实例探究/&title=《deeplearning.ai学习笔记（十一）深度卷积网络：实例探究》 — 一只程序喵&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/25/deeplearning-ai学习笔记（十一）深度卷积网络：实例探究/&title=《deeplearning.ai学习笔记（十一）深度卷积网络：实例探究》 — 一只程序喵&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/08/25/deeplearning-ai学习笔记（十一）深度卷积网络：实例探究/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《deeplearning.ai学习笔记（十一）深度卷积网络：实例探究》 — 一只程序喵&url=http://yoursite.com/2019/08/25/deeplearning-ai学习笔记（十一）深度卷积网络：实例探究/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/08/25/deeplearning-ai学习笔记（十一）深度卷积网络：实例探究/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADEElEQVR42u3aS5IiMQwFQO5/aeYCPfCeXESAKmvV0YDtNAuhz+MRP8/g+d+nXq+T7Jic5/GJBxsbG/tH2Akmf89r8Ow/+crFF4ONjY29jv06/LTBpr3K1zvOPvXGiI2NjX1jdpskJOsk15qkItjY2NjYLTtJDPKSUJJCnOyIjY2NvZudB548/LRHz6/ypPiFjY2NvY+dd0W//++P9LexsbGxv5j9LJ+2VTAb7pkFp0KBjY2NvYidB4CrSjxteyBJWobnx8bGxl7Ebodv2hSlbQ+0F10jsbGxsRexXyNPCvRtSMtbvMmrb/DY2NjYi9izn/6zANPC2rDaromNjY19H/a1acCsGJSE0vbisLGxsXewT9qobTMgP/onZpGwsbGxt7JPkoST8tP5AFB+rY/Z0tjY2Ng/wj75WT8b0MnTjKTINWwkY2NjY69mt0nF5/qneVitz4+NjY29jt2W8tsRnDZtOLn06LPY2NjY69h5C/Z8ZCfZqx30bIMiNjY29h3YsyGetjWbh8aTdsUfp8XGxsZexJ7x8m1O2r1JUenkC8PGxsa+DzsJMwksXznZK18TGxsb+w7s2fDlSZk+KQ/lJ5ylPdjY2Nhb2edt4PPAkwfItjGMjY2NvY+dF9nz0DJr97aNh6OEBBsbG3sp+9oryMtSs3Sl/RQ2Njb2Vnbb7r02tfjEmm2LAhsbG/vX2W2wacs9bSlqxqhLWtjY2Ni3YeeN2Fli015WEmKjAImNjY29iJ2P2uSHnpWB8gB5vjs2Njb2PnZyiDZcXVWuapsKxY7Y2NjYS9lXXUQbkGaYNjXCxsbGvgM7z1pORmeScv8wLOXFJmxsbOwV7Gf5XJUStMEpv+Io9GJjY2MvYs8CQN5CSFoO5+/M2wM1HhsbG/tH2G3QalOXfHwnTznaAIaNjY19B3bbAL4qLH2uqISNjY2NnQSDvH07G8SZpRlR1oWNjY19e/ZV0y/5EM/J86a/jY2Njb2CnRSV8mHKPLzl5aF2AOiyWho2Njb217NnBZq8nDR79aQxkJ8QGxsb+8fZ/wAqbxYR+k+EEgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '一只程序喵 | 刘明辉的个人博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '一只程序喵 | 刘明辉的个人博客';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>

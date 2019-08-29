@@ -37,14 +37,16 @@
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/24/m6qETA.jpg">
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/24/m6qCQO.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/24/m6qiOe.jpg">
-<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/15.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/29/mqWBMd.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/29/mqh9Xj.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/24/m6bxF1.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/24/m6L9Nn.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/24/m6qPyD.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/24/m6qSW6.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/29/mqWTZq.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/24/m6LpAs.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/08/24/m6bbyF.png">
-<meta property="og:updated_time" content="2019-08-24T15:13:00.258Z">
+<meta property="og:updated_time" content="2019-08-29T09:23:53.308Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="deeplearning.ai学习笔记（十）卷积神经网络基础">
 <meta name="twitter:description" content="计算机视觉（CV, Computer Vision）是深度学习应用的主要方向之一。计算机视觉问题包括以下几类：  图像分类（Image Classification） 目标检测（Object detection） 风格迁移（Neural Style Transfer）  使用传统神经网络处理机器视觉的一个主要问题是输入层维度很大，使得网络权重W非常庞大。这样会造成两个后果：  神经网络结构复杂，数">
@@ -142,7 +144,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -181,7 +183,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#卷积运算（Convolutions）"><span class="post-toc-number">1.</span> <span class="post-toc-text">卷积运算（Convolutions）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#引例：边缘检测（Edge-Detection）"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">引例：边缘检测（Edge Detection）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#卷积运算的求解过程"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">卷积运算的求解过程</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#卷积作用的直观理解"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">卷积作用的直观理解</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#填充（Padding）"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">填充（Padding）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#带步长的卷积（Strided-Convolutions）"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">带步长的卷积（Strided Convolutions）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三维卷积运算"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">三维卷积运算</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#卷积神经网络（CNN-Convolutional-Neural-Networks）"><span class="post-toc-number">2.</span> <span class="post-toc-text">卷积神经网络（CNN, Convolutional Neural Networks）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#单层卷积神经网络"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">单层卷积神经网络</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#单层卷积神经网络的结构"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">单层卷积神经网络的结构</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#总结：卷积神经网络中的符号与计算"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">总结：卷积神经网络中的符号与计算</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#深度卷积神经网络"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">深度卷积神经网络</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#卷积神经网络中的三种网络层"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">卷积神经网络中的三种网络层</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#卷积层（CONV-Convolutional-Layer）"><span class="post-toc-number">2.2.1.1.</span> <span class="post-toc-text">卷积层（CONV, Convolutional Layer）</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#池化层（POOL-Pooling-Layer）"><span class="post-toc-number">2.2.1.2.</span> <span class="post-toc-text">池化层（POOL, Pooling Layer）</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#全连接层（FC-Fully-Connected-Layer）"><span class="post-toc-number">2.2.1.3.</span> <span class="post-toc-text">全连接层（FC, Fully Connected Layer）</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#深度卷积神经网络实例"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">深度卷积神经网络实例</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#卷积在神经网络中有效的原因（Why-Convolutions-）"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">卷积在神经网络中有效的原因（Why Convolutions?）</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#卷积运算（Convolutions）"><span class="post-toc-number">1.</span> <span class="post-toc-text">卷积运算（Convolutions）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#引例：边缘检测（Edge-Detection）"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">引例：边缘检测（Edge Detection）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#卷积运算的求解过程"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">卷积运算的求解过程</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#卷积作用的直观理解"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">卷积作用的直观理解</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#填充（Padding）"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">填充（Padding）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#带步长的卷积（Strided-Convolutions）"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">带步长的卷积（Strided Convolutions）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三维卷积运算"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">三维卷积运算</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一维卷积运算"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">一维卷积运算</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#卷积神经网络（CNN-Convolutional-Neural-Networks）"><span class="post-toc-number">2.</span> <span class="post-toc-text">卷积神经网络（CNN, Convolutional Neural Networks）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#单层卷积神经网络"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">单层卷积神经网络</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#单层卷积神经网络的结构"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">单层卷积神经网络的结构</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#总结：卷积神经网络中的符号与计算"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">总结：卷积神经网络中的符号与计算</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#深度卷积神经网络"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">深度卷积神经网络</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#卷积神经网络中的三种网络层"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">卷积神经网络中的三种网络层</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#卷积层（CONV-Convolutional-Layer）"><span class="post-toc-number">2.2.1.1.</span> <span class="post-toc-text">卷积层（CONV, Convolutional Layer）</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#池化层（POOL-Pooling-Layer）"><span class="post-toc-number">2.2.1.2.</span> <span class="post-toc-text">池化层（POOL, Pooling Layer）</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#全连接层（FC-Fully-Connected-Layer）"><span class="post-toc-number">2.2.1.3.</span> <span class="post-toc-text">全连接层（FC, Fully Connected Layer）</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#深度卷积神经网络实例"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">深度卷积神经网络实例</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#卷积在神经网络中有效的原因（Why-Convolutions-）"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">卷积在神经网络中有效的原因（Why Convolutions?）</span></a></li></ol></li></ol>
         </nav>
     </aside>
 
@@ -302,12 +304,19 @@ p=\frac{f-1}{2}</script><p>其中f通常为奇数（滤波器有一个便于表�
                 <div class="image-caption">三维卷积运算（多滤波器）</div>
             </figure>
 <p>设输入图片的尺寸为n×n×n_c（n_c为通道数），滤波器尺寸为 f×f×n_c，则<strong>卷积后的输出图片尺寸为 (n−f+1)×(n−f+1)×n_c′</strong>，n_c′为滤波器组的个数。</p>
+<h3 id="一维卷积运算"><a href="#一维卷积运算" class="headerlink" title="一维卷积运算"></a>一维卷积运算</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s2.ax1x.com/2019/08/29/mqWBMd.png" alt="一维卷积举例" title>
+                </div>
+                <div class="image-caption">一维卷积举例</div>
+            </figure>
 <h2 id="卷积神经网络（CNN-Convolutional-Neural-Networks）"><a href="#卷积神经网络（CNN-Convolutional-Neural-Networks）" class="headerlink" title="卷积神经网络（CNN, Convolutional Neural Networks）"></a>卷积神经网络（<strong>CNN</strong>, Convolutional Neural Networks）</h2><h3 id="单层卷积神经网络"><a href="#单层卷积神经网络" class="headerlink" title="单层卷积神经网络"></a>单层卷积神经网络</h3><h4 id="单层卷积神经网络的结构"><a href="#单层卷积神经网络的结构" class="headerlink" title="单层卷积神经网络的结构"></a>单层卷积神经网络的结构</h4><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\15.png" alt title>
+                    <img src="https://s2.ax1x.com/2019/08/29/mqh9Xj.png" alt="单层卷积神经网络结构" title>
                 </div>
-                <div class="image-caption"></div>
+                <div class="image-caption">单层卷积神经网络结构</div>
             </figure>
 <p>与单纯的卷积运算相比，卷积神经网络的单层结构多了激活函数和偏移量。与标准神经网络相比，滤波器的数值对应着权重 W[l]，卷积运算对应着 W[l]与A[l−1]的乘积运算，所选的激活函数为 ReLU。</p>
 <p><strong>注：选定滤波器组后，参数的数目与输入图片的尺寸无关</strong>。</p>
@@ -353,6 +362,14 @@ p=\frac{f-1}{2}</script><p>其中f通常为奇数（滤波器有一个便于表�
 <p>若池化过程的输入维度为：n_H×n_W×n_c，则输出维度为：</p>
 <script type="math/tex; mode=display">
 \lfloor \frac{n_H-f}{2}+1\rfloor × \lfloor \frac{n_W-f}{2}+1\rfloor × n_c</script><h5 id="全连接层（FC-Fully-Connected-Layer）"><a href="#全连接层（FC-Fully-Connected-Layer）" class="headerlink" title="全连接层（FC, Fully Connected Layer）"></a>全连接层（FC, Fully Connected Layer）</h5><p>全连接层即一般的神经网络结构，每一个结点都与上一层的所有结点相连，用来把前边提取到的特征综合起来。</p>
+<p><strong>全连接层转变成为卷积层：</strong></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s2.ax1x.com/2019/08/29/mqWTZq.png" alt="全连接层转变成为卷积层" title>
+                </div>
+                <div class="image-caption">全连接层转变成为卷积层</div>
+            </figure>
 <h4 id="深度卷积神经网络实例"><a href="#深度卷积神经网络实例" class="headerlink" title="深度卷积神经网络实例"></a>深度卷积神经网络实例</h4><p>以一个简单的数字识别CNN为例</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
@@ -394,7 +411,7 @@ p=\frac{f-1}{2}</script><p>其中f通常为奇数（滤波器有一个便于表�
     <div class="content">
         
 <span class="post-time">
-    最終更新：<time datetime="2019-08-24T15:13:00.258Z" itemprop="dateUpdated">2019-08-24 23:13:00</time>
+    Last updated: <time datetime="2019-08-29T09:23:53.308Z" itemprop="dateUpdated">2019-08-29 17:23:53</time>
 </span><br>
 
 
@@ -569,7 +586,7 @@ p=\frac{f-1}{2}</script><p>其中f通常为奇数（滤波器有一个便于表�
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">
@@ -691,6 +708,23 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
 </script>
 
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 </body>
 </html>

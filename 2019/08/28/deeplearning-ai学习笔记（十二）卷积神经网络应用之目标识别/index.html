@@ -31,8 +31,15 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1-2.png">
 <meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/2-5.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/12-2.png">
 <meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/face-landmark.png">
-<meta property="og:updated_time" content="2019-08-28T17:58:10.247Z">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/Sliding-windows-detection.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/9-2.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/11-2.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/14-3.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/15-3.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/18-2.png">
+<meta property="og:updated_time" content="2019-08-29T07:23:40.314Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="deeplearning.ai学习笔记（十二）卷积神经网络应用之目标识别">
 <meta name="twitter:description" content="问题描述 图片分类问题：判断图片中物体的种类； 定位分类问题：不仅要求判断出图片中物体的种类，还要在图片中标记出它的具体位置，用边框（Bounding Box）把物体圈起来（一般来说，定位分类问题通常只有一个较大的对象位于图片中间位置）； 目标识别问题：图片可以含有多个对象，甚至单张图片中会有多个不同分类的对象。">
@@ -130,7 +137,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -169,7 +176,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题描述"><span class="post-toc-number">1.</span> <span class="post-toc-text">问题描述</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#目标标签"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">目标标签</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#损失函数"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">损失函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#评价指标：交并比（IoU-Intersection-Over-Union）"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">评价指标：交并比（IoU, Intersection Over Union）</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#特征点检测（Landmark-Detection）"><span class="post-toc-number">2.</span> <span class="post-toc-text">特征点检测（Landmark Detection）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#滑动窗口目标检测算法"><span class="post-toc-number">3.</span> <span class="post-toc-text">滑动窗口目标检测算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本思想"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">基本思想</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#卷积实现"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">卷积实现</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#YOLO算法"><span class="post-toc-number">4.</span> <span class="post-toc-text">YOLO算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本思想-1"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">基本思想</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#非极大抑制"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">非极大抑制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Anchor-Box"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">Anchor Box</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#总结：算法过程"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">总结：算法过程</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#R-CNN算法"><span class="post-toc-number">5.</span> <span class="post-toc-text">R-CNN算法</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题描述"><span class="post-toc-number">1.</span> <span class="post-toc-text">问题描述</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#目标标签"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">目标标签</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#损失函数"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">损失函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#评价指标：交并比（IoU-Intersection-Over-Union）"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">评价指标：交并比（IoU, Intersection Over Union）</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#特征点检测（Landmark-Detection）"><span class="post-toc-number">2.</span> <span class="post-toc-text">特征点检测（Landmark Detection）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#滑动窗口目标检测算法"><span class="post-toc-number">3.</span> <span class="post-toc-text">滑动窗口目标检测算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本思想"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">基本思想</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#卷积实现"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">卷积实现</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#YOLO算法"><span class="post-toc-number">4.</span> <span class="post-toc-text">YOLO算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本思想-1"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">基本思想</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#非极大抑制（Non-max-Suppression）"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">非极大抑制（Non-max Suppression）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Anchor-Box"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">Anchor Box</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#总结：算法过程"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">总结：算法过程</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#R-CNN算法"><span class="post-toc-number">5.</span> <span class="post-toc-text">R-CNN算法</span></a></li></ol>
         </nav>
     </aside>
 
@@ -198,6 +205,7 @@
 <li>定位分类问题：不仅要求判断出图片中物体的种类，还要在图片中标记出它的具体位置，用<strong>边框（Bounding Box）</strong>把物体圈起来（一般来说，定位分类问题通常只有一个较大的对象位于图片中间位置）；</li>
 <li>目标识别问题：图片可以含有多个对象，甚至单张图片中会有多个不同分类的对象。</li>
 </ul>
+<a id="more"></a>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
@@ -229,6 +237,13 @@ L(\hat{y},y)=\begin{cases}
 <h3 id="评价指标：交并比（IoU-Intersection-Over-Union）"><a href="#评价指标：交并比（IoU-Intersection-Over-Union）" class="headerlink" title="评价指标：交并比（IoU, Intersection Over Union）"></a>评价指标：交并比（<strong>IoU</strong>, Intersection Over Union）</h3><p><strong>交并比</strong>函数用于评价算法，计算预测边框和实际边框交集（I）与并集（U）面积之比：</p>
 <script type="math/tex; mode=display">
 IoU=\frac{S_I}{S_U}</script><p>IoU 的值在 0～1 之间，且越接近 1 表示目标的定位越准确。<strong>IoU 大于等于 0.5 时，一般可以认为预测边框是正确的</strong>（也可以更加严格地定义一个更高的阈值）。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\12-2.png" alt="LoU" title>
+                </div>
+                <div class="image-caption">LoU</div>
+            </figure>
 <h2 id="特征点检测（Landmark-Detection）"><a href="#特征点检测（Landmark-Detection）" class="headerlink" title="特征点检测（Landmark Detection）"></a>特征点检测（Landmark Detection）</h2><p>除了使用矩形区域检测目标类别和位置外，我们还可以仅对目标的关键特征点坐标进行定位，这些关键点被称为landmarks。</p>
 <p>例：人脸特征检测</p>
 <figure class="image-bubble">
@@ -238,9 +253,97 @@ IoU=\frac{S_I}{S_U}</script><p>IoU 的值在 0～1 之间，且越接近 1 表�
                 </div>
                 <div class="image-caption">人脸特征点检测</div>
             </figure>
-<h2 id="滑动窗口目标检测算法"><a href="#滑动窗口目标检测算法" class="headerlink" title="滑动窗口目标检测算法"></a>滑动窗口目标检测算法</h2><h3 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h3><h3 id="卷积实现"><a href="#卷积实现" class="headerlink" title="卷积实现"></a>卷积实现</h3><p>相关论文：<a href="https://arxiv.org/pdf/1312.6229.pdf" target="_blank" rel="noopener">Sermanet et al., 2014. OverFeat: Integrated Recognition, Localization and Detection using Convolutional Networks</a></p>
-<h2 id="YOLO算法"><a href="#YOLO算法" class="headerlink" title="YOLO算法"></a>YOLO算法</h2><h3 id="基本思想-1"><a href="#基本思想-1" class="headerlink" title="基本思想"></a>基本思想</h3><h3 id="非极大抑制"><a href="#非极大抑制" class="headerlink" title="非极大抑制"></a>非极大抑制</h3><h3 id="Anchor-Box"><a href="#Anchor-Box" class="headerlink" title="Anchor Box"></a>Anchor Box</h3><h3 id="总结：算法过程"><a href="#总结：算法过程" class="headerlink" title="总结：算法过程"></a>总结：算法过程</h3><p>相关论文：<a href="https://arxiv.org/pdf/1506.02640.pdf" target="_blank" rel="noopener">Redmon et al., 2015. You Only Look Once: Unified, Real-Time Object Detection</a></p>
-<h2 id="R-CNN算法"><a href="#R-CNN算法" class="headerlink" title="R-CNN算法"></a>R-CNN算法</h2><p>相关论文：</p>
+<h2 id="滑动窗口目标检测算法"><a href="#滑动窗口目标检测算法" class="headerlink" title="滑动窗口目标检测算法"></a>滑动窗口目标检测算法</h2><h3 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h3><p>该算法的步骤如下：</p>
+<ol>
+<li>训练集上搜集相应的各种目标图片和非目标图片，样本图片要求尺寸较小，相应目标居于图片中心位置并基本占据整张图片。</li>
+<li>使用训练集构建 CNN 模型，使得模型有较高的识别率。</li>
+<li>选择大小适宜的窗口与合适的固定步幅，对测试图片进行从左到右、从上倒下的滑动遍历。每个窗口区域使用已经训练好的 CNN 模型进行识别判断。</li>
+<li>可以选择更大的窗口，然后重复第三步的操作。</li>
+</ol>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\Sliding-windows-detection.png" alt="滑动窗口算法" title>
+                </div>
+                <div class="image-caption">滑动窗口算法</div>
+            </figure>
+<p><strong>优点：</strong>原理简单</p>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>滑动窗的大小和步进长度都需要人为直观设定。滑动窗过小或过大，步进长度过大均会降低目标检测正确率。</li>
+<li>每次滑动窗区域都要进行一次CNN网络计算，如果滑动窗和步进长度较小，整个目标检测的算法运行时间会很长。</li>
+</ul>
+<h3 id="卷积实现"><a href="#卷积实现" class="headerlink" title="卷积实现"></a>卷积实现</h3><p>滑动窗算法可以使用卷积方式实现，以提高运行速度，节约重复运算成本。</p>
+<p>首先，将全连接层换成卷积层，即使用与上一层尺寸一致的滤波器进行卷积运算。</p>
+<p>不需要将输入图片分割成多个子集，分别执行向前传播，而是将它们作为一张图片输入给卷积网络进行一次 CNN 正向计算。这样，公共区域的计算可以共享，以降低运算成本。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\9-2.png" alt="滑动窗算法卷积实现" title>
+                </div>
+                <div class="image-caption">滑动窗算法卷积实现</div>
+            </figure>
+<p>相关论文：<a href="https://arxiv.org/pdf/1312.6229.pdf" target="_blank" rel="noopener">Sermanet et al., 2014. OverFeat: Integrated Recognition, Localization and Detection using Convolutional Networks</a></p>
+<h2 id="YOLO算法"><a href="#YOLO算法" class="headerlink" title="YOLO算法"></a>YOLO算法</h2><p>滑动窗口算法有时会出现边框的位置可能无法完美覆盖目标，或者大小不合适，或者最准确的边框并非正方形，而是长方形等问题。</p>
+<p><strong>YOLO（You Only Look Once）算法</strong>可以用于得到更精确的边框。</p>
+<h3 id="基本思想-1"><a href="#基本思想-1" class="headerlink" title="基本思想"></a>基本思想</h3><p>YOLO算法首先将原始图片分割成nxn网格，每个网格代表一块区域。如果目标中心坐标(b_x,b_y)不在当前网格内，则当前网格Pc=0；相反，则当前网格Pc=1（即只看中心坐标是否在当前网格内）。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\11-2.png" alt="YOLO算法" title>
+                </div>
+                <div class="image-caption">YOLO算法</div>
+            </figure>
+<p>注：当前网格左上角坐标设定为(0, 0)，右下角坐标设定为(1, 1)，(b_x,b_y)范围限定在[0,1]之间。由于目标可能超出该网格，故b_h、b_w可以大于1。</p>
+<p><strong>YOLO 算法的优点：</strong></p>
+<ol>
+<li>显式输出边框坐标和大小，不会受到滑窗分类器的步长大小限制；</li>
+<li>只进行一次 CNN 正向计算，效率很高，甚至可以达到实时识别。</li>
+</ol>
+<h3 id="非极大抑制（Non-max-Suppression）"><a href="#非极大抑制（Non-max-Suppression）" class="headerlink" title="非极大抑制（Non-max Suppression）"></a>非极大抑制（Non-max Suppression）</h3><p>YOLO 算法中，可能出现多个网格检测到同一目标。<strong>非极大值抑制（Non-max Suppression）</strong>会通过清理检测结果，找到每个目标中点所位于的网格，确保算法对每个目标只检测一次。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\14-3.png" alt="非极大抑制" title>
+                </div>
+                <div class="image-caption">非极大抑制</div>
+            </figure>
+<p>过程如下：</p>
+<ol>
+<li>将包含目标中心坐标的可信度 Pc 小于阈值（例如 0.6）的网格丢弃；</li>
+<li>选取拥有最大 Pc 值的网格；</li>
+<li>分别计算该网格和其他所有网格的 IoU，将 IoU 超过预设阈值（如0.5）的网格丢弃；</li>
+<li>重复第 2~3 步，直到不存在未处理的网格。</li>
+</ol>
+<p>上述步骤适用于单类别目标检测。进行多个类别目标检测时，对于每个类别，应该单独做一次非极大值抑制。</p>
+<h3 id="Anchor-Box"><a href="#Anchor-Box" class="headerlink" title="Anchor Box"></a>Anchor Box</h3><p>对于多个目标重叠的情况，需要使用不同形状的Anchor Boxes来检测。</p>
+<p>例：一个人站在一辆车前面</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\15-3.png" alt="Anchor Box" title>
+                </div>
+                <div class="image-caption">Anchor Box</div>
+            </figure>
+<p>为了同时检测两个目标，我们可以设置两个Anchor Boxes，Anchor box 1检测人，Anchor box 2检测车。也就是说，每个网格多加了一层输出。原来的输出维度是 3 x 3 x 8，现在是3 x 3 x 2 x 8（这里的2表示有两个Anchor Boxes）每个Anchor box都有一个Pc值，若两个Pc值均大于某阈值，则检测到了两个目标。</p>
+<p>在单目标检测中，图像中的目标被分配给了包含该目标中点的那个网格；引入 Anchor Box 进行多目标检测时，图像中的目标则被分配到了<strong>包含该目标中点的那个网格以及具有最高 IoU 值的该网格的 Anchor Box。</strong></p>
+<p>Anchor Boxes形状的选择可以通过人为选取，也可以使用其他机器学习算法（如k-means算法）对待检测的所有目标进行形状分类，选择主要形状。</p>
+<h3 id="总结：算法过程"><a href="#总结：算法过程" class="headerlink" title="总结：算法过程"></a>总结：算法过程</h3><ol>
+<li>将原始图片分割成nxn网格；</li>
+<li>对于每一个网格，进行包含两个Anchor Boxes的预测值；</li>
+<li>去除概率值低的预测边框；</li>
+<li>对于每一类适用非极大抑制产生最终的预测边框。</li>
+</ol>
+<p>相关论文：<a href="https://arxiv.org/pdf/1506.02640.pdf" target="_blank" rel="noopener">Redmon et al., 2015. You Only Look Once: Unified, Real-Time Object Detection</a></p>
+<h2 id="R-CNN算法"><a href="#R-CNN算法" class="headerlink" title="R-CNN算法"></a>R-CNN算法</h2><p>前面介绍的滑动窗口目标检测算法对一些明显没有目标的区域也进行了扫描，这降低了算法的运行效率。为了解决这个问题，<strong>R-CNN（Region CNN，带区域的 CNN）</strong>被提出。通过对输入图片运行<strong>图像分割算法</strong>，在不同的色块上找出<strong>候选区域（Region Proposal）</strong>，就只需要在这些区域上运行分类器。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\18-2.png" alt="R-CNN算法" title>
+                </div>
+                <div class="image-caption">R-CNN算法</div>
+            </figure>
+<p>相关论文：</p>
 <ul>
 <li>R-CNN：<a href="https://arxiv.org/pdf/1311.2524.pdf" target="_blank" rel="noopener">Girshik et al., 2013. Rich feature hierarchies for accurate object detection and semantic segmentation</a></li>
 <li>Fast R-CNN：<a href="https://arxiv.org/pdf/1504.08083.pdf" target="_blank" rel="noopener">Girshik, 2015. Fast R-CNN</a></li>
@@ -254,7 +357,7 @@ IoU=\frac{S_I}{S_U}</script><p>IoU 的值在 0～1 之间，且越接近 1 表�
     <div class="content">
         
 <span class="post-time">
-    最終更新：<time datetime="2019-08-28T17:58:10.247Z" itemprop="dateUpdated">2019-08-29 01:58:10</time>
+    Last updated: <time datetime="2019-08-29T07:23:40.314Z" itemprop="dateUpdated">2019-08-29 15:23:40</time>
 </span><br>
 
 
@@ -300,7 +403,9 @@ IoU=\frac{S_I}{S_U}</script><p>IoU 的值在 0～1 之间，且越接近 1 表�
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/28/deeplearning-ai学习笔记（十二）卷积神经网络应用之目标识别/&title=《deeplearning.ai学习笔记（十二）卷积神经网络应用之目标识别》 — 一只程序喵&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/28/deeplearning-ai学习笔记（十二）卷积神经网络应用之目标识别/&title=《deeplearning.ai学习笔记（十二）卷积神经网络应用之目标识别》 — 一只程序喵&source=问题描述
+图片分类问题：判断图片中物体的种类；
+定位分类问题：不仅要求判断出图片中物体的种类，还要在图片中标记出它的具体位置，用边框（Bounding B..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -427,7 +532,7 @@ IoU=\frac{S_I}{S_U}</script><p>IoU 的值在 0～1 之间，且越接近 1 表�
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">
@@ -459,7 +564,9 @@ IoU=\frac{S_I}{S_U}</script><p>IoU 的值在 0～1 之间，且越接近 1 表�
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/28/deeplearning-ai学习笔记（十二）卷积神经网络应用之目标识别/&title=《deeplearning.ai学习笔记（十二）卷积神经网络应用之目标识别》 — 一只程序喵&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/28/deeplearning-ai学习笔记（十二）卷积神经网络应用之目标识别/&title=《deeplearning.ai学习笔记（十二）卷积神经网络应用之目标识别》 — 一只程序喵&source=问题描述
+图片分类问题：判断图片中物体的种类；
+定位分类问题：不仅要求判断出图片中物体的种类，还要在图片中标记出它的具体位置，用边框（Bounding B..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -547,6 +654,23 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
 </script>
 
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 </body>
 </html>

@@ -121,7 +121,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -181,11 +181,14 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        人脸识别（Face Recognition）问题描述Siamese网络三元组损失函数算法过程神经风格迁移（Neural Style Transfer）问题描述神经网络可视化代价函数
+        人脸识别（Face Recognition）问题描述人脸验证（Face Verification）vs. 人脸识别（Face Recognition）
+人脸验证：验证输入的人脸图像是否与某个已知的身份信息对应（一对一）；
+人脸识别：验证输入的人脸图像是否与多个已知身份信息中的某一个匹配（一对多）。
+
     
 
         <a href="/2019/08/29/deeplearning-ai学习笔记（十三）卷积神经网络应用之人脸识别-神经风格迁移/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -231,13 +234,10 @@
 定位分类问题：不仅要求判断出图片中物体的种类，还要在图片中标记出它的具体位置，用边框（Bounding Box）把物体圈起来（一般来说，定位分类问题通常只有一个较大的对象位于图片中间位置）；
 目标识别问题：图片可以含有多个对象，甚至单张图片中会有多个不同分类的对象。
 
-
-                
-                    ...
     
 
         <a href="/2019/08/28/deeplearning-ai学习笔记（十二）卷积神经网络应用之目标识别/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -292,7 +292,7 @@
     
 
         <a href="/2019/08/25/deeplearning-ai学习笔记（十一）深度卷积网络：实例探究/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -337,7 +337,7 @@
     
 
         <a href="/2019/08/24/华丽转变！从C快速入门C/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -393,7 +393,7 @@
     
 
         <a href="/2019/08/24/deeplearning-ai学习笔记（十）卷积神经网络基础/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -439,7 +439,7 @@
     
 
         <a href="/2019/08/23/deeplearning-ai学习笔记（九）构建机器学习项目之机器学习策略（下）/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -485,7 +485,7 @@
     
 
         <a href="/2019/08/22/deeplearning-ai学习笔记（八）构建机器学习项目之机器学习策略（上）/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -547,7 +547,7 @@ Adam优化算法超参数β1、β2、ε：一般设置为0.9、0.99、10^-8
     
 
         <a href="/2019/08/20/deeplearning-ai学习笔记（七）优化深度神经网络之超参数调试、Batch标准化与深度学习框架/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -593,7 +593,7 @@ Adam优化算法超参数β1、β2、ε：一般设置为0.9、0.99、10^-8
     
 
         <a href="/2019/08/18/deeplearning-ai学习笔记（六）优化深度神经网络之优化算法（Optimization-algorithms）/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -643,7 +643,7 @@ Adam优化算法超参数β1、β2、ε：一般设置为0.9、0.99、10^-8
     
 
         <a href="/2019/08/16/deeplearning-ai学习笔记（五）优化深度神经网络之应用层面的深度学习/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -686,7 +686,7 @@ Adam优化算法超参数β1、β2、ε：一般设置为0.9、0.99、10^-8
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">
@@ -806,6 +806,23 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 </script>
 
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 </body>
 </html>

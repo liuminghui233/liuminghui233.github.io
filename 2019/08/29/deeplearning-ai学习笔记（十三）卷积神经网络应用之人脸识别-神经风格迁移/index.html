@@ -21,18 +21,25 @@
     
     
     <meta name="keywords" content="学习笔记,deeplearning.ai">
-    <meta name="description" content="人脸识别（Face Recognition）问题描述Siamese网络三元组损失函数算法过程神经风格迁移（Neural Style Transfer）问题描述神经网络可视化代价函数">
+    <meta name="description" content="人脸识别（Face Recognition）问题描述人脸验证（Face Verification）vs. 人脸识别（Face Recognition） 人脸验证：验证输入的人脸图像是否与某个已知的身份信息对应（一对一）； 人脸识别：验证输入的人脸图像是否与多个已知身份信息中的某一个匹配（一对多）。">
 <meta name="keywords" content="学习笔记,deeplearning.ai">
 <meta property="og:type" content="article">
 <meta property="og:title" content="deeplearning.ai学习笔记（十三）卷积神经网络应用之人脸识别&amp;神经风格迁移">
 <meta property="og:url" content="http://yoursite.com/2019/08/29/deeplearning-ai学习笔记（十三）卷积神经网络应用之人脸识别-神经风格迁移/index.html">
 <meta property="og:site_name" content="一只程序喵">
-<meta property="og:description" content="人脸识别（Face Recognition）问题描述Siamese网络三元组损失函数算法过程神经风格迁移（Neural Style Transfer）问题描述神经网络可视化代价函数">
+<meta property="og:description" content="人脸识别（Face Recognition）问题描述人脸验证（Face Verification）vs. 人脸识别（Face Recognition） 人脸验证：验证输入的人脸图像是否与某个已知的身份信息对应（一对一）； 人脸识别：验证输入的人脸图像是否与多个已知身份信息中的某一个匹配（一对多）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-28T17:58:18.105Z">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/2-6.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/4-4.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1567069822535.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/6-3.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/9-3.png">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/11-3.png">
+<meta property="og:updated_time" content="2019-08-29T09:39:11.722Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="deeplearning.ai学习笔记（十三）卷积神经网络应用之人脸识别&amp;神经风格迁移">
-<meta name="twitter:description" content="人脸识别（Face Recognition）问题描述Siamese网络三元组损失函数算法过程神经风格迁移（Neural Style Transfer）问题描述神经网络可视化代价函数">
+<meta name="twitter:description" content="人脸识别（Face Recognition）问题描述人脸验证（Face Verification）vs. 人脸识别（Face Recognition） 人脸验证：验证输入的人脸图像是否与某个已知的身份信息对应（一对一）； 人脸识别：验证输入的人脸图像是否与多个已知身份信息中的某一个匹配（一对多）。">
+<meta name="twitter:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/2-6.png">
     
         <link rel="alternate" type="application/atom+xml" title="一只程序喵" href="/atom.xml">
     
@@ -126,7 +133,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -165,7 +172,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#人脸识别（Face-Recognition）"><span class="post-toc-number">1.</span> <span class="post-toc-text">人脸识别（Face Recognition）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#问题描述"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">问题描述</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Siamese网络"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Siamese网络</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三元组损失函数"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">三元组损失函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#算法过程"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">算法过程</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#神经风格迁移（Neural-Style-Transfer）"><span class="post-toc-number">2.</span> <span class="post-toc-text">神经风格迁移（Neural Style Transfer）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#问题描述-1"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">问题描述</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#神经网络可视化"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">神经网络可视化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代价函数"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">代价函数</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#人脸识别（Face-Recognition）"><span class="post-toc-number">1.</span> <span class="post-toc-text">人脸识别（Face Recognition）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#问题描述"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">问题描述</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#人脸验证（Face-Verification）vs-人脸识别（Face-Recognition）"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">人脸验证（Face Verification）vs. 人脸识别（Face Recognition）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#难点：单样本（One-Shot）学习"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">难点：单样本（One-Shot）学习</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#学习目标：相似性函数（Similarity-function）"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">学习目标：相似性函数（Similarity function）</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#孪生网络（Siamese-Network）"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">孪生网络（Siamese Network）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三元组损失函数（Triplet-Loss）"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">三元组损失函数（Triplet Loss）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#训练样本"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">训练样本</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Triplet-损失函数"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">Triplet 损失函数</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二分类结构"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">二分类结构</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#神经风格迁移（Neural-Style-Transfer）"><span class="post-toc-number">2.</span> <span class="post-toc-text">神经风格迁移（Neural Style Transfer）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#问题描述-1"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">问题描述</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#神经网络可视化（What-are-deep-ConvNets-learning）"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">神经网络可视化（What are deep ConvNets learning）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#算法过程"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">算法过程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代价函数定义"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">代价函数定义</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#内容代价函数（Content-Cost-Function）"><span class="post-toc-number">2.4.1.</span> <span class="post-toc-text">内容代价函数（Content Cost Function）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#风格代价函数（Style-Cost-Function）"><span class="post-toc-number">2.4.2.</span> <span class="post-toc-text">风格代价函数（Style Cost Function）</span></a></li></ol></li></ol></li></ol>
         </nav>
     </aside>
 
@@ -189,7 +196,113 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="人脸识别（Face-Recognition）"><a href="#人脸识别（Face-Recognition）" class="headerlink" title="人脸识别（Face Recognition）"></a>人脸识别（Face Recognition）</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><h3 id="Siamese网络"><a href="#Siamese网络" class="headerlink" title="Siamese网络"></a>Siamese网络</h3><h3 id="三元组损失函数"><a href="#三元组损失函数" class="headerlink" title="三元组损失函数"></a>三元组损失函数</h3><h3 id="算法过程"><a href="#算法过程" class="headerlink" title="算法过程"></a>算法过程</h3><h2 id="神经风格迁移（Neural-Style-Transfer）"><a href="#神经风格迁移（Neural-Style-Transfer）" class="headerlink" title="神经风格迁移（Neural Style Transfer）"></a>神经风格迁移（Neural Style Transfer）</h2><h3 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h3><h3 id="神经网络可视化"><a href="#神经网络可视化" class="headerlink" title="神经网络可视化"></a>神经网络可视化</h3><h3 id="代价函数"><a href="#代价函数" class="headerlink" title="代价函数"></a>代价函数</h3>
+            <h2 id="人脸识别（Face-Recognition）"><a href="#人脸识别（Face-Recognition）" class="headerlink" title="人脸识别（Face Recognition）"></a>人脸识别（Face Recognition）</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><h4 id="人脸验证（Face-Verification）vs-人脸识别（Face-Recognition）"><a href="#人脸验证（Face-Verification）vs-人脸识别（Face-Recognition）" class="headerlink" title="人脸验证（Face Verification）vs. 人脸识别（Face Recognition）"></a><strong>人脸验证（Face Verification）</strong>vs. <strong>人脸识别（Face Recognition）</strong></h4><ul>
+<li>人脸验证：验证输入的人脸图像是否与某个已知的身份信息对应（一对一）；</li>
+<li>人脸识别：验证输入的人脸图像是否与多个已知身份信息中的某一个匹配（一对多）。</li>
+</ul>
+<a id="more"></a>
+<h4 id="难点：单样本（One-Shot）学习"><a href="#难点：单样本（One-Shot）学习" class="headerlink" title="难点：单样本（One-Shot）学习"></a>难点：单样本（One-Shot）学习</h4><p>只采集某人的一个面部样本，就能快速准确地识别出这个人，即只用一个训练样本来获得准确的预测结果。</p>
+<h4 id="学习目标：相似性函数（Similarity-function）"><a href="#学习目标：相似性函数（Similarity-function）" class="headerlink" title="学习目标：相似性函数（Similarity function）"></a>学习目标：相似性函数（Similarity function）</h4><p>相似性函数表示<strong>两张图片的相似程度</strong>，用d(img1,img2)来表示。若d(img1,img2)较小，则表示两张图片相似；若d(img1,img2)较大，则表示两张图片不是同一个人。可以设置一个超参数 τ 作为阈值，作为判断两幅图片是否为同一个人的依据。</p>
+<script type="math/tex; mode=display">
+if~d(img_1,img_2) \leq \tau ,~then~img_1与img_2相同</script><p>对于人脸识别问题，则只需计算测试图片与数据库中K个目标的相似函数，取其中d(img1,img2)最小的目标为匹配对象。若所有的d(img1,img2)都很大，则表示数据库没有这个人。</p>
+<h3 id="孪生网络（Siamese-Network）"><a href="#孪生网络（Siamese-Network）" class="headerlink" title="孪生网络（Siamese Network）"></a>孪生网络（Siamese Network）</h3><p>若一张图片经过一般的CNN网络（包括CONV层、POOL层、FC层），最终得到全连接层FC，该FC层可以看成是原始图片的编码，表征了原始图片的关键特征。其中不同图片的CNN网络所有结构和参数都是一样的，这个网络结构我们称之为孪生网络。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\2-6.png" alt="孪生网络" title>
+                </div>
+                <div class="image-caption">孪生网络</div>
+            </figure>
+<p>建立孪生网络后，两张图片<em>x</em>(1)和<em>x</em>(2)的相似性函数可由各自FC层<em>f</em>(<em>x</em>(1))与<em>f</em>(<em>x</em>(2))之差的范数来表示：</p>
+<script type="math/tex; mode=display">
+d(x^{(1)},x^{(2)})=||f(x^{(1)})-f(x^{(2)})||^2</script><p>利用梯度下降算法，不断调整网络参数，使得属于同一人的图片之间<em>d</em>(<em>x</em>(1),<em>x</em>(2))很小，而不同人的图片之间<em>d</em>(<em>x</em>(1),<em>x</em>(2))很大。</p>
+<script type="math/tex; mode=display">
+\begin{align}
+&若x^{(i)},x^{(j)}是同一个人，则||f(x^{(1)})-f(x^{(2)})||^2较小\\
+&若x^{(i)},x^{(j)}不是同一个人，则||f(x^{(1)})-f(x^{(2)})||^2较大\\
+\end{align}</script><p><strong>减少计算量两点技巧：</strong></p>
+<p>使用预计算的方式在训练时就将数据库每个模板的编码层输出<em>f</em>(<em>x</em>)保存下来。即<strong>无须保存模板图片，只要保存每个模板的<em>f</em>(<em>x</em>)即可</strong>；</p>
+<p>测试过程中，<strong>无须计算模板的孪生网络，只要计算测试图片的孪生网络</strong>，得到的<em>f</em>(<em>x</em>(<em>i</em>))直接与存储的模板<em>f</em>(<em>x</em>(<em>j</em>))进行下一步的计算即可。</p>
+<p>相关论文：<a href="http://www.cs.wayne.edu/~mdong/taigman_cvpr14.pdf" target="_blank" rel="noopener">Taigman et al., 2014, DeepFace closing the gap to human level performance</a></p>
+<h3 id="三元组损失函数（Triplet-Loss）"><a href="#三元组损失函数（Triplet-Loss）" class="headerlink" title="三元组损失函数（Triplet Loss）"></a>三元组损失函数（Triplet Loss）</h3><p><strong>Triplet 损失函数</strong>用于训练出合适的参数，以获得高质量的人脸图像编码。</p>
+<h4 id="训练样本"><a href="#训练样本" class="headerlink" title="训练样本"></a>训练样本</h4><p>Triplet Loss需要每个样本包含三张图片：<strong>靶目标（Anchor）</strong>、<strong>正例（Positive）</strong>、<strong>反例（Negative）</strong>。顾名思义，靶目标和正例是同一人，靶目标和反例不是同一人。Anchor和Positive组成一类样本，Anchor和Negative组成另外一类样本。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\4-4.png" alt="Triplet样本" title>
+                </div>
+                <div class="image-caption">Triplet样本</div>
+            </figure>
+<p><strong>训练样本的选取：</strong>同一组训练样本，A、P、N的选择尽可能<strong>不要使用随机选取方法</strong>。因为随机选择的A与P一般比较接近，A与N相差也较大，模型不需要经过复杂训练就能实现这种明显识别，因此学习的特征抓不住关键区别。因此，最好<strong>人为选择A与P相差较大，A与N相差较小的图片做为样本</strong>。这种人为地增加难度和混淆度会让模型本身去学习不同人脸之间关键的差异特征。</p>
+<h4 id="Triplet-损失函数"><a href="#Triplet-损失函数" class="headerlink" title="Triplet 损失函数"></a>Triplet 损失函数</h4><p>对于A、P、N，应满足：</p>
+<script type="math/tex; mode=display">
+||f(A)-f(P)||^2 \leq ||f(A)-f(N)||^2~即~||f(A)-f(P)||^2-||f(A)-f(N)||^2 \leq 0</script><p>为避免所有的图片都是零向量时不等式也满足，引入超参数<em>α</em>（间隔，margin），且<em>α</em>&gt;0，则有：</p>
+<script type="math/tex; mode=display">
+||f(A)-f(P)||^2-||f(A)-f(N)||^2 \leq -\alpha ~即~ ||f(A)-f(P)||^2-||f(A)-f(N)||^2 +\alpha \leq 0</script><p><strong>定义Triplet损失函数为：</strong></p>
+<script type="math/tex; mode=display">
+L(A,P,N)=max(||f(A)-f(P)||^2-||f(A)-f(N)||^2+\alpha,0)</script><p>对于大小为 m 的训练集，<strong>代价函数为：</strong></p>
+<script type="math/tex; mode=display">
+J=\sum_{i=1}^{m} L(A^{(i)},P^{(i)},N^{(i)})</script><p>相关论文：<a href="https://arxiv.org/pdf/1503.03832.pdf" target="_blank" rel="noopener">Schroff et al., 2015, FaceNet: A unified embedding for face recognition and clustering</a></p>
+<h3 id="二分类结构"><a href="#二分类结构" class="headerlink" title="二分类结构"></a>二分类结构</h3><p>除了构造triplet loss来解决人脸识别问题之外，还可以使用二分类结构。</p>
+<p>做法是将两个siamese网络组合在一起，将各自的编码层输出经过一个逻辑输出单元，该神经元使用sigmoid函数，输出1则表示识别为同一人，输出0则表示识别为不同人。</p>
+<p>结构如下：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1567069822535.png" alt="二分类结构" title>
+                </div>
+                <div class="image-caption">二分类结构</div>
+            </figure>
+<p>Sigmoid 单元对应的表达式为：</p>
+<script type="math/tex; mode=display">
+\hat{y}=\sigma(\sum_{k-1}^{K}w_k|f(x^{(i)})_k-f(x^{(j)})_k|+b)</script><p>其中，wk 和 b 都是通过梯度下降算法迭代训练得到的参数。上述计算表达式也可以用另一种表达式代替：</p>
+<script type="math/tex; mode=display">
+\hat{y}=\sigma(\sum_{k-1}^{K}w_k \frac{(f(x^{(i)})_k-f(x^{(j)})_k)^2}{f(x^{(i)})_k+f(x^{(j)})_k}+b)</script><p>上式被称为<em>χ</em>方公式，也叫<em>χ</em>方相似度。</p>
+<h2 id="神经风格迁移（Neural-Style-Transfer）"><a href="#神经风格迁移（Neural-Style-Transfer）" class="headerlink" title="神经风格迁移（Neural Style Transfer）"></a>神经风格迁移（Neural Style Transfer）</h2><h3 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h3><p>将一张图片的风格“迁移”到另外一张图片中，生成具有其风格特色的图片。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\6-3.png" alt="神经风格迁移" title>
+                </div>
+                <div class="image-caption">神经风格迁移</div>
+            </figure>
+<p>一般用C表示内容图片，S表示风格图片，G表示生成的图片。</p>
+<h3 id="神经网络可视化（What-are-deep-ConvNets-learning）"><a href="#神经网络可视化（What-are-deep-ConvNets-learning）" class="headerlink" title="神经网络可视化（What are deep ConvNets learning）"></a>神经网络可视化（<strong>What are deep ConvNets learning</strong>）</h3><p>做法：遍历所有训练样本，找出让该层激活函数输出最大的9块图像区域；然后再找出该层的其它单元（不同的滤波器通道）激活函数输出最大的9块图像区域；共找9次，得到9 x 9的图像，其中每个3 x 3区域表示一个运算单元。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\9-3.png" alt="神经网络可视化" title>
+                </div>
+                <div class="image-caption">神经网络可视化</div>
+            </figure>
+<p>可以看出，第一层隐藏层一般检测的是原始图像的边缘和颜色阴影等简单信息。随着层数的增加，捕捉的区域更大，特征更加复杂，从边缘到纹理再到具体物体。</p>
+<h3 id="算法过程"><a href="#算法过程" class="headerlink" title="算法过程"></a>算法过程</h3><ol>
+<li>随机生成图片 G 的所有像素点；</li>
+<li>使用梯度下降算法使代价函数最小化，以不断修正 G 的所有像素点，从而使G逐渐有C的内容和S的风格。</li>
+</ol>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\11-3.png" alt="神经风格迁移训练过程" title>
+                </div>
+                <div class="image-caption">神经风格迁移训练过程</div>
+            </figure>
+<p>相关论文：<a href="https://arxiv.org/pdf/1508.06576v2.pdf" target="_blank" rel="noopener">Gatys al., 2015. A neural algorithm of artistic style</a></p>
+<h3 id="代价函数定义"><a href="#代价函数定义" class="headerlink" title="代价函数定义"></a>代价函数定义</h3><p>代价函数由两部分组成：C与G的相似程度和S与G的相似程度。</p>
+<script type="math/tex; mode=display">
+J(G)=\alpha J_{content}(C,G)+\beta J_{style}(S,G)</script><p>其中，<em>α</em>,<em>β</em>是超参数，用来调整<em>J</em>(C,G)与<em>J</em>(S,G)的相对比重。</p>
+<h4 id="内容代价函数（Content-Cost-Function）"><a href="#内容代价函数（Content-Cost-Function）" class="headerlink" title="内容代价函数（Content Cost Function）"></a>内容代价函数（Content Cost Function）</h4><p><strong>J(C,G) 的定义与计算过程如下：</strong></p>
+<ol>
+<li><p>使用一个预训练好的 CNN（例如 VGG）；</p>
+</li>
+<li><p>选择一个隐藏层 l 来计算内容代价函数。l 太小则内容图片和生成图片像素级别相似，l 太大则可能只有具体物体级别的相似。因此，<strong>一般选一个中间层</strong>；</p>
+</li>
+<li><p>设a(C)[l]、a(G)[l]为C和G在l层的激活，则有：</p>
+<script type="math/tex; mode=display">
+J_{content}(C,G)=\frac{1}{2}||a^{(C)[l]}-a^{(G)[l]}||^2C和G越相似，则J(C,G)越小。</script><p>​        C和G越相似，则J(C,G)越小。</p>
+</li>
+</ol>
+<h4 id="风格代价函数（Style-Cost-Function）"><a href="#风格代价函数（Style-Cost-Function）" class="headerlink" title="风格代价函数（Style Cost Function）"></a>风格代价函数（Style Cost Function）</h4>
         </div>
 
         <blockquote class="post-copyright">
@@ -197,7 +310,7 @@
     <div class="content">
         
 <span class="post-time">
-    最終更新：<time datetime="2019-08-28T17:58:18.105Z" itemprop="dateUpdated">2019-08-29 01:58:18</time>
+    Last updated: <time datetime="2019-08-29T09:39:11.722Z" itemprop="dateUpdated">2019-08-29 17:39:11</time>
 </span><br>
 
 
@@ -243,7 +356,8 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/29/deeplearning-ai学习笔记（十三）卷积神经网络应用之人脸识别-神经风格迁移/&title=《deeplearning.ai学习笔记（十三）卷积神经网络应用之人脸识别&神经风格迁移》 — 一只程序喵&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/29/deeplearning-ai学习笔记（十三）卷积神经网络应用之人脸识别-神经风格迁移/&title=《deeplearning.ai学习笔记（十三）卷积神经网络应用之人脸识别&神经风格迁移》 — 一只程序喵&source=人脸识别（Face Recognition）问题描述人脸验证（Face Verification）vs. 人脸识别（Face Recognition）
+人..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -363,7 +477,7 @@
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">
@@ -395,7 +509,8 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/29/deeplearning-ai学习笔记（十三）卷积神经网络应用之人脸识别-神经风格迁移/&title=《deeplearning.ai学习笔记（十三）卷积神经网络应用之人脸识别&神经风格迁移》 — 一只程序喵&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/29/deeplearning-ai学习笔记（十三）卷积神经网络应用之人脸识别-神经风格迁移/&title=《deeplearning.ai学习笔记（十三）卷积神经网络应用之人脸识别&神经风格迁移》 — 一只程序喵&source=人脸识别（Face Recognition）问题描述人脸验证（Face Verification）vs. 人脸识别（Face Recognition）
+人..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -483,6 +598,23 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
 </script>
 
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 </body>
 </html>

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>deeplearning.ai学习笔记（十四）循环神经网络（Recurrent Neural Network） | 一只程序喵 | 刘明辉的个人博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="学习笔记,deeplearning.ai">
+    <meta name="description" content="序列模型（Sequence Model）概念数学符号输入输出：one-hot向量标准神经网络在序列模型上存在的问题 对于不同的示例，输入和输出可能有不同的长度，因此输入层和输出层的神经元数量无法固定。 从输入文本的不同位置学到的同一特征无法共享。 模型中的参数太多，计算量太大。  为了解决这些问题，引入循环神经网络（Recurrent Neural Network，RNN）。 基本循环神经网络网络">
+<meta name="keywords" content="学习笔记,deeplearning.ai">
+<meta property="og:type" content="article">
+<meta property="og:title" content="deeplearning.ai学习笔记（十四）循环神经网络（Recurrent Neural Network）">
+<meta property="og:url" content="http://yoursite.com/2019/08/31/deeplearning-ai学习笔记（十四）循环神经网络/index.html">
+<meta property="og:site_name" content="一只程序喵">
+<meta property="og:description" content="序列模型（Sequence Model）概念数学符号输入输出：one-hot向量标准神经网络在序列模型上存在的问题 对于不同的示例，输入和输出可能有不同的长度，因此输入层和输出层的神经元数量无法固定。 从输入文本的不同位置学到的同一特征无法共享。 模型中的参数太多，计算量太大。  为了解决这些问题，引入循环神经网络（Recurrent Neural Network，RNN）。 基本循环神经网络网络">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-31T08:10:54.541Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="deeplearning.ai学习笔记（十四）循环神经网络（Recurrent Neural Network）">
+<meta name="twitter:description" content="序列模型（Sequence Model）概念数学符号输入输出：one-hot向量标准神经网络在序列模型上存在的问题 对于不同的示例，输入和输出可能有不同的长度，因此输入层和输出层的神经元数量无法固定。 从输入文本的不同位置学到的同一特征无法共享。 模型中的参数太多，计算量太大。  为了解决这些问题，引入循环神经网络（Recurrent Neural Network，RNN）。 基本循环神经网络网络">
+    
+        <link rel="alternate" type="application/atom+xml" title="一只程序喵" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">刘明辉</h5>
+          <a href="mailto:549208791@qq.com" title="549208791@qq.com" class="mail">549208791@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/liuminghui233" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">deeplearning.ai学习笔记（十四）循环神经网络（Recurrent Neural Network）</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">deeplearning.ai学习笔记（十四）循环神经网络（Recurrent Neural Network）</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-08-31T05:18:21.000Z" itemprop="datePublished" class="page-time">
+  2019-08-31
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#序列模型（Sequence-Model）"><span class="post-toc-number">1.</span> <span class="post-toc-text">序列模型（Sequence Model）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#概念"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">概念</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数学符号"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">数学符号</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#输入"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">输入</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#输出：one-hot向量"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">输出：one-hot向量</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#标准神经网络在序列模型上存在的问题"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">标准神经网络在序列模型上存在的问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本循环神经网络"><span class="post-toc-number">2.</span> <span class="post-toc-text">基本循环神经网络</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#网络结构"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">网络结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#前向传播"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">前向传播</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#反向传播"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">反向传播</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#循环神经网络的架构"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">循环神经网络的架构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实例：语言模型（Language-Model）"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">实例：语言模型（Language Model）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#RNN的梯度消失问题"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">RNN的梯度消失问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#高级循环神经网络"><span class="post-toc-number">3.</span> <span class="post-toc-text">高级循环神经网络</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#GRU（Gated-Recurrent-Units-门控循环单元）"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">GRU（Gated Recurrent Units, 门控循环单元）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#LSTM（Long-Short-Term-Memory，长短期记忆）"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">LSTM（Long Short Term Memory，长短期记忆）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#双向循环神经网络（Bidirectional-RNN，BRNN）"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">双向循环神经网络（Bidirectional RNN，BRNN）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#深度循环神经网络（Deep-RNN-DRNN"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">深度循环神经网络（Deep RNN, DRNN)</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-deeplearning-ai学习笔记（十四）循环神经网络"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">deeplearning.ai学习笔记（十四）循环神经网络（Recurrent Neural Network）</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-08-31 13:18:21" datetime="2019-08-31T05:18:21.000Z"  itemprop="datePublished">2019-08-31</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="序列模型（Sequence-Model）"><a href="#序列模型（Sequence-Model）" class="headerlink" title="序列模型（Sequence Model）"></a>序列模型（Sequence Model）</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><h3 id="数学符号"><a href="#数学符号" class="headerlink" title="数学符号"></a>数学符号</h3><h4 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h4><h4 id="输出：one-hot向量"><a href="#输出：one-hot向量" class="headerlink" title="输出：one-hot向量"></a>输出：one-hot向量</h4><h3 id="标准神经网络在序列模型上存在的问题"><a href="#标准神经网络在序列模型上存在的问题" class="headerlink" title="标准神经网络在序列模型上存在的问题"></a>标准神经网络在序列模型上存在的问题</h3><ul>
+<li>对于不同的示例，输入和输出可能有不同的长度，因此输入层和输出层的神经元数量无法固定。</li>
+<li>从输入文本的不同位置学到的同一特征无法共享。</li>
+<li>模型中的参数太多，计算量太大。</li>
+</ul>
+<p>为了解决这些问题，引入<strong>循环神经网络（Recurrent Neural Network，RNN）</strong>。</p>
+<h2 id="基本循环神经网络"><a href="#基本循环神经网络" class="headerlink" title="基本循环神经网络"></a>基本循环神经网络</h2><h3 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h3><h4 id="前向传播"><a href="#前向传播" class="headerlink" title="前向传播"></a>前向传播</h4><h4 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h4><h3 id="循环神经网络的架构"><a href="#循环神经网络的架构" class="headerlink" title="循环神经网络的架构"></a>循环神经网络的架构</h3><h3 id="实例：语言模型（Language-Model）"><a href="#实例：语言模型（Language-Model）" class="headerlink" title="实例：语言模型（Language Model）"></a>实例：语言模型（Language Model）</h3><h3 id="RNN的梯度消失问题"><a href="#RNN的梯度消失问题" class="headerlink" title="RNN的梯度消失问题"></a>RNN的梯度消失问题</h3><h2 id="高级循环神经网络"><a href="#高级循环神经网络" class="headerlink" title="高级循环神经网络"></a>高级循环神经网络</h2><h3 id="GRU（Gated-Recurrent-Units-门控循环单元）"><a href="#GRU（Gated-Recurrent-Units-门控循环单元）" class="headerlink" title="GRU（Gated Recurrent Units, 门控循环单元）"></a>GRU（Gated Recurrent Units, 门控循环单元）</h3><h3 id="LSTM（Long-Short-Term-Memory，长短期记忆）"><a href="#LSTM（Long-Short-Term-Memory，长短期记忆）" class="headerlink" title="LSTM（Long Short Term Memory，长短期记忆）"></a>LSTM（Long Short Term Memory，长短期记忆）</h3><h3 id="双向循环神经网络（Bidirectional-RNN，BRNN）"><a href="#双向循环神经网络（Bidirectional-RNN，BRNN）" class="headerlink" title="双向循环神经网络（Bidirectional RNN，BRNN）"></a>双向循环神经网络（Bidirectional RNN，BRNN）</h3><h3 id="深度循环神经网络（Deep-RNN-DRNN"><a href="#深度循环神经网络（Deep-RNN-DRNN" class="headerlink" title="深度循环神经网络（Deep RNN, DRNN)"></a>深度循环神经网络（Deep RNN, DRNN)</h3>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-08-31T08:10:54.541Z" itemprop="dateUpdated">2019-08-31 16:10:54</time>
+</span><br>
+
+
+        
+        版权声明:本文为博主原创文章,未经博主允许不得转载。<a href="/2019/08/31/deeplearning-ai学习笔记（十四）循环神经网络/" target="_blank" rel="external">http://yoursite.com/2019/08/31/deeplearning-ai学习笔记（十四）循环神经网络/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="刘明辉">
+            刘明辉
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/deeplearning-ai/">deeplearning.ai</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/08/31/deeplearning-ai学习笔记（十四）循环神经网络/&title=《deeplearning.ai学习笔记（十四）循环神经网络（Recurrent Neural Network）》 — 一只程序喵&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/31/deeplearning-ai学习笔记（十四）循环神经网络/&title=《deeplearning.ai学习笔记（十四）循环神经网络（Recurrent Neural Network）》 — 一只程序喵&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/08/31/deeplearning-ai学习笔记（十四）循环神经网络/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《deeplearning.ai学习笔记（十四）循环神经网络（Recurrent Neural Network）》 — 一只程序喵&url=http://yoursite.com/2019/08/31/deeplearning-ai学习笔记（十四）循环神经网络/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/08/31/deeplearning-ai学习笔记（十四）循环神经网络/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/08/29/deeplearning-ai学习笔记（十三）卷积神经网络应用之人脸识别-神经风格迁移/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">deeplearning.ai学习笔记（十三）卷积神经网络应用之人脸识别&amp;神经风格迁移</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢打赏ο(=•ω＜=)ρ⌒☆
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>刘明辉 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/08/31/deeplearning-ai学习笔记（十四）循环神经网络/&title=《deeplearning.ai学习笔记（十四）循环神经网络（Recurrent Neural Network）》 — 一只程序喵&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/31/deeplearning-ai学习笔记（十四）循环神经网络/&title=《deeplearning.ai学习笔记（十四）循环神经网络（Recurrent Neural Network）》 — 一只程序喵&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/08/31/deeplearning-ai学习笔记（十四）循环神经网络/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《deeplearning.ai学习笔记（十四）循环神经网络（Recurrent Neural Network）》 — 一只程序喵&url=http://yoursite.com/2019/08/31/deeplearning-ai学习笔记（十四）循环神经网络/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/08/31/deeplearning-ai学习笔记（十四）循环神经网络/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADHUlEQVR42u3aQW6DUAwE0N7/0nTTRTaQsU2k4D5WFYHkPyJ1Yvv//MTH8XK8njm78q5rklfPrrnhwMbGxn4I+7g8JtecUZPzZ69en0nWiY2Njb2VncfMNWySojngem3Rw8XGxsb+x+zkQeRBUg2k5Dw2NjY2dh4MeQmRRF1UQozbWNjY2Nhb2dWf+/kH5GeSkJs3v7CxsbH3sXvtnu/8+yPzbWxsbOwvZh/Foxp7SThNGkm9AxsbG3sTOw+AfLg751WLlub6sbGxsVewez/6e4GXRFq+MWjyJWFjY2NvYk+aONUtO9VA6o0Q8ijFxsbG3sTujWAny8qXnj/W6ntiY2Njb2Ln//p7TfzJhs58Dc3QwsbGxn44+xORUy1R8gZT8lAK4wFsbGzsRezegLb66ihjiyPeQr2FjY2NvYJd/bk/eRx5aPXWEzXCsLGxsVezrz+4t9y7Wk759dFmHWxsbOxF7LxBnyzlrrHupHn05l5sbGzsRezq9POucW/efuqVN4V4xsbGxn44u9fEqY5mq4Pk6r3VZhM2Njb2PvZkSJCzq+2h5KFUS5pmVmNjY2M/hF1dYhJg+Vae5K68BVbesoONjY39WHb10mpDZ17eTMbMb4zY2NjYi9j5UqpFQrXdU11DL3SxsbGx97HzQWx+zaRR1Rs2NOswbGxs7Iezq437/OgVD3m5MroLGxsbeyl73iSaL/0T5cpp1YWNjY29gl0tJyZj4OTVyZadcsGDjY2NvYJdDZLeZp3qsCFvMFWbWX/nsbGxsRexJ236Xmkxv3L+BWBjY2NvZVebO0m50ms2JefnAwxsbGzsrexJy7537yTY8gAb9dKwsbGxH8iuPoi8MJiE2V1biLCxsbE3sY/iMdm+09vuMwmq05VgY2NjL2JPci9p90yokweUbznCxsbG3sHuhdZdjyMvh6ojhDfviY2Njb2O3YucSfj1WlqTSS42NjY2djJwLQfJoPipFiTY2NjY2HlI5Phe6fKR+TY2Njb2w9lJPPRaRZMgvGvQO+qlYWNjY389u9egmc+T54OE/B2aAYmNjY397exf8dc1AKyR97IAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '一只程序喵 | 刘明辉的个人博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '一只程序喵 | 刘明辉的个人博客';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>

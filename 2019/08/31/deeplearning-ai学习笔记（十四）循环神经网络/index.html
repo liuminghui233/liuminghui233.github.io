@@ -21,19 +21,19 @@
     
     
     <meta name="keywords" content="学习笔记,deeplearning.ai">
-    <meta name="description" content="序列模型（Sequence Model）概念前后相互关联的数据，如自然语言、音频等。 主要应用：                                                                                              序列模型的主要应用              符号表示对于一个序列数据x，用x⟨t⟩来表示这个数据中的第t个元素，用">
+    <meta name="description" content="序列模型（Sequence Model）概念前后相互关联的数据，如自然语言、音频等。 主要应用：                                                                                              序列模型的主要应用              符号表示对于一个序列数据x，用x^⟨t⟩^来表示这个数据中的第t个元素">
 <meta name="keywords" content="学习笔记,deeplearning.ai">
 <meta property="og:type" content="article">
 <meta property="og:title" content="deeplearning.ai学习笔记（十四）循环神经网络（Recurrent Neural Network）">
 <meta property="og:url" content="http://yoursite.com/2019/08/31/deeplearning-ai学习笔记（十四）循环神经网络/index.html">
 <meta property="og:site_name" content="一只程序喵">
-<meta property="og:description" content="序列模型（Sequence Model）概念前后相互关联的数据，如自然语言、音频等。 主要应用：                                                                                              序列模型的主要应用              符号表示对于一个序列数据x，用x⟨t⟩来表示这个数据中的第t个元素，用">
+<meta property="og:description" content="序列模型（Sequence Model）概念前后相互关联的数据，如自然语言、音频等。 主要应用：                                                                                              序列模型的主要应用              符号表示对于一个序列数据x，用x^⟨t⟩^来表示这个数据中的第t个元素">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1567256436468.png">
-<meta property="og:updated_time" content="2019-08-31T13:06:02.295Z">
+<meta property="og:updated_time" content="2019-08-31T13:13:31.725Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="deeplearning.ai学习笔记（十四）循环神经网络（Recurrent Neural Network）">
-<meta name="twitter:description" content="序列模型（Sequence Model）概念前后相互关联的数据，如自然语言、音频等。 主要应用：                                                                                              序列模型的主要应用              符号表示对于一个序列数据x，用x⟨t⟩来表示这个数据中的第t个元素，用">
+<meta name="twitter:description" content="序列模型（Sequence Model）概念前后相互关联的数据，如自然语言、音频等。 主要应用：                                                                                              序列模型的主要应用              符号表示对于一个序列数据x，用x^⟨t⟩^来表示这个数据中的第t个元素">
 <meta name="twitter:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1567256436468.png">
     
         <link rel="alternate" type="application/atom+xml" title="一只程序喵" href="/atom.xml">
@@ -128,7 +128,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -200,8 +200,8 @@
                 </div>
                 <div class="image-caption">序列模型的主要应用</div>
             </figure>
-<h3 id="符号表示"><a href="#符号表示" class="headerlink" title="符号表示"></a>符号表示</h3><p>对于一个序列数据x，用x⟨t⟩来表示这个数据中的第t个元素，用y⟨t⟩来表示第t个标签，用Tx和Ty来表示输入和输出的长度。对于一段音频，元素可能是其中的几帧；对于一句话，元素可能是一到多个单词。</p>
-<p>第i个序列数据的第t个元素用符号<script type="math/tex">x^{(i)⟨t⟩}</script>，第t个标签即为y(i)⟨t⟩，对应有T(i)x和T(i)y。</p>
+<h3 id="符号表示"><a href="#符号表示" class="headerlink" title="符号表示"></a>符号表示</h3><p>对于一个序列数据x，用x^⟨t⟩^来表示这个数据中的第t个元素，用y^⟨t⟩^来表示第t个标签，用T~x~和T~y~来表示输入和输出的长度。对于一段音频，元素可能是其中的几帧；对于一句话，元素可能是一到多个单词。</p>
+<p>第i个序列数据的第t个元素用符号<script type="math/tex">x^{(i)⟨t⟩}</script>，第t个标签即为<script type="math/tex">y^{(i)⟨t⟩}</script>，对应有<script type="math/tex">T^{(i)}_x</script>和<script type="math/tex">T^{(i)}_y</script>。</p>
 <h3 id="one-hot向量"><a href="#one-hot向量" class="headerlink" title="one-hot向量"></a>one-hot向量</h3><h3 id="标准神经网络在序列模型上存在的问题"><a href="#标准神经网络在序列模型上存在的问题" class="headerlink" title="标准神经网络在序列模型上存在的问题"></a>标准神经网络在序列模型上存在的问题</h3><ul>
 <li>对于不同的示例，输入和输出可能有不同的长度，因此输入层和输出层的神经元数量无法固定。</li>
 <li>从输入文本的不同位置学到的同一特征无法共享。</li>
@@ -222,7 +222,7 @@
     <div class="content">
         
 <span class="post-time">
-    最終更新：<time datetime="2019-08-31T13:06:02.295Z" itemprop="dateUpdated">2019-08-31 21:06:02</time>
+    最后更新时间：<time datetime="2019-08-31T13:13:31.725Z" itemprop="dateUpdated">2019-08-31 21:13:31</time>
 </span><br>
 
 
@@ -388,7 +388,7 @@
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
         </p>
     </div>
     <div class="bottom">

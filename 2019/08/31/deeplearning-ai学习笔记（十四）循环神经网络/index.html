@@ -21,18 +21,20 @@
     
     
     <meta name="keywords" content="学习笔记,deeplearning.ai">
-    <meta name="description" content="序列模型（Sequence Model）概念数学符号输入输出：one-hot向量标准神经网络在序列模型上存在的问题 对于不同的示例，输入和输出可能有不同的长度，因此输入层和输出层的神经元数量无法固定。 从输入文本的不同位置学到的同一特征无法共享。 模型中的参数太多，计算量太大。  为了解决这些问题，引入循环神经网络（Recurrent Neural Network，RNN）。 基本循环神经网络网络">
+    <meta name="description" content="序列模型（Sequence Model）概念前后相互关联的数据，如自然语言、音频等。 主要应用：                                                                                              序列模型的主要应用              符号表示对于一个序列数据x，用x⟨t⟩来表示这个数据中的第t个元素，用">
 <meta name="keywords" content="学习笔记,deeplearning.ai">
 <meta property="og:type" content="article">
 <meta property="og:title" content="deeplearning.ai学习笔记（十四）循环神经网络（Recurrent Neural Network）">
 <meta property="og:url" content="http://yoursite.com/2019/08/31/deeplearning-ai学习笔记（十四）循环神经网络/index.html">
 <meta property="og:site_name" content="一只程序喵">
-<meta property="og:description" content="序列模型（Sequence Model）概念数学符号输入输出：one-hot向量标准神经网络在序列模型上存在的问题 对于不同的示例，输入和输出可能有不同的长度，因此输入层和输出层的神经元数量无法固定。 从输入文本的不同位置学到的同一特征无法共享。 模型中的参数太多，计算量太大。  为了解决这些问题，引入循环神经网络（Recurrent Neural Network，RNN）。 基本循环神经网络网络">
+<meta property="og:description" content="序列模型（Sequence Model）概念前后相互关联的数据，如自然语言、音频等。 主要应用：                                                                                              序列模型的主要应用              符号表示对于一个序列数据x，用x⟨t⟩来表示这个数据中的第t个元素，用">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-31T08:10:54.541Z">
+<meta property="og:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1567256436468.png">
+<meta property="og:updated_time" content="2019-08-31T13:04:21.681Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="deeplearning.ai学习笔记（十四）循环神经网络（Recurrent Neural Network）">
-<meta name="twitter:description" content="序列模型（Sequence Model）概念数学符号输入输出：one-hot向量标准神经网络在序列模型上存在的问题 对于不同的示例，输入和输出可能有不同的长度，因此输入层和输出层的神经元数量无法固定。 从输入文本的不同位置学到的同一特征无法共享。 模型中的参数太多，计算量太大。  为了解决这些问题，引入循环神经网络（Recurrent Neural Network，RNN）。 基本循环神经网络网络">
+<meta name="twitter:description" content="序列模型（Sequence Model）概念前后相互关联的数据，如自然语言、音频等。 主要应用：                                                                                              序列模型的主要应用              符号表示对于一个序列数据x，用x⟨t⟩来表示这个数据中的第t个元素，用">
+<meta name="twitter:image" content="c:/Users/54920/AppData/Roaming/Typora/typora-user-images/1567256436468.png">
     
         <link rel="alternate" type="application/atom+xml" title="一只程序喵" href="/atom.xml">
     
@@ -165,7 +167,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#序列模型（Sequence-Model）"><span class="post-toc-number">1.</span> <span class="post-toc-text">序列模型（Sequence Model）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#概念"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">概念</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数学符号"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">数学符号</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#输入"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">输入</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#输出：one-hot向量"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">输出：one-hot向量</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#标准神经网络在序列模型上存在的问题"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">标准神经网络在序列模型上存在的问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本循环神经网络"><span class="post-toc-number">2.</span> <span class="post-toc-text">基本循环神经网络</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#网络结构"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">网络结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#前向传播"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">前向传播</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#反向传播"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">反向传播</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#循环神经网络的架构"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">循环神经网络的架构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实例：语言模型（Language-Model）"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">实例：语言模型（Language Model）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#RNN的梯度消失问题"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">RNN的梯度消失问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#高级循环神经网络"><span class="post-toc-number">3.</span> <span class="post-toc-text">高级循环神经网络</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#GRU（Gated-Recurrent-Units-门控循环单元）"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">GRU（Gated Recurrent Units, 门控循环单元）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#LSTM（Long-Short-Term-Memory，长短期记忆）"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">LSTM（Long Short Term Memory，长短期记忆）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#双向循环神经网络（Bidirectional-RNN，BRNN）"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">双向循环神经网络（Bidirectional RNN，BRNN）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#深度循环神经网络（Deep-RNN-DRNN"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">深度循环神经网络（Deep RNN, DRNN)</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#序列模型（Sequence-Model）"><span class="post-toc-number">1.</span> <span class="post-toc-text">序列模型（Sequence Model）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#概念"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">概念</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#符号表示"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">符号表示</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#one-hot向量"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">one-hot向量</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#标准神经网络在序列模型上存在的问题"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">标准神经网络在序列模型上存在的问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本循环神经网络"><span class="post-toc-number">2.</span> <span class="post-toc-text">基本循环神经网络</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#网络结构"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">网络结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#前向传播"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">前向传播</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#反向传播"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">反向传播</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#循环神经网络的架构"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">循环神经网络的架构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实例：语言模型（Language-Model）"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">实例：语言模型（Language Model）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#RNN的梯度消失问题"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">RNN的梯度消失问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#高级循环神经网络"><span class="post-toc-number">3.</span> <span class="post-toc-text">高级循环神经网络</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#GRU（Gated-Recurrent-Units-门控循环单元）"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">GRU（Gated Recurrent Units, 门控循环单元）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#LSTM（Long-Short-Term-Memory，长短期记忆）"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">LSTM（Long Short Term Memory，长短期记忆）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#双向循环神经网络（Bidirectional-RNN，BRNN）"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">双向循环神经网络（Bidirectional RNN，BRNN）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#深度循环神经网络（Deep-RNN-DRNN"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">深度循环神经网络（Deep RNN, DRNN)</span></a></li></ol></li></ol>
         </nav>
     </aside>
 
@@ -189,13 +191,30 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="序列模型（Sequence-Model）"><a href="#序列模型（Sequence-Model）" class="headerlink" title="序列模型（Sequence Model）"></a>序列模型（Sequence Model）</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><h3 id="数学符号"><a href="#数学符号" class="headerlink" title="数学符号"></a>数学符号</h3><h4 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h4><h4 id="输出：one-hot向量"><a href="#输出：one-hot向量" class="headerlink" title="输出：one-hot向量"></a>输出：one-hot向量</h4><h3 id="标准神经网络在序列模型上存在的问题"><a href="#标准神经网络在序列模型上存在的问题" class="headerlink" title="标准神经网络在序列模型上存在的问题"></a>标准神经网络在序列模型上存在的问题</h3><ul>
+            <h2 id="序列模型（Sequence-Model）"><a href="#序列模型（Sequence-Model）" class="headerlink" title="序列模型（Sequence Model）"></a>序列模型（Sequence Model）</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p><strong>前后相互关联的数据</strong>，如自然语言、音频等。</p>
+<p><strong>主要应用：</strong></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\54920\AppData\Roaming\Typora\typora-user-images\1567256436468.png" alt="序列模型的主要应用" title>
+                </div>
+                <div class="image-caption">序列模型的主要应用</div>
+            </figure>
+<h3 id="符号表示"><a href="#符号表示" class="headerlink" title="符号表示"></a>符号表示</h3><p>对于一个序列数据x，用x⟨t⟩来表示这个数据中的第t个元素，用y⟨t⟩来表示第t个标签，用Tx和Ty来表示输入和输出的长度。对于一段音频，元素可能是其中的几帧；对于一句话，元素可能是一到多个单词。</p>
+<p>第i个序列数据的第t个元素用符号$x^{(i)⟨t⟩}$，第t个标签即为y(i)⟨t⟩，对应有T(i)x和T(i)y。</p>
+<h3 id="one-hot向量"><a href="#one-hot向量" class="headerlink" title="one-hot向量"></a>one-hot向量</h3><h3 id="标准神经网络在序列模型上存在的问题"><a href="#标准神经网络在序列模型上存在的问题" class="headerlink" title="标准神经网络在序列模型上存在的问题"></a>标准神经网络在序列模型上存在的问题</h3><ul>
 <li>对于不同的示例，输入和输出可能有不同的长度，因此输入层和输出层的神经元数量无法固定。</li>
 <li>从输入文本的不同位置学到的同一特征无法共享。</li>
 <li>模型中的参数太多，计算量太大。</li>
 </ul>
 <p>为了解决这些问题，引入<strong>循环神经网络（Recurrent Neural Network，RNN）</strong>。</p>
-<h2 id="基本循环神经网络"><a href="#基本循环神经网络" class="headerlink" title="基本循环神经网络"></a>基本循环神经网络</h2><h3 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h3><h4 id="前向传播"><a href="#前向传播" class="headerlink" title="前向传播"></a>前向传播</h4><h4 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h4><h3 id="循环神经网络的架构"><a href="#循环神经网络的架构" class="headerlink" title="循环神经网络的架构"></a>循环神经网络的架构</h3><h3 id="实例：语言模型（Language-Model）"><a href="#实例：语言模型（Language-Model）" class="headerlink" title="实例：语言模型（Language Model）"></a>实例：语言模型（Language Model）</h3><h3 id="RNN的梯度消失问题"><a href="#RNN的梯度消失问题" class="headerlink" title="RNN的梯度消失问题"></a>RNN的梯度消失问题</h3><h2 id="高级循环神经网络"><a href="#高级循环神经网络" class="headerlink" title="高级循环神经网络"></a>高级循环神经网络</h2><h3 id="GRU（Gated-Recurrent-Units-门控循环单元）"><a href="#GRU（Gated-Recurrent-Units-门控循环单元）" class="headerlink" title="GRU（Gated Recurrent Units, 门控循环单元）"></a>GRU（Gated Recurrent Units, 门控循环单元）</h3><h3 id="LSTM（Long-Short-Term-Memory，长短期记忆）"><a href="#LSTM（Long-Short-Term-Memory，长短期记忆）" class="headerlink" title="LSTM（Long Short Term Memory，长短期记忆）"></a>LSTM（Long Short Term Memory，长短期记忆）</h3><h3 id="双向循环神经网络（Bidirectional-RNN，BRNN）"><a href="#双向循环神经网络（Bidirectional-RNN，BRNN）" class="headerlink" title="双向循环神经网络（Bidirectional RNN，BRNN）"></a>双向循环神经网络（Bidirectional RNN，BRNN）</h3><h3 id="深度循环神经网络（Deep-RNN-DRNN"><a href="#深度循环神经网络（Deep-RNN-DRNN" class="headerlink" title="深度循环神经网络（Deep RNN, DRNN)"></a>深度循环神经网络（Deep RNN, DRNN)</h3>
+<h2 id="基本循环神经网络"><a href="#基本循环神经网络" class="headerlink" title="基本循环神经网络"></a>基本循环神经网络</h2><h3 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h3><h4 id="前向传播"><a href="#前向传播" class="headerlink" title="前向传播"></a>前向传播</h4><h4 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h4><h3 id="循环神经网络的架构"><a href="#循环神经网络的架构" class="headerlink" title="循环神经网络的架构"></a>循环神经网络的架构</h3><h3 id="实例：语言模型（Language-Model）"><a href="#实例：语言模型（Language-Model）" class="headerlink" title="实例：语言模型（Language Model）"></a>实例：语言模型（Language Model）</h3><h3 id="RNN的梯度消失问题"><a href="#RNN的梯度消失问题" class="headerlink" title="RNN的梯度消失问题"></a>RNN的梯度消失问题</h3><h2 id="高级循环神经网络"><a href="#高级循环神经网络" class="headerlink" title="高级循环神经网络"></a>高级循环神经网络</h2><h3 id="GRU（Gated-Recurrent-Units-门控循环单元）"><a href="#GRU（Gated-Recurrent-Units-门控循环单元）" class="headerlink" title="GRU（Gated Recurrent Units, 门控循环单元）"></a>GRU（Gated Recurrent Units, 门控循环单元）</h3><p>相关论文：</p>
+<ul>
+<li><a href="https://arxiv.org/pdf/1409.1259.pdf" target="_blank" rel="noopener">Cho et al., 2014. On the properties of neural machine translation: Encoder-decoder approaches</a></li>
+<li><a href="https://arxiv.org/pdf/1412.3555.pdf" target="_blank" rel="noopener">Chung et al., 2014. Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling</a></li>
+</ul>
+<h3 id="LSTM（Long-Short-Term-Memory，长短期记忆）"><a href="#LSTM（Long-Short-Term-Memory，长短期记忆）" class="headerlink" title="LSTM（Long Short Term Memory，长短期记忆）"></a>LSTM（Long Short Term Memory，长短期记忆）</h3><p>相关论文：<a href="https://www.researchgate.net/publication/13853244_Long_Short-term_Memory" target="_blank" rel="noopener">Hochreiter &amp; Schmidhuber 1997. Long short-term memory</a></p>
+<h3 id="双向循环神经网络（Bidirectional-RNN，BRNN）"><a href="#双向循环神经网络（Bidirectional-RNN，BRNN）" class="headerlink" title="双向循环神经网络（Bidirectional RNN，BRNN）"></a>双向循环神经网络（Bidirectional RNN，BRNN）</h3><h3 id="深度循环神经网络（Deep-RNN-DRNN"><a href="#深度循环神经网络（Deep-RNN-DRNN" class="headerlink" title="深度循环神经网络（Deep RNN, DRNN)"></a>深度循环神经网络（Deep RNN, DRNN)</h3>
         </div>
 
         <blockquote class="post-copyright">
@@ -203,7 +222,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-08-31T08:10:54.541Z" itemprop="dateUpdated">2019-08-31 16:10:54</time>
+    Last updated: <time datetime="2019-08-31T13:04:21.681Z" itemprop="dateUpdated">2019-08-31 21:04:21</time>
 </span><br>
 
 
@@ -489,23 +508,6 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
 </script>
 
 
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 </body>
 </html>

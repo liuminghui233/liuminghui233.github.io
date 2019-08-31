@@ -181,13 +181,16 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        序列模型（Sequence Model）概念数学符号输入输出：one-hot向量标准神经网络在序列模型上存在的问题
-对于不同的示例，输入和输出可能有不同的长度，因此输入层和输出层的神经元数量无法固定。
-从输入文本的不同位置学到的同一特征无法共享。
-模型中的参数太多，计算量太大。
+        序列模型（Sequence Model）概念前后相互关联的数据，如自然语言、音频等。
+主要应用：
 
-为了解决这些问题，引入循环神经网络（Recurrent Neural Network，RNN）。
-基本循环神经网...
+                
+                    
+                    
+                
+                序列模型的主要应用
+            
+符号表示对于一个序列数据x，用x⟨t⟩来表示这个数据中的第t个元...
     
 
         <a href="/2019/08/31/deeplearning-ai学习笔记（十四）循环神经网络/" class="post-more waves-effect waves-button">
@@ -807,23 +810,6 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 </script>
 
 
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 </body>
 </html>

@@ -40,7 +40,7 @@
 <meta property="og:image" content="https://s2.ax1x.com/2019/09/03/nktsMD.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/09/03/nkt2dA.jpg">
 <meta property="og:image" content="https://s2.ax1x.com/2019/09/03/nktRII.jpg">
-<meta property="og:updated_time" content="2019-09-03T12:51:31.901Z">
+<meta property="og:updated_time" content="2019-09-03T12:54:05.094Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="deeplearning.ai学习笔记（十五）自然语言处理与词嵌入">
 <meta name="twitter:description" content="词的表示one-hot向量表示表示方法：  首先建立一个较大的词汇表（例如10000）;  然后使用one-hot的方式对每个单词进行编码。">
@@ -322,7 +322,7 @@ p(w_i)=\frac{f(w_i)^{\frac{3}{4}}}{\sum_{j=0}^{m} f(w_j)^{\frac{3}{4}}}</script>
 <script type="math/tex; mode=display">
 J=\sum_{i=1}^{N} \sum_{j=1}^{N} f(X_{ij}) (\theta_i^t e_j +b_i+b_j^{'}-logX_{ij})^2</script><p><strong>其中：</strong></p>
 <ul>
-<li><script type="math/tex; mode=display">θ_i$$、$$e_j$$是单词$$i$$和单词$$j$$的词向量，是对称的，最终的词向量表示为：</script><p>e_w = \frac{e_w+\theta_w}{2}<br>$$</p>
+<li><script type="math/tex; mode=display">\theta_i$$、$$e_j$$是单词$$i$$和单词$$j$$的词向量，是对称的，最终的词向量表示为：</script><p>e_w = \frac{e_w+\theta_w}{2}<br>$$</p>
 </li>
 <li><p>权重因子<script type="math/tex">f()</script>是一个用来避免<script type="math/tex">X_{ij}=0</script>时<script type="math/tex">log(X_{ij})</script>为负无穷大、并在其他情况下调整权重的函数；当<script type="math/tex">X_{ij}=0</script>时，<script type="math/tex">f(X_{ij})=0</script>忽略了无任何相关性的context和target；</p>
 </li>
@@ -382,7 +382,7 @@ bias~direction = \frac{1}{N} ((e_{he}-e_{she})+(e_{mela}-e_{fmela})+\cdots)</scr
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-09-03T12:51:31.901Z" itemprop="dateUpdated">2019-09-03 20:51:31</time>
+    Last updated: <time datetime="2019-09-03T12:54:05.094Z" itemprop="dateUpdated">2019-09-03 20:54:05</time>
 </span><br>
 
 

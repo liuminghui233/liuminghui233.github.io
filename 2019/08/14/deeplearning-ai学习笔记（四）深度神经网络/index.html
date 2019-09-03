@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>deeplearning.ai学习笔记（四）深度神经网络（Deep Neural Network） | 一只程序喵 | 刘明辉的个人博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="学习笔记,deeplearning.ai">
+    <meta name="description" content="深度神经网络其实就是包含更多的隐藏层神经网络。                                                                                              越来越“深”的神经网络              深度神经网络为何如此有效？（Why deep representations?)神经网络效果显著，其强大能力主要源自">
+<meta name="keywords" content="学习笔记,deeplearning.ai">
+<meta property="og:type" content="article">
+<meta property="og:title" content="deeplearning.ai学习笔记（四）深度神经网络（Deep Neural Network）">
+<meta property="og:url" content="http://yoursite.com/2019/08/14/deeplearning-ai学习笔记（四）深度神经网络/index.html">
+<meta property="og:site_name" content="一只程序喵">
+<meta property="og:description" content="深度神经网络其实就是包含更多的隐藏层神经网络。                                                                                              越来越“深”的神经网络              深度神经网络为何如此有效？（Why deep representations?)神经网络效果显著，其强大能力主要源自">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mVik1s.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mVieBV.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mViPhQ.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mViFpj.png">
+<meta property="og:updated_time" content="2019-08-28T17:31:57.383Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="deeplearning.ai学习笔记（四）深度神经网络（Deep Neural Network）">
+<meta name="twitter:description" content="深度神经网络其实就是包含更多的隐藏层神经网络。                                                                                              越来越“深”的神经网络              深度神经网络为何如此有效？（Why deep representations?)神经网络效果显著，其强大能力主要源自">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/08/15/mVik1s.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="一只程序喵" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">刘明辉</h5>
+          <a href="mailto:549208791@qq.com" title="549208791@qq.com" class="mail">549208791@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/liuminghui233" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">deeplearning.ai学习笔记（四）深度神经网络（Deep Neural Network）</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜尋">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">deeplearning.ai学习笔记（四）深度神经网络（Deep Neural Network）</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-08-14T14:28:38.000Z" itemprop="datePublished" class="page-time">
+  2019-08-14
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#深度神经网络为何如此有效？（Why-deep-representations"><span class="post-toc-number">1.</span> <span class="post-toc-text">深度神经网络为何如此有效？（Why deep representations?)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#由“浅”到“深”的特征提取"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">由“浅”到“深”的特征提取</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#深度网络能减少神经元个数"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">深度网络能减少神经元个数</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#构建深度神经网络"><span class="post-toc-number">2.</span> <span class="post-toc-text">构建深度神经网络</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前向传播和反向传播流程块图"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">前向传播和反向传播流程块图</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前向传播和反向传播计算表达式"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">前向传播和反向传播计算表达式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#正向传播"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">正向传播</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#反向传播"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">反向传播</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参数（Parameters）-vs-超参数（Hyperparameters）"><span class="post-toc-number">3.</span> <span class="post-toc-text">参数（Parameters） vs 超参数（Hyperparameters）</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-deeplearning-ai学习笔记（四）深度神经网络"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">deeplearning.ai学习笔记（四）深度神经网络（Deep Neural Network）</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-08-14 22:28:38" datetime="2019-08-14T14:28:38.000Z"  itemprop="datePublished">2019-08-14</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><strong>深度神经网络</strong>其实就是包含更多的隐藏层神经网络。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s2.ax1x.com/2019/08/15/mVik1s.png" alt="越来越“深”的神经网络" title>
+                </div>
+                <div class="image-caption">越来越“深”的神经网络</div>
+            </figure>
+<h2 id="深度神经网络为何如此有效？（Why-deep-representations"><a href="#深度神经网络为何如此有效？（Why-deep-representations" class="headerlink" title="深度神经网络为何如此有效？（Why deep representations?)"></a>深度神经网络为何如此有效？（Why deep representations?)</h2><p>神经网络效果显著，其强大能力主要源自神经网络足够“深”，即<strong>网络层数越多，神经网络就更加复杂和深入，学习也更加准确</strong>。</p>
+<a id="more"></a>
+<h3 id="由“浅”到“深”的特征提取"><a href="#由“浅”到“深”的特征提取" class="headerlink" title="由“浅”到“深”的特征提取"></a>由“浅”到“深”的特征提取</h3><p>以人脸识别为例：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s2.ax1x.com/2019/08/15/mVieBV.png" alt="人脸识别的特征提取" title>
+                </div>
+                <div class="image-caption">人脸识别的特征提取</div>
+            </figure>
+<p>经过训练，神经网络第一层所做的事就是从原始图片中提取出人脸的轮廓与边缘，即边缘检测。这样每个神经元得到的是一些边缘信息。神经网络第二层所做的事情就是将前一层的边缘进行组合，组合成人脸一些局部特征，比如眼睛、鼻子、嘴巴等。再往后面，就将这些局部特征组合起来，融合成人脸的模样。</p>
+<h3 id="深度网络能减少神经元个数"><a href="#深度网络能减少神经元个数" class="headerlink" title="深度网络能减少神经元个数"></a>深度网络能减少神经元个数</h3><p>以计算逻辑输出为例</p>
+<script type="math/tex; mode=display">
+y=x_1 \oplus x_2 \oplus \cdots \oplus x_n</script><p><strong>使用深度网络：</strong></p>
+<p>每层将前一层的两两单元进行异或，最后到一个输出。整个深度网络的层数是<em>l<strong>o</strong>g</em>2(<em>n</em>)，神经元个数为：</p>
+<script type="math/tex; mode=display">
+1+2+\cdots+2^{log_2(n)-1}=n-1</script><p><strong>不使用深度网络：</strong></p>
+<p>仅仅使用单个隐藏层，由于包含了所有的逻辑位，需要的神经元个数达到指数级别。</p>
+<h2 id="构建深度神经网络"><a href="#构建深度神经网络" class="headerlink" title="构建深度神经网络"></a>构建深度神经网络</h2><h3 id="前向传播和反向传播流程块图"><a href="#前向传播和反向传播流程块图" class="headerlink" title="前向传播和反向传播流程块图"></a>前向传播和反向传播流程块图</h3><p><strong>对于第<em>l</em>层来说：</strong></p>
+<p>正向传播时：</p>
+<script type="math/tex; mode=display">
+输入:a^{[l-1]} \\
+输出:a^{[l]} \\
+参数:W^{[l]},b^{[l]} \\
+缓存:z^{[l]}</script><p>反向传播时：</p>
+<script type="math/tex; mode=display">
+输入:da^{[l]} \\
+输出:da^{[l-1]},dW^{[l]},db^{[l]}\\
+参数:W^{[l]},b^{[l]}</script><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s2.ax1x.com/2019/08/15/mViPhQ.png" alt="第l层流程块图" title>
+                </div>
+                <div class="image-caption">第l层流程块图</div>
+            </figure>
+<p><strong>对于整个神经网络：</strong></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s2.ax1x.com/2019/08/15/mViFpj.png" alt="神经网络流程块图" title>
+                </div>
+                <div class="image-caption">神经网络流程块图</div>
+            </figure>
+<h3 id="前向传播和反向传播计算表达式"><a href="#前向传播和反向传播计算表达式" class="headerlink" title="前向传播和反向传播计算表达式"></a>前向传播和反向传播计算表达式</h3><h4 id="正向传播"><a href="#正向传播" class="headerlink" title="正向传播"></a>正向传播</h4><script type="math/tex; mode=display">
+\begin{cases}
+z^{[l]}=W^{[l]}a^{[l-1]}+b^{[l]} \\
+a^{[l]}=g^{[l]}(z^{[l]})
+\end{cases}</script><p><strong>m个训练样本：</strong></p>
+<script type="math/tex; mode=display">
+\begin{cases}
+Z^{[l]}=W^{[l]}A^{[l-1]}+b^{[l]} \\
+A^{[l]}=g^{[l]}(Z^{[l]})
+\end{cases}</script><h4 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h4><script type="math/tex; mode=display">
+\begin{cases}
+dz^{[l]}=da^{[l]}*g^{[l]'}(z^{[l]}) \\
+dW^{[l]}=dz^{[l]}\centerdot a^{[l-1]}\\
+db^{[l]}=dz^{[l]}\\
+da^{[l-1]}=W^{[l]T}\centerdot dz^{[l]}\\
+\end{cases}\\
+进一步推导可得递推关系:dz^{[l]}=W^{[l+1]T}\centerdot dz^{[l+1]}*g^{[l]'}(z^{[l]})</script><p><strong>m个训练样本：</strong></p>
+<script type="math/tex; mode=display">
+\begin{cases}
+dZ^{[l]}=dA^{[l]}*g^{[l]'}(Z^{[l]}) \\
+dW^{[l]}=\frac{1}{m}dZ^{[l]}\centerdot A^{[l-1]T}\\
+db^{[l]}=\frac{1}{m}np.sum(dZ^{[l]},axis=1,keepdim=True) \\
+dA^{[l-1]}=W^{[l]T}\centerdot dZ^{[l]}\\
+\end{cases}\\
+进一步推导可得递推关系:dZ^{[l]}=W^{[l+1]T}\centerdot dZ^{[l+1]}*g^{[l]'}(Z^{[l]})</script><p>注：这里的“*”运算符表示矩阵对应位置相乘。</p>
+<h2 id="参数（Parameters）-vs-超参数（Hyperparameters）"><a href="#参数（Parameters）-vs-超参数（Hyperparameters）" class="headerlink" title="参数（Parameters） vs 超参数（Hyperparameters）"></a>参数（Parameters） vs 超参数（Hyperparameters）</h2><ul>
+<li>参数（parameters）：如<em>W</em>[l]、<em>b</em>[l]</li>
+<li>超参数（hyperparameters）：学习率<em>α</em>，迭代次数N，神经网络层数L，各层神经元个数<em>n</em>[<em>l</em>]，激活函数<em>g</em>(<em>z</em>)等。它们决定了参数<em>W</em>[<em>l</em>]和<em>b</em>[<em>l</em>]的值，因此称为超参数。</li>
+</ul>
+<blockquote>
+<p>Applied deep learning is a very empirical process.</p>
+</blockquote>
+<p>如何设置最优的超参数是一个比较困难的、需要经验知识的问题。通常的做法是选择超参数一定范围内的值，分别代入神经网络进行训练，测试cost function随着迭代次数增加的变化，根据结果选择cost function最小时对应的超参数值。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最後更新時間：<time datetime="2019-08-28T17:31:57.383Z" itemprop="dateUpdated">2019-08-29 01:31:57</time>
+</span><br>
+
+
+        
+        版权声明:本文为博主原创文章,未经博主允许不得转载。<a href="/2019/08/14/deeplearning-ai学习笔记（四）深度神经网络/" target="_blank" rel="external">http://yoursite.com/2019/08/14/deeplearning-ai学习笔记（四）深度神经网络/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="刘明辉">
+            刘明辉
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/deeplearning-ai/">deeplearning.ai</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/08/14/deeplearning-ai学习笔记（四）深度神经网络/&title=《deeplearning.ai学习笔记（四）深度神经网络（Deep Neural Network）》 — 一只程序喵&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/14/deeplearning-ai学习笔记（四）深度神经网络/&title=《deeplearning.ai学习笔记（四）深度神经网络（Deep Neural Network）》 — 一只程序喵&source=深度神经网络其实就是包含更多的隐藏层神经网络。
+
+                
+                    
+              ..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/08/14/deeplearning-ai学习笔记（四）深度神经网络/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《deeplearning.ai学习笔记（四）深度神经网络（Deep Neural Network）》 — 一只程序喵&url=http://yoursite.com/2019/08/14/deeplearning-ai学习笔记（四）深度神经网络/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/08/14/deeplearning-ai学习笔记（四）深度神经网络/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/08/16/deeplearning-ai学习笔记（五）优化深度神经网络之应用层面的深度学习/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">deeplearning.ai学习笔记（五）优化深度神经网络之应用层面的深度学习</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/08/12/deeplearning-ai学习笔记（三）浅层神经网络/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">deeplearning.ai学习笔记（三）浅层神经网络（Shallow Neural Networks）</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢打赏ο(=•ω＜=)ρ⌒☆
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>本部落格係採用<a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh_TW">創用 CC 姓名標示 4.0 國際 授權條款授權</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>刘明辉 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/08/14/deeplearning-ai学习笔记（四）深度神经网络/&title=《deeplearning.ai学习笔记（四）深度神经网络（Deep Neural Network）》 — 一只程序喵&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/14/deeplearning-ai学习笔记（四）深度神经网络/&title=《deeplearning.ai学习笔记（四）深度神经网络（Deep Neural Network）》 — 一只程序喵&source=深度神经网络其实就是包含更多的隐藏层神经网络。
+
+                
+                    
+              ..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/08/14/deeplearning-ai学习笔记（四）深度神经网络/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《deeplearning.ai学习笔记（四）深度神经网络（Deep Neural Network）》 — 一只程序喵&url=http://yoursite.com/2019/08/14/deeplearning-ai学习笔记（四）深度神经网络/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/08/14/deeplearning-ai学习笔记（四）深度神经网络/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADNUlEQVR42u3aQXKjQBAEQP3/09qrIyThqh68IYbk5ECAyPGh1dXzeMTH88fx88ynT1/Pf7o+v+vTp6/XnHZgY2NjX4T9PDxaWHLX68K17E9nEgs2Njb2ruzj1zouEvmrHBfF5GnH71YsMTY2NvaN2bOClCxfUoSSkomNjY2NnbCTRUmekD85KZ/Y2NjYd2bnhSEJcWatRfKEPMY6LUvDxsbG/np2PhX9/r//ZL6NjY2N/cXsWXCTbOjJi9OsUVk5sLGxsXdizyL7NlpqeW3TMnt/bGxs7F3ZswAo2aCTlLR8o8/6PwkbGxt7J/Z6OWm/vh1OtIuV/wOwsbGxr85uB6s5adZCtN/VvuebLA0bGxt7C3Yy3J1VxZWtOXkJrJ+MjY2NvRE7/6Gfj13b1mU9lmp36WBjY2PvxF4fr7ajhZVGog2zHu3H2NjY2Bdk54Pb/Of+ylK2AVPblrzpw7CxsbEvzm4jmzxgykcFyZn8+qiUYmNjY2/ETkrUStiUxz1t1zAbaWBjY2PvzT75oYdFZWWjT5sLFR0YNjY29sXZ69S8sZnd2yJ/sWBjY2NvwW7HqCtFLhk5tAOJ4TAYGxsbeyP27Od+28DMFmh9U+Yv12NjY2Nvwc5fui1C+RDirPAoH3hgY2Nj78duG4n14pc/Jx85F7UJGxsbezt2HgO1w9S8tLRD4nwR35zBxsbG3oidl5DZ0LcdAOftyvpd2NjY2Huw6+Fo3Ma0Ef96u1KPB7CxsbE3ZbdT4nNDqCRIyoOwooBhY2NjX5adJ+ezQH8WVOWFczYqxsbGxr4Pe7Y5Ji+Ns1FuXjiLBcXGxsa+OHtWVNZbgrxotQPdKCbDxsbGvg179qLHBSaPh9aHzdGQABsbG3tTdhvlnNsqtOfbUoeNjY29B/tZHrNAqi2QKxsuo5ALGxsbeyP2rAC0Ef9su087MP6TGAsbGxv7IuyVUWseA+VbdvKBcf4cbGxs7Duw81A+edGVECpvVGYjCmxsbGzsaOZQLuLsrrYhwcbGxsZuW4ukXWmHELMDGxsb+w7sdgTbtg3nNiH/NUvDxsbG/nr2ekCTk5Ily98kf8KwQGJjY2N/O/sfNyYMN8GGriUAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '一只程序喵 | 刘明辉的个人博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '一只程序喵 | 刘明辉的个人博客';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>

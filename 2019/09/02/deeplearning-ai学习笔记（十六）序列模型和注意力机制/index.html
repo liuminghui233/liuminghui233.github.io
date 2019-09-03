@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>deeplearning.ai学习笔记（十六）序列模型和注意力机制 | 一只程序喵 | 刘明辉的个人博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="学习笔记,deeplearning.ai">
+    <meta name="description" content="Seq2Seq（Sequence-to-Sequence）模型能够应用于机器翻译、语音识别等各种序列到序列的转换问题。下面介绍其具体形式及应用。 Encoder-Decoder模型一个基本的 Seq2Seq 模型包含编码器（Encoder）和解码器（Decoder）两部分，它们通常是两个不同的 RNN。">
+<meta name="keywords" content="学习笔记,deeplearning.ai">
+<meta property="og:type" content="article">
+<meta property="og:title" content="deeplearning.ai学习笔记（十六）序列模型和注意力机制">
+<meta property="og:url" content="http://yoursite.com/2019/09/02/deeplearning-ai学习笔记（十六）序列模型和注意力机制/index.html">
+<meta property="og:site_name" content="一只程序喵">
+<meta property="og:description" content="Seq2Seq（Sequence-to-Sequence）模型能够应用于机器翻译、语音识别等各种序列到序列的转换问题。下面介绍其具体形式及应用。 Encoder-Decoder模型一个基本的 Seq2Seq 模型包含编码器（Encoder）和解码器（Decoder）两部分，它们通常是两个不同的 RNN。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/03/nkt5z8.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/03/nktXiq.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/03/nktfit.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/03/nktoQS.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/03/nkthJP.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/03/nkt0G6.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/03/nktwPx.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/03/nktyse.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/03/nktBRK.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/03/nktDxO.jpg">
+<meta property="og:updated_time" content="2019-09-03T07:41:09.557Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="deeplearning.ai学习笔记（十六）序列模型和注意力机制">
+<meta name="twitter:description" content="Seq2Seq（Sequence-to-Sequence）模型能够应用于机器翻译、语音识别等各种序列到序列的转换问题。下面介绍其具体形式及应用。 Encoder-Decoder模型一个基本的 Seq2Seq 模型包含编码器（Encoder）和解码器（Decoder）两部分，它们通常是两个不同的 RNN。">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/09/03/nkt5z8.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="一只程序喵" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">刘明辉</h5>
+          <a href="mailto:549208791@qq.com" title="549208791@qq.com" class="mail">549208791@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/liuminghui233" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">deeplearning.ai学习笔记（十六）序列模型和注意力机制</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜尋">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">deeplearning.ai学习笔记（十六）序列模型和注意力机制</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-09-02T08:41:50.000Z" itemprop="datePublished" class="page-time">
+  2019-09-02
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Encoder-Decoder模型"><span class="post-toc-number">1.</span> <span class="post-toc-text">Encoder-Decoder模型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#机器翻译问题"><span class="post-toc-number">2.</span> <span class="post-toc-text">机器翻译问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本模型"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">基本模型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#集束搜索算法"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">集束搜索算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#算法过程"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">算法过程</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#算法改进：长度规范化（Length-Normalization）"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">算法改进：长度规范化（Length Normalization）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#超参数B选取"><span class="post-toc-number">2.2.3.</span> <span class="post-toc-text">超参数B选取</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#错误分析"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">错误分析</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#评估指标：BLEU指数（Bilingual-Evaluation-Understudy-Score）"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">评估指标：BLEU指数（Bilingual Evaluation Understudy Score）</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#注意力模型（Attention-Model）"><span class="post-toc-number">3.</span> <span class="post-toc-text">注意力模型（Attention Model）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#语音处理问题"><span class="post-toc-number">4.</span> <span class="post-toc-text">语音处理问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#语音识别（Speech-recognition）"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">语音识别（Speech recognition）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#问题描述"><span class="post-toc-number">4.1.1.</span> <span class="post-toc-text">问题描述</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#注意力模型"><span class="post-toc-number">4.1.2.</span> <span class="post-toc-text">注意力模型</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#CTC（Connectionist-Temporal-Classification）损失函数模型"><span class="post-toc-number">4.1.3.</span> <span class="post-toc-text">CTC（Connectionist Temporal Classification）损失函数模型</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#触发词检测（Trigger-Word-Detection）"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">触发词检测（Trigger Word Detection）</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-deeplearning-ai学习笔记（十六）序列模型和注意力机制"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">deeplearning.ai学习笔记（十六）序列模型和注意力机制</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-09-02 16:41:50" datetime="2019-09-02T08:41:50.000Z"  itemprop="datePublished">2019-09-02</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><strong>Seq2Seq（Sequence-to-Sequence）模型</strong>能够应用于机器翻译、语音识别等各种序列到序列的转换问题。下面介绍其具体形式及应用。</p>
+<h2 id="Encoder-Decoder模型"><a href="#Encoder-Decoder模型" class="headerlink" title="Encoder-Decoder模型"></a>Encoder-Decoder模型</h2><p>一个基本的 Seq2Seq 模型包含<strong>编码器（Encoder）</strong>和<strong>解码器（Decoder）</strong>两部分，它们通常是两个不同的 RNN。<a id="more"></a></p>
+<p><strong>例1：机器翻译（Machine Translation）</strong></p>
+<p>将编码器的输出作为解码器的输入，由解码器负责输出正确的翻译结果。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s2.ax1x.com/2019/09/03/nkt5z8.jpg" alt="机器翻译" title>
+                </div>
+                <div class="image-caption">机器翻译</div>
+            </figure>
+<p><strong>例2：图像描述（Image Captioning）</strong></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s2.ax1x.com/2019/09/03/nktXiq.jpg" alt="图像描述" title>
+                </div>
+                <div class="image-caption">图像描述</div>
+            </figure>
+<h2 id="机器翻译问题"><a href="#机器翻译问题" class="headerlink" title="机器翻译问题"></a>机器翻译问题</h2><h3 id="基本模型"><a href="#基本模型" class="headerlink" title="基本模型"></a>基本模型</h3><p><strong>机器翻译模型与语言模型的关系：</strong>机器翻译模型可以看成是有条件的语言模型。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s2.ax1x.com/2019/09/03/nktfit.png" alt="机器翻译模型 vs. 语言模型" title>
+                </div>
+                <div class="image-caption">机器翻译模型 vs. 语言模型</div>
+            </figure>
+<ul>
+<li>相似之处：机器翻译模型的decoder network与语言模型相似；</li>
+<li>不同之处：<ul>
+<li>语言模型：自动生成一条完整语句，语句是随机的；</li>
+<li>机器翻译模型：encoder network可以看成是语言的<script type="math/tex">a^{\lt 0 \gt}</script>，是模型的一个条件，即在输入语句的条件下，生成正确的翻译语句。</li>
+</ul>
+</li>
+</ul>
+<p><strong>机器翻译模型的目标：</strong>将输入语句作为条件，找到最佳翻译语句，使条件概率概率最大：</p>
+<script type="math/tex; mode=display">
+arg~max_{y^{<1>},\cdots,y^{<T_y>}}~P(y^{<1>},\cdots,y^{<T_y>}|x)</script><p><strong>搜索算法：</strong></p>
+<ul>
+<li>贪心搜索（Greedy Search）：根据条件，每次只寻找一个最佳单词作为翻译输出，没有考虑该单词前后关系，概率选择上有可能会出错，不符合要求。</li>
+<li>集束搜索（Beam Search）</li>
+</ul>
+<h3 id="集束搜索算法"><a href="#集束搜索算法" class="headerlink" title="集束搜索算法"></a>集束搜索算法</h3><h4 id="算法过程"><a href="#算法过程" class="headerlink" title="算法过程"></a>算法过程</h4><p><strong>集束搜索</strong>会考虑每个时间步多个可能的选择。设定一个<strong>集束宽（Beam Width）</strong><script type="math/tex">B</script>，代表了解码器中每个时间步的预选单词数量。</p>
+<p><strong>例：</strong><script type="math/tex">B=3</script>，则找出第一个时间步最可能的三个预选单词及其概率值<script type="math/tex">P(\hat{y}^{⟨1⟩}|x)</script>，然后分别将三个预选词作为第二个时间步的输入，得到<script type="math/tex">P(\hat{y}^{⟨2⟩}|x,\hat{y}^{⟨1⟩})</script>。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s2.ax1x.com/2019/09/03/nktoQS.jpg" alt="集束搜索的过程" title>
+                </div>
+                <div class="image-caption">集束搜索的过程</div>
+            </figure>
+<p>根据条件概率公式，可以求出：</p>
+<script type="math/tex; mode=display">
+P(\hat{y}^{⟨1⟩},\hat{y}^{⟨2⟩}|x)=P(\hat{y}^{⟨1⟩}|x)P(\hat{y}^{⟨2⟩}|x,\hat{y}^{⟨1⟩})</script><p>以此类推，最后输出一个最优的结果，即结果符合公式：</p>
+<script type="math/tex; mode=display">
+arg~max \prod_{t=1}^{T_y}P(\hat{y}^{<t>}|x,\hat{y}^{<1>},\cdots,\hat{y}^{<t-1>})</script><p>特别地，当<script type="math/tex">B=1</script>时，集束搜索就变为贪心搜索。</p>
+<h4 id="算法改进：长度规范化（Length-Normalization）"><a href="#算法改进：长度规范化（Length-Normalization）" class="headerlink" title="算法改进：长度规范化（Length Normalization）"></a>算法改进：长度规范化（Length Normalization）</h4><p>对于以上得到的结果，存在以下两点问题：</p>
+<ul>
+<li>对于多个小于 1 的概率值相乘后，会造成<strong>数值下溢（Numerical Underflow）</strong>；</li>
+<li>模型倾向于选择单词数更少的翻译语句，使机器翻译受单词数目的影响。</li>
+</ul>
+<p>对于以上问题，对上述乘积形式进行取对数log运算并且进行长度归一化：</p>
+<script type="math/tex; mode=display">
+arg~max \frac{1}{T_y^\alpha} \sum_{t=1}^{T_y}logP(\hat{y}^{<t>}|x,\hat{y}^{<1>},\cdots,\hat{y}^{<t-1>})</script><p>其中：</p>
+<ul>
+<li><script type="math/tex">Ty</script>是翻译结果的单词数量；</li>
+<li><script type="math/tex">α</script>是超参数归一化因子，<script type="math/tex">α=1</script>时完全进行长度归一化，<script type="math/tex">\alpha=0</script>时不进行长度归一化，一般令<script type="math/tex">\alpha=0.7</script>。</li>
+</ul>
+<h4 id="超参数B选取"><a href="#超参数B选取" class="headerlink" title="超参数B选取"></a>超参数B选取</h4><ul>
+<li>较大的<script type="math/tex">B</script>值意味着可能更好的结果和巨大的计算成本；</li>
+<li>较小的<script type="math/tex">B</script>值代表较小的计算成本和可能表现较差的结果。</li>
+</ul>
+<p>通常来说，<script type="math/tex">B</script>取一个 10 左右的值。</p>
+<h3 id="错误分析"><a href="#错误分析" class="headerlink" title="错误分析"></a>错误分析</h3><blockquote>
+<p>Figures out what faction of errors are “due to” beam search vs. RNN model.</p>
+</blockquote>
+<p>集束搜索是一种启发式搜索算法，其输出结果不总为最优。实际应用中，如果机器翻译效果不好，需要通过错误分析，判断是RNN模型问题还是集束搜索算法问题。</p>
+<p><strong>例：</strong></p>
+<script type="math/tex; mode=display">
+Human~translation:Jane~visits~Africa~in~September.(y^*)\\
+Algorithm~translation:Jane~visits~Africa~lat~September.(\hat{y})</script><ol>
+<li><p>将翻译中没有太大差别的前三个单词作为解码器前三个时间步的输入，得到第四个时间步的条件概率<script type="math/tex">P(y^∗|x) $$$$ P(\hat{y}|x)</script>，比较其大小并分析：</p>
+<ul>
+<li>如果<script type="math/tex">P(y^∗|x)>P(\hat{y}|x)</script>，说明集束搜索算法出现错误，没有选择到概率最大的词；</li>
+<li>如果<script type="math/tex">P(y^∗|x)≤P(\hat{y}|x)</script>，说明RNN模型的效果不佳，预测的第四个词为“in”的概率小于“last”。</li>
+</ul>
+</li>
+<li><p>建立一个表格，记录对每一个错误的分析统计。</p>
+<p><img src="https://s2.ax1x.com/2019/09/03/nkthJP.png" alt="错误分析"></p>
+</li>
+</ol>
+<h3 id="评估指标：BLEU指数（Bilingual-Evaluation-Understudy-Score）"><a href="#评估指标：BLEU指数（Bilingual-Evaluation-Understudy-Score）" class="headerlink" title="评估指标：BLEU指数（Bilingual Evaluation Understudy Score）"></a>评估指标：BLEU指数（Bilingual Evaluation Understudy Score）</h3><p>将每个单词在人工翻译结果中出现的次数作为分子，在机器翻译结果中出现的次数作为分母。</p>
+<p>上述方法是以单个词为单位进行统计，以单个词为单位的集合称为<strong>unigram（一元组）</strong>。而以成对的词为单位的集合称为<strong>bigram（二元组）</strong>。对每个二元组，可以统计其在机器翻译结果（<script type="math/tex">count</script>）和人工翻译结果（<script type="math/tex">count_{clip}</script>）出现的次数，计算Bleu指数。</p>
+<p>以此类推，以n个单词为单位的集合称为<strong>n-gram（多元组）</strong>，对应的Blue指数计算公式为：</p>
+<script type="math/tex; mode=display">
+p_n=\frac{\sum_{n-gram∈\hat{y}}count_{clip}(n-gram)}{\sum_{n-gram∈\hat{y}}count(n-gram)}</script><p>对N个<script type="math/tex">p_n</script>进行几何加权平均得到：</p>
+<script type="math/tex; mode=display">
+p_{ave}=exp(\frac{1}{N}\sum_{i=1}^{N} log^{p_n})</script><p>当机器翻译结果短于人工翻译结果时，输出的大部分词可能都出现在人工翻译结果中，比较容易能得到更大的精确度分值。</p>
+<p>改进的方法是设置一个<strong>最佳匹配长度（Best Match Length）</strong>，如果机器翻译的结果短于该最佳匹配长度，则需要接受<strong>简短惩罚（Brevity Penalty，BP）:</strong></p>
+<script type="math/tex; mode=display">
+BP=\begin{cases}
+1 & ,if~MT\_length \geq BM\_length\\
+exp(1-\frac{MT\_length}{BM\_length}) & ,if~MT\_length < BM\_length
+\end{cases}</script><p>因此，Bleu指数的计算公式为：</p>
+<script type="math/tex; mode=display">
+Blue\_ score=BP × exp(\frac{1}{N}\sum_{i=1}^{N} log^{p_n})</script><p>相关论文：<a href="http://www.aclweb.org/anthology/P02-1040.pdf" target="_blank" rel="noopener">Papineni et. al., 2002. A method for automatic evaluation of machine translation</a></p>
+<h2 id="注意力模型（Attention-Model）"><a href="#注意力模型（Attention-Model）" class="headerlink" title="注意力模型（Attention Model）"></a>注意力模型（Attention Model）</h2><p>在机器翻译问题中，如果原语句很长，要对整个语句输入RNN的编码网络和解码网络进行翻译，效果不佳。对待长语句，正确的翻译方法是像人工翻译那样将长语句分段，每次只对长语句的一部分进行翻译。</p>
+<p>根据这种“<strong>局部聚焦</strong>”的思想，建立了注意力模型。</p>
+<p>例：在如下的模型中</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s2.ax1x.com/2019/09/03/nkt0G6.png" alt="注意力模型实例" title>
+                </div>
+                <div class="image-caption">注意力模型实例</div>
+            </figure>
+<p>底层是一个双向循环神经网络（BRNN），该网络中每个时间步的激活都包含前向传播和反向传播产生的激活：</p>
+<script type="math/tex; mode=display">
+a^{⟨t^{'}⟩}=(\stackrel{\rightarrow}{a}^{⟨t^{'}⟩},\stackrel{\leftarrow}{a}^{⟨t^{'}⟩})</script><p>顶层是一个“多对多”结构的循环神经网络，第<script type="math/tex">t</script>个时间步的输入包含该网络中前一个时间步的激活<script type="math/tex">s^{⟨t−1⟩}</script>、输出<script type="math/tex">y^{⟨t−1⟩}</script>以及底层的 BRNN 中多个时间步的激活<script type="math/tex">c</script>，其中<script type="math/tex">c</script>有：</p>
+<script type="math/tex; mode=display">
+c^{⟨t⟩}=\sum_{t^{'}}α^{⟨t,t^{'}⟩}a^{⟨t^{'}⟩}</script><p>其中，参数<script type="math/tex">α^{⟨t,t′⟩}</script>即代表着<script type="math/tex">y^{⟨t⟩}</script>对<script type="math/tex">a^{⟨t^{'}⟩}</script>的“注意力”，有：</p>
+<script type="math/tex; mode=display">
+α⟨t,t^{'}⟩=\frac{exp(e^{⟨t,t^{'}⟩})}{\sum^{Tx}_{t^{'}=1}exp(e^{⟨t,t^{'}⟩})},\sum_{t^{'}}α⟨t,t^{'}⟩=1</script><p>对于<script type="math/tex">e^{⟨t,t^{'}⟩}</script>，我们通过一个简单的神经网络学习得到。输入为<script type="math/tex">s^{⟨t−1⟩}</script>和<script type="math/tex">a^{⟨t^{'}⟩}</script>，如下图所示：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s2.ax1x.com/2019/09/03/nktwPx.png" alt="参数e训练网络" title>
+                </div>
+                <div class="image-caption">参数e训练网络</div>
+            </figure>
+<p><strong>缺点：</strong>计算量较大，若输入句子长度为<script type="math/tex">T_x</script>，输出句子长度为<script type="math/tex">T_y</script>，则计算时间约为<script type="math/tex">T_x*T_y</script>。</p>
+<p>相关论文：</p>
+<ul>
+<li><a href="https://arxiv.org/pdf/1409.0473.pdf" target="_blank" rel="noopener">Bahdanau et. al., 2014. Neural machine translation by jointly learning to align and translate</a></li>
+<li><a href="https://arxiv.org/pdf/1502.03044.pdf" target="_blank" rel="noopener">Xu et. al., 2015. Show, Attend and Tell: Neural Image Caption Generation with Visual Attention</a>（将注意力模型应用到图像描述中）</li>
+</ul>
+<h2 id="语音处理问题"><a href="#语音处理问题" class="headerlink" title="语音处理问题"></a>语音处理问题</h2><h3 id="语音识别（Speech-recognition）"><a href="#语音识别（Speech-recognition）" class="headerlink" title="语音识别（Speech recognition）"></a>语音识别（Speech recognition）</h3><h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><ul>
+<li><strong>输入：</strong>一段以时间为横轴的音频片段；</li>
+<li><strong>输出：</strong>文本；</li>
+<li><strong>常见预处理步骤：</strong>运行音频片段来生成一个声谱图，并将其作为特征；</li>
+<li><strong>传统方法：</strong>将语音中每个单词分解成多个音素（phoneme）。</li>
+</ul>
+<h4 id="注意力模型"><a href="#注意力模型" class="headerlink" title="注意力模型"></a>注意力模型</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s2.ax1x.com/2019/09/03/nktyse.jpg" alt="语音识别注意力模型" title>
+                </div>
+                <div class="image-caption">语音识别注意力模型</div>
+            </figure>
+<h4 id="CTC（Connectionist-Temporal-Classification）损失函数模型"><a href="#CTC（Connectionist-Temporal-Classification）损失函数模型" class="headerlink" title="CTC（Connectionist Temporal Classification）损失函数模型"></a>CTC（Connectionist Temporal Classification）损失函数模型</h4><p>由于输入是音频数据，使用 RNN 所建立的系统含有很多个时间步，且输出数量往往小于输入。因此，不是每一个时间步都有对应的输出。CTC 允许 RNN 生成下图红字所示的输出，并将两个空白符（blank）中重复的字符折叠起来，再将空白符去掉，得到最终的输出文本。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s2.ax1x.com/2019/09/03/nktBRK.jpg" alt="语音识别CTC模型" title>
+                </div>
+                <div class="image-caption">语音识别CTC模型</div>
+            </figure>
+<p>相关论文：<a href="http://people.idsia.ch/~santiago/papers/icml2006.pdf" target="_blank" rel="noopener">Graves et al., 2006. Connectionist Temporal Classification: Labeling unsegmented sequence data with recurrent neural networks</a></p>
+<h3 id="触发词检测（Trigger-Word-Detection）"><a href="#触发词检测（Trigger-Word-Detection）" class="headerlink" title="触发词检测（Trigger Word Detection）"></a>触发词检测（Trigger Word Detection）</h3><p><strong>触发词检测</strong>常用于各种智能设备，通过约定的触发词可以语音唤醒设备。</p>
+<p>使用 RNN 来实现触发词检测时，可以将触发词对应的序列的标签设置为“1”，而将其他的标签设置为“0”。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s2.ax1x.com/2019/09/03/nktDxO.jpg" alt="触发词检测的RNN模型" title>
+                </div>
+                <div class="image-caption">触发词检测的RNN模型</div>
+            </figure>
+<p>但通常训练样本语音中的触发字较非触发字数目少得多，即正负样本分布不均。一种解决办法是在出现一个触发字时，将其附近的RNN都输出1。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最後更新時間：<time datetime="2019-09-03T07:41:09.557Z" itemprop="dateUpdated">2019-09-03 15:41:09</time>
+</span><br>
+
+
+        
+        版权声明:本文为博主原创文章,未经博主允许不得转载。<a href="/2019/09/02/deeplearning-ai学习笔记（十六）序列模型和注意力机制/" target="_blank" rel="external">http://yoursite.com/2019/09/02/deeplearning-ai学习笔记（十六）序列模型和注意力机制/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="刘明辉">
+            刘明辉
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/deeplearning-ai/">deeplearning.ai</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/09/02/deeplearning-ai学习笔记（十六）序列模型和注意力机制/&title=《deeplearning.ai学习笔记（十六）序列模型和注意力机制》 — 一只程序喵&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/09/02/deeplearning-ai学习笔记（十六）序列模型和注意力机制/&title=《deeplearning.ai学习笔记（十六）序列模型和注意力机制》 — 一只程序喵&source=Seq2Seq（Sequence-to-Sequence）模型能够应用于机器翻译、语音识别等各种序列到序列的转换问题。下面介绍其具体形式及应用。
+Enco..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/09/02/deeplearning-ai学习笔记（十六）序列模型和注意力机制/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《deeplearning.ai学习笔记（十六）序列模型和注意力机制》 — 一只程序喵&url=http://yoursite.com/2019/09/02/deeplearning-ai学习笔记（十六）序列模型和注意力机制/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/09/02/deeplearning-ai学习笔记（十六）序列模型和注意力机制/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/09/01/deeplearning-ai学习笔记（十五）自然语言处理与词嵌入/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">deeplearning.ai学习笔记（十五）自然语言处理与词嵌入</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢打赏ο(=•ω＜=)ρ⌒☆
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>本部落格係採用<a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh_TW">創用 CC 姓名標示 4.0 國際 授權條款授權</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>刘明辉 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/09/02/deeplearning-ai学习笔记（十六）序列模型和注意力机制/&title=《deeplearning.ai学习笔记（十六）序列模型和注意力机制》 — 一只程序喵&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/09/02/deeplearning-ai学习笔记（十六）序列模型和注意力机制/&title=《deeplearning.ai学习笔记（十六）序列模型和注意力机制》 — 一只程序喵&source=Seq2Seq（Sequence-to-Sequence）模型能够应用于机器翻译、语音识别等各种序列到序列的转换问题。下面介绍其具体形式及应用。
+Enco..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/09/02/deeplearning-ai学习笔记（十六）序列模型和注意力机制/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《deeplearning.ai学习笔记（十六）序列模型和注意力机制》 — 一只程序喵&url=http://yoursite.com/2019/09/02/deeplearning-ai学习笔记（十六）序列模型和注意力机制/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/09/02/deeplearning-ai学习笔记（十六）序列模型和注意力机制/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADJElEQVR42u3aQY7jMAwEwPz/01lgboNFvN2UMhtrSqfAsGWVcqBJ6vGIx/Nr/P07ufPVs6/muZ7h+v7NAxsbG/sm7Ofl2LXc5Eq+rdfrvL4HGxsb+1R2G7SSsHH9VPLeWciMghw2Njb2r2Tn4ScZu7YMGxsbG7sNYHkKcY28TiHyIIqNjY2NnReV8sW1haG8nfAfamnY2NjYH89eafR+2u8f6m9jY2Njfwz7uWnkb2lTiCSxqVeLjY2NfRA7Tx7yItRsnjyxmd352LtcbGxs7I9kt0WZJIy1ScJKoyIvgWFjY2OfxE6K+CvtgbY1O2st1JuOjY2NfSj7fb93tZDb8PnyTmxsbOzj2NfBJl9cMs9stvz+aLuxsbGxD2Kvf+i/rw3cNnfbmbGxsbHPZudt1Lagv3KUZ1bY2lBmwsbGxr4tOy8erV+ZlZNm24eNjY19Enu2Q23wWN+4NqX5RzDDxsbGPo7dlu/zZCM/arkyW1v8wsbGxj6J3YaBdyxiV1v3sTKwsbGxb85eWcT7qDlpuEHY2NjYR7BXCkl5ayG53rYWZmkMNjY29nns5DjLSjLQLq4o8W8KvdjY2Nh3Z+9a1iz4zY7vzFoX2NjY2Gezdx3NmSUb+ZztJm7oYGBjY2PfhF0cbSnxLXiWFNVpDDY2NvZB7OTjflbEzxe03jAeJkvY2NjYR7Bnj7UpSlv0WfkPo78NGxsb+yB2GyRmx2jygzgrLef84A42Njb22ex8O9aDU5J4tAWv9WexsbGxz2C3n/75C9oEpm1UtEUobGxs7JPYbas1CUuzdsKsvDVLhLCxsbFPYueJRxJU2u2YhaUatpJvYWNjY388u23fttfbatY6rG7xYmNjY9+Q/SzHrO2aL7pt+rbh9ttJJWxsbOwj2O0X++zh9tBkm8zkx4awsbGxT2Xnr1xJS9qecx5Q2+3AxsbGPpU9O16z6wjO5jNHSazGxsbG/sXsFcauQNi2IjYEMGxsbOwj2G0DIElLktbCypWXq8XGxsY+jp0XbvKn2nSiLf23BSxsbGzsU9mzRm+eGCRbkB/fqQNVvCpsbGzsG7L/AGQJTwL1EH+/AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '一只程序喵 | 刘明辉的个人博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '一只程序喵 | 刘明辉的个人博客';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>

@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>C++标准模板库STL使用详解（一）STL基本概念 | 一只程序喵 | 刘明辉的个人博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="C/C++">
+    <meta name="description" content="何为STL？将一些常用的数据结构（比如链表，数组，二叉树）和算法（比如排序，查找）写成模板，以后则不论数据结构里放的是什么对象，算法针对什么样的对象，则都不必重新实现数据结构，重新编写算法。 标准模板库 (Standard Template Library) 就是一些常用数据结构和算法的模板的集合。 有了STL，不必再写大多的标准数据结构和算法，并且可获得非常高的性能！ STL中的基本概念STL三">
+<meta name="keywords" content="C&#x2F;C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++标准模板库STL使用详解（一）STL基本概念">
+<meta property="og:url" content="http://yoursite.com/2019/09/04/C-标准模板库STL使用详解（一）STL基本概念/index.html">
+<meta property="og:site_name" content="一只程序喵">
+<meta property="og:description" content="何为STL？将一些常用的数据结构（比如链表，数组，二叉树）和算法（比如排序，查找）写成模板，以后则不论数据结构里放的是什么对象，算法针对什么样的对象，则都不必重新实现数据结构，重新编写算法。 标准模板库 (Standard Template Library) 就是一些常用数据结构和算法的模板的集合。 有了STL，不必再写大多的标准数据结构和算法，并且可获得非常高的性能！ STL中的基本概念STL三">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/04/nZRXUs.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/04/nZRj5n.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/04/nZRxCq.png">
+<meta property="og:updated_time" content="2019-09-04T13:19:06.981Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++标准模板库STL使用详解（一）STL基本概念">
+<meta name="twitter:description" content="何为STL？将一些常用的数据结构（比如链表，数组，二叉树）和算法（比如排序，查找）写成模板，以后则不论数据结构里放的是什么对象，算法针对什么样的对象，则都不必重新实现数据结构，重新编写算法。 标准模板库 (Standard Template Library) 就是一些常用数据结构和算法的模板的集合。 有了STL，不必再写大多的标准数据结构和算法，并且可获得非常高的性能！ STL中的基本概念STL三">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/09/04/nZRXUs.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="一只程序喵" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">刘明辉</h5>
+          <a href="mailto:549208791@qq.com" title="549208791@qq.com" class="mail">549208791@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/liuminghui233" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">C++标准模板库STL使用详解（一）STL基本概念</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">C++标准模板库STL使用详解（一）STL基本概念</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-09-04T12:07:03.000Z" itemprop="datePublished" class="page-time">
+  2019-09-04
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#何为STL？"><span class="post-toc-number">1.</span> <span class="post-toc-text">何为STL？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#STL中的基本概念"><span class="post-toc-number">2.</span> <span class="post-toc-text">STL中的基本概念</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#容器概述"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">容器概述</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#顺序容器简介"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">顺序容器简介</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#关联容器简介"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">关联容器简介</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#容器适配器简介"><span class="post-toc-number">2.1.3.</span> <span class="post-toc-text">容器适配器简介</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#迭代器"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">迭代器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#性质"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">性质</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#基本用法"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">基本用法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#迭代器类型"><span class="post-toc-number">2.2.3.</span> <span class="post-toc-text">迭代器类型</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#算法简介"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">算法简介</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#STL中的“大”、“小“、”相等“"><span class="post-toc-number">3.</span> <span class="post-toc-text">STL中的“大”、“小“、”相等“</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#STL中“大”“小“的概念"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">STL中“大”“小“的概念</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#STL中“相等“的概念"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">STL中“相等“的概念</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-C-标准模板库STL使用详解（一）STL基本概念"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">C++标准模板库STL使用详解（一）STL基本概念</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-09-04 20:07:03" datetime="2019-09-04T12:07:03.000Z"  itemprop="datePublished">2019-09-04</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="何为STL？"><a href="#何为STL？" class="headerlink" title="何为STL？"></a>何为STL？</h2><p>将一些常用的<strong>数据结构</strong>（比如链表，数组，二叉树）和<strong>算法</strong>（比如排序，查找）写成模板，以后则不论数据<br>结构里放的是什么对象，算法针对什么样的对象，则都不必重新实现数据结构，重新编写算法。</p>
+<p><strong>标准模板库 (Standard Template Library)</strong> 就是一些<strong>常用数据结构和算法</strong>的模板的集合。</p>
+<p><strong>有了STL，不必再写大多的标准数据结构和算法，并且可获得非常高的性能！</strong></p>
+<h2 id="STL中的基本概念"><a href="#STL中的基本概念" class="headerlink" title="STL中的基本概念"></a>STL中的基本概念</h2><p><strong>STL三要素：</strong></p>
+<ul>
+<li><strong>容器：</strong>可容纳各种数据类型的通用数据结构，是类模板。</li>
+<li><strong>迭代器：</strong>可用于依次存取容器中元素，<strong>类似于指针</strong>。</li>
+<li><strong>算法：</strong>用来操作容器中的元素的函数模板。</li>
+</ul>
+<p>例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> <span class="built_in">array</span>[<span class="number">100</span>];</span><br><span class="line">sort(<span class="built_in">array</span>,<span class="built_in">array</span>+<span class="number">100</span>);</span><br></pre></td></tr></table></figure>
+<p>该数组就是容器，而 int* 类型的指针变量就可以作为迭代器，sort算法可以作用于该容器上，对其进行排序。</p>
+<h3 id="容器概述"><a href="#容器概述" class="headerlink" title="容器概述"></a>容器概述</h3><p><strong>容器可分为三种：</strong></p>
+<ul>
+<li><strong>顺序容器：</strong>vector, deque,list</li>
+<li><strong>关联容器：</strong>set, multiset, map, multimap</li>
+<li><strong>容器适配器：</strong>stack, queue, priority_queue</li>
+</ul>
+<h4 id="顺序容器简介"><a href="#顺序容器简介" class="headerlink" title="顺序容器简介"></a>顺序容器简介</h4><p>容器并非排序的，元素的插入位置同元素的值无关。</p>
+<ul>
+<li><p><strong>动态数组（变长数组）<code>vector</code>：</strong>元素在内存连续存放。随机存取任何元素都能在常数时间完成。在尾端增删元素具有较佳的性能（大部分情况下是常数时间）。</p>
+<p><img src="https://s2.ax1x.com/2019/09/04/nZRXUs.png" alt="动态数组"></p>
+</li>
+<li><p><strong>双向队列<code>deque</code>：</strong>元素在内存连续存放。随机存取任何元素都能在常数时间完成（但次于vector）。在两端增删元素具有较佳的性能（大部分情况下是常数时间）。</p>
+<p><img src="https://s2.ax1x.com/2019/09/04/nZRj5n.png" alt="双向队列"></p>
+</li>
+<li><p><strong>双向链表<code>list</code>：</strong>元素在内存不连续存放。在任何位置增删元素都能在常数时间完成。不支持随机存取。</p>
+<p><img src="https://s2.ax1x.com/2019/09/04/nZRxCq.png" alt="双向链表"></p>
+</li>
+</ul>
+<h4 id="关联容器简介"><a href="#关联容器简介" class="headerlink" title="关联容器简介"></a>关联容器简介</h4><p><strong>性质：</strong></p>
+<ul>
+<li>元素是排序的；</li>
+<li>插入任何元素，都按相应的排序规则来确定其位置；</li>
+<li>在查找时具有非常好的性能；</li>
+<li>通常以平衡二叉树方式实现，插入和检索的时间都是 O(log(N))。</li>
+</ul>
+<p><strong>种类：</strong></p>
+<ul>
+<li><strong>集合<code>set/multiset</code>：</strong>set中不允许相同元素，multiset中允许存在相同的元素。</li>
+<li><strong>映射<code>map/multimap</code>：</strong>map与set的不同在于map中存放的元素有且仅有两个成员变量，一个名为first,另一个名为second, map根据first值对元素进行从小到大排序，并可快速地根据first来检索元素。map同multimap的不同在于是否允许相同first值的元素。</li>
+</ul>
+<h4 id="容器适配器简介"><a href="#容器适配器简介" class="headerlink" title="容器适配器简介"></a>容器适配器简介</h4><ul>
+<li><strong>栈<code>stack</code>：</strong>是项的有限序列，并满足序列中被删除、检索和修改的项只能是最近插入序列的项（栈顶的项）。<strong>后进先出。</strong></li>
+<li><p><strong>队列<code>queue</code>：</strong>插入只可以在尾部进行，删除、检索和修改只允许从头部进行。<strong>先进先出。</strong></p>
+</li>
+<li><p><strong>优先队列<code>priority_queue</code>：</strong>最高优先级元素总是第一个出列。</p>
+</li>
+</ul>
+<h3 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h3><h4 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h4><ul>
+<li>用于指向顺序容器和关联容器中的元素</li>
+<li>迭代器用法和指针类似</li>
+<li>从能否修改指向元素分：有const和非const两种<ul>
+<li>通过迭代器可以读取它指向的元素</li>
+<li>通过非const迭代器还能修改其指向的元素</li>
+</ul>
+</li>
+<li>从迭代器方向分：有正向和反向两种</li>
+<li>从适配容器类型分：有双向迭代器和随机访问迭代器两种</li>
+</ul>
+<h4 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h4><ul>
+<li><p><strong>定义一个容器类的迭代器：</strong> </p>
+<p><code>容器类名::iterator 变量名;</code>或<code>容器类名::const_iterator 变量名;</code></p>
+</li>
+<li><p><strong>访问一个迭代器指向的元素：</strong></p>
+<p><code>*迭代器变量名</code></p>
+</li>
+<li><p>迭代器上可以执行 <code>++</code> 操作, 以使其指向容器中的下一个元素。如果迭代器到达了容器中的最后一个元素的后面，此时再使用它，就会出错，类似于使用NULL或未初始化的指针一样。</p>
+</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</span><br><span class="line">    v.push_back(<span class="number">1</span>);</span><br><span class="line">	v.push_back(<span class="number">2</span>);</span><br><span class="line">	v.push_back(<span class="number">3</span>);</span><br><span class="line">	v.push_back(<span class="number">4</span>);</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::const_iterator i;  <span class="comment">//常量迭代器</span></span><br><span class="line">    <span class="keyword">for</span> (i=v.begin();i!=v.end();++i)</span><br><span class="line">    	<span class="built_in">cout</span> &lt;&lt; *i &lt;&lt; <span class="string">","</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::reverse_iterator r; <span class="comment">//反向迭代器</span></span><br><span class="line">	<span class="keyword">for</span>( r = v.rbegin();r != v.rend();r++ )</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; * r &lt;&lt; <span class="string">","</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator j; <span class="comment">//非常量迭代器</span></span><br><span class="line">	<span class="keyword">for</span>( j = v.begin();j != v.end();j ++ )</span><br><span class="line">		*j = <span class="number">100</span>;</span><br><span class="line">	<span class="keyword">for</span>( i = v.begin();i != v.end();i++ )</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; * i &lt;&lt; <span class="string">","</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<p>1,2,3,4,</p>
+<p>4,3,2,1,</p>
+<p>100,100,100,100,</p>
+<h4 id="迭代器类型"><a href="#迭代器类型" class="headerlink" title="迭代器类型"></a>迭代器类型</h4><p><strong>双向迭代器</strong></p>
+<p>若p和p1都是双向迭代器，则可对p、p1可进行以下操作：</p>
+<ul>
+<li><code>++p</code>, <code>p++</code> 使p指向容器中下一个元素</li>
+<li><code>--p</code>, <code>p--</code> 使p指向容器中上一个元素</li>
+<li><code>*p</code> 取p指向的元素</li>
+<li><code>p = p1</code> 赋值</li>
+<li><code>p == p1</code> , <code>p!= p1</code> 判断是否相等、不等</li>
+</ul>
+<p><strong>随机访问迭代器</strong></p>
+<p>若p和p1都是随机访问迭代器，则可对p、p1可进行以下操作：</p>
+<ul>
+<li>双向迭代器的所有操作</li>
+<li><code>p += i</code> 将p向后移动i个元素</li>
+<li><code>p -= i</code> 将p向向前移动i个元素</li>
+<li><code>p + i</code> 值为: 指向 p 后面的第i个元素的迭代器</li>
+<li><code>p - i</code> 值为: 指向 p 前面的第i个元素的迭代器</li>
+<li><code>p[i]</code> 值为: p后面的第i个元素的引用</li>
+<li><code>p &lt; p1</code>、 <code>p &lt;= p1</code>、<code>p &gt; p1</code>、 <code>p&gt;= p1</code></li>
+<li><code>p – p1</code> : p1和p之间的元素个数</li>
+</ul>
+<p><strong>容器上的迭代器类型</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">容器</th>
+<th style="text-align:center">迭代器</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">vector</td>
+<td style="text-align:center">随机访问</td>
+</tr>
+<tr>
+<td style="text-align:center">deque</td>
+<td style="text-align:center">随机访问</td>
+</tr>
+<tr>
+<td style="text-align:center">list</td>
+<td style="text-align:center">双向</td>
+</tr>
+<tr>
+<td style="text-align:center">set/multiset</td>
+<td style="text-align:center">双向</td>
+</tr>
+<tr>
+<td style="text-align:center">map/multimap</td>
+<td style="text-align:center">双向</td>
+</tr>
+<tr>
+<td style="text-align:center">stack</td>
+<td style="text-align:center">不支持迭代器</td>
+</tr>
+<tr>
+<td style="text-align:center">queue</td>
+<td style="text-align:center">不支持迭代器</td>
+</tr>
+<tr>
+<td style="text-align:center">priority_queue</td>
+<td style="text-align:center">不支持迭代器</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>有的算法，例如sort，binary_search需要通过随机访问迭代器来访问容器中的元素，那么list以及关联容器就不支持该算法！</p>
+<p><strong>遍历vetor（随机访问迭代器）的方法：</strong></p>
+<ol>
+<li><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">0</span>;i &lt; v.size() ; i ++)</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; v[i]; <span class="comment">//根据下标随机访问</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::const_iterator ii;</span><br><span class="line"><span class="keyword">for</span>( ii = v.begin(); ii != v.end ();++ii)</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; * ii;</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::const_iterator ii;</span><br><span class="line"><span class="keyword">for</span>( ii = v.begin(); ii &lt; v.end ();++ii )</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; * ii;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>遍历list（双向迭代器）的方法：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt;::const_iterator ii;</span><br><span class="line"><span class="keyword">for</span>( ii = v.begin(); ii != v.end ();++ii )</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; * ii;</span><br></pre></td></tr></table></figure>
+<h3 id="算法简介"><a href="#算法简介" class="headerlink" title="算法简介"></a>算法简介</h3><ul>
+<li>STL中提供能在各种容器中通用的算法，比如查找，排序等</li>
+<li>算法通过迭代器来操纵容器中的元素。许多算法可以对容器中的一个局部区间进行操作，因此需要两个参数，一个是起始元素的迭代器，一个是终止元素的后面一个元素的迭代器。比如，排序和查找</li>
+<li>有的算法返回一个迭代器。比如 find() 算法，在容器中查找一个元素，并返回一个指向该元素的迭代器</li>
+<li>算法可以处理容器，也可以处理普通数组</li>
+</ul>
+<h2 id="STL中的“大”、“小“、”相等“"><a href="#STL中的“大”、“小“、”相等“" class="headerlink" title="STL中的“大”、“小“、”相等“"></a>STL中的“大”、“小“、”相等“</h2><h3 id="STL中“大”“小“的概念"><a href="#STL中“大”“小“的概念" class="headerlink" title="STL中“大”“小“的概念"></a>STL中“大”“小“的概念</h3><ul>
+<li>关联容器内部的元素是从小到大排序的。</li>
+<li>有些算法要求其操作的区间是从小到大排序的，称为“有序区间算法”。例：binary_search</li>
+<li>有些算法会对区间进行从小到大排序，称为“排序算法”。例： sort</li>
+<li>还有一些其他算法会用到“大”，“小”的概念</li>
+</ul>
+<p>使用STL时，在缺省的情况下，<strong>以下三个说法等价：</strong></p>
+<ul>
+<li>x比y小</li>
+<li>表达式“x&lt;y”为真</li>
+<li>y比x大</li>
+</ul>
+<h3 id="STL中“相等“的概念"><a href="#STL中“相等“的概念" class="headerlink" title="STL中“相等“的概念"></a>STL中“相等“的概念</h3><ul>
+<li><p>有时，<strong>“x和y相等”等价于“x==y为真”</strong></p>
+<p>例：在未排序的区间上进行的算法，如顺序查找find</p>
+</li>
+<li><p>有时，<strong>“x和y相等”等价于“x小于y和y小于x同时为假”</strong></p>
+<p>例：有序区间算法，如binary_search</p>
+<p>​       关联容器自身的成员函数find</p>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-09-04T13:19:06.981Z" itemprop="dateUpdated">2019-09-04 21:19:06</time>
+</span><br>
+
+
+        
+        版权声明:本文为博主原创文章,未经博主允许不得转载。<a href="/2019/09/04/C-标准模板库STL使用详解（一）STL基本概念/" target="_blank" rel="external">http://yoursite.com/2019/09/04/C-标准模板库STL使用详解（一）STL基本概念/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="刘明辉">
+            刘明辉
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/09/04/C-标准模板库STL使用详解（一）STL基本概念/&title=《C++标准模板库STL使用详解（一）STL基本概念》 — 一只程序喵&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/09/04/C-标准模板库STL使用详解（一）STL基本概念/&title=《C++标准模板库STL使用详解（一）STL基本概念》 — 一只程序喵&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/09/04/C-标准模板库STL使用详解（一）STL基本概念/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《C++标准模板库STL使用详解（一）STL基本概念》 — 一只程序喵&url=http://yoursite.com/2019/09/04/C-标准模板库STL使用详解（一）STL基本概念/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/09/04/C-标准模板库STL使用详解（一）STL基本概念/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/09/02/deeplearning-ai学习笔记（十六）序列模型和注意力机制/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">deeplearning.ai学习笔记（十六）序列模型和注意力机制</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢打赏ο(=•ω＜=)ρ⌒☆
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>刘明辉 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/09/04/C-标准模板库STL使用详解（一）STL基本概念/&title=《C++标准模板库STL使用详解（一）STL基本概念》 — 一只程序喵&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/09/04/C-标准模板库STL使用详解（一）STL基本概念/&title=《C++标准模板库STL使用详解（一）STL基本概念》 — 一只程序喵&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/09/04/C-标准模板库STL使用详解（一）STL基本概念/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《C++标准模板库STL使用详解（一）STL基本概念》 — 一只程序喵&url=http://yoursite.com/2019/09/04/C-标准模板库STL使用详解（一）STL基本概念/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/09/04/C-标准模板库STL使用详解（一）STL基本概念/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADNklEQVR42u3ay27jQAwEwPz/T3uBPS2wsNXNcQCLLp0CP6SpyYFmc35+4uvx92pf+f/dfz/z7JX83eS5Rxc2Njb2TdiPl1eyiGefef36sy1LnpV895kFGxsbeys7ud3rzUrKzMVSyo3INwgbGxsbO3lwcuWlLr8DNjY2NvaMnbzexkmzhgQbGxsbOy8YefTfFqTZ4KEtq9jY2Nhb2e2g95P//sX5NjY2NvZHsh/HV1J42uW27U29ZmxsbOxF7OR272oJ2u04v9vFFmNjY2OvYLdFIordR0ckz6Olol3BxsbGXs1uC0xeNk7iofboz4UIGxsbexG7vXV+iCdfep7ht+1H9FxsbGzsFexkKe0utuOE5KjQyXACGxsbeys7bwNmg9v2u+2QYBhIYWNjY69jzxqDZMvaCCnZuPNDPNjY2Nhb2edHYc5J+VbODhK9La/CxsbG/hh2GwDli8tbiLb4JU3IRQHDxsbGXsSeBfFtMpPjkxJ4EkVFvRE2Njb2rdjJD/qjn/tvHfrmqy3+MdjY2Njr2EnvkgRGySLycpWXpfZYDzY2Nvbd2e1Ni2Mx8bh31kLkJRMbGxv7G9jtkZd2nHDStCQbXW8BNjY29lJ2Hh61Y+Dk9VmzkTc52NjY2FvZJ2WjHdCeBEyz6Cr6n2NjY2PfnJ2MVPNHtvHTjJ186+JvbGxs7NXs9mf9UUz/pm8NQyVsbGzsFew2ak8Gt7OWJocloVVRhrGxsbFXsGeAduyaF8iTRqg4jomNjY29jt3GRudLyZuHk6EFNjY29m520jbUR2GCRiKPrtqClxwMxcbGxt7EPknLkwfMRg5tG3OUpWFjY2PfnJ3HQO3P/WSJsxCqbWYujuxgY2Nj35x9Poh9zcsjp7wctrFX1I1hY2Nj35b9KK93hftH04w4qLooWtjY2Ngr2LOx7izW/43P54d+sLGxsXez20go34j23ZPP10MIbGxs7HXsk6M2syM1s0ZiFloVb2BjY2N/DTsJj97VirTFNSqH2NjY2F/JbstSAn7vFhcFDxsbG3sdOy8SJ0PfvP1ov9W2TNjY2Nib2LNoJj/iE4X1ZfDU/huGc29sbGzsT2f/AYN7talta0W9AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '一只程序喵 | 刘明辉的个人博客';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '一只程序喵 | 刘明辉的个人博客';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>
